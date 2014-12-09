@@ -1,4 +1,5 @@
 package edu.pjwstk.kor.model;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Status {
@@ -6,10 +7,14 @@ public class Status {
 	private String statusName;
 	private Date statusDateSet;
 	
-	public Status(String statusName, Date statusDateSet) {
+	private ArrayList<Shipment> shipmentByStatusList;
+
+	public Status(String statusName, Date statusDateSet,
+			ArrayList<Shipment> shipmentByStatusList) {
 		super();
 		this.statusName = statusName;
 		this.statusDateSet = statusDateSet;
+		this.shipmentByStatusList = shipmentByStatusList;
 	}
 
 	public String getStatusName() {
@@ -28,11 +33,22 @@ public class Status {
 		this.statusDateSet = statusDateSet;
 	}
 
+	public ArrayList<Shipment> getShipmentByStatusList() {
+		return shipmentByStatusList;
+	}
+
+	public void setShipmentByStatusList(ArrayList<Shipment> shipmentByStatusList) {
+		this.shipmentByStatusList = shipmentByStatusList;
+	}
+
 	@Override
 	public String toString() {
 		return "Status [statusName=" + statusName + ", statusDateSet="
-				+ statusDateSet + "]";
+				+ statusDateSet + ", shipmentByStatusList="
+				+ shipmentByStatusList + "]";
 	}
+	
+	
 	
 	
 }
