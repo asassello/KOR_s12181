@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Random;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
@@ -18,6 +19,7 @@ import com.db4o.config.Configuration;
 import com.db4o.config.ObjectClass;
 import com.db4o.ext.ExtObjectContainer;
 
+import edu.pjwstk.kor.model.Address;
 import edu.pjwstk.kor.model.Adress;
 import edu.pjwstk.kor.model.Employee;
 import edu.pjwstk.kor.model.Package;
@@ -65,6 +67,21 @@ public class DataGenerator {
 	}
 	private void initData() {
 		
+		//kolejnoœæ istotna
+		adresses = RandomAdress.getAdresses();
+		persons = RandomPerson.getPersons(adresses);
+		employees = RandomEmployee.getEmployees(persons);
+		
+
+		packages = new ArrayList<Package>();
+		payments = new ArrayList<Payment>();
+		paymentTypes = new ArrayList<PaymentType>();
+		receivers = new ArrayList<Receiver>();
+		senders = new ArrayList<Sender>();
+		shimpents = new ArrayList<Shipment>();
+		statuses = new ArrayList<Status>();
+		
+		
 	}
 	private void saveData() {
 		
@@ -104,6 +121,7 @@ public class DataGenerator {
 
 
 	public ObjectContainer getConnection() {
+
     	if(dbConn == null) {
     		File dbFile = new File(DB_FILENAME);
     		dbFile.delete();
@@ -111,4 +129,37 @@ public class DataGenerator {
     	}
     	return dbConn;
     }
+	public static <T> T random(List<T> col) {
+		int randomIndex = (int)(Math.random()*col.size());
+		return col.get(randomIndex);
+	}
+	public static String randomZip() {
+        int r = (int)(Math.random() * 100000);
+        DecimalFormat df = new DecimalFormat("00000");
+        StringBuilder sb = new StringBuilder(df.format(r));
+        sb.insert(2, "-");
+        return sb.toString();
+	}
+	public static int randomInt(int min, int max) {
+		return (int)(Math.random() * (max-min+1)) + min;
+	}
+	public static Date randomDate() {
+		return randomDate(1900, 2000);
+	}
+	public static Date randomDate(int minYear, int maxYear) {
+		int year = randomInt(minYear, maxYear);
+        int month = randomInt(0, 11);
+
+        GregorianCalendar gc = new GregorianCalendar(year, month, 1);
+
+        int day = randomInt(1, gc.getActualMaximum(gc.DAY_OF_MONTH));
+
+        gc.set(year, month, day);
+
+        return gc.getTime();
+	}
+	public static boolean randomBoolean() {
+		int r = (int)(Math.random() * 2);
+		return r > 0 ? true : false;		
+	}
 }

@@ -16,9 +16,19 @@ public class Employee extends Person {
 		this.position = position;
 		this.isTemporary = isTemporary;
 	}
-
+	
+	public Employee(Person person, Employee superior, Float salary,
+			String position, Boolean isTemporary) {
+		super(person.getName(), person.getSurname(), person.getPhoneNumber(), person.getEmailAdress(), person.getAdres());
+		this.superior = superior;
+		this.salary = salary;
+		this.position = position;
+		this.isTemporary = isTemporary;
+	}
+	
 	public Employee getSuperior() {
 		return superior;
+		//mo¿e zwracañ null
 	}
 
 	public void setSuperior(Employee superior) {

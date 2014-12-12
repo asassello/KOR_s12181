@@ -6,5 +6,7 @@
 	<classpathentry kind="lib" path="C:/Users/user/Dysk Google/stud/KOR/Referenced_Libraries/KOR_sXXXX/lib/junit-4.8.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/user/Dysk Google/stud/KOR/Referenced_Libraries/KOR_sXXXX/lib/sbql4j_0.952_xml.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/JPS WS/commons-lang3-3.3.2-bin/commons-lang3-3.3.2/commons-lang3-3.3.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/user/Documents/JPS WS/commons-lang3-3.3.2-bin/commons-lang3-3.3.2/commons-lang3-3.3.2-javadoc.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
