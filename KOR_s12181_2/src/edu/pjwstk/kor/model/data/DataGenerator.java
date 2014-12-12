@@ -71,11 +71,12 @@ public class DataGenerator {
 		adresses = RandomAdress.getAdresses();
 		persons = RandomPerson.getPersons(adresses);
 		employees = RandomEmployee.getEmployees(persons);
+		paymentTypes = RandomPaymentType.getPaymentTypes();
 		
 
 		packages = new ArrayList<Package>();
 		payments = new ArrayList<Payment>();
-		paymentTypes = new ArrayList<PaymentType>();
+		
 		receivers = new ArrayList<Receiver>();
 		senders = new ArrayList<Sender>();
 		shimpents = new ArrayList<Shipment>();
