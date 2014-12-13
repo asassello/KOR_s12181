@@ -231,7 +231,7 @@ public class RandomPerson {
 			String emailAdress = RandomStringUtils.randomAlphabetic(5) + "@" + RandomStringUtils.randomAlphabetic(5) + ".pl" ;
 			emailAdresses.add(emailAdress);
 		}
-		for(int i=0; i<100; i++){
+		for(int i=0; i<300; i++){
 
 			Random rnd = new Random();
 			int idx1 = rnd.nextInt(names.size());

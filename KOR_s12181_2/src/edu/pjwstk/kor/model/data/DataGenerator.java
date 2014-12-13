@@ -73,10 +73,9 @@ public class DataGenerator {
 		employees = RandomEmployee.getEmployees(persons);
 		paymentTypes = RandomPaymentType.getPaymentTypes();
 		packages = RandomPackage.getPackages(paymentTypes);
-		
-		receivers = new ArrayList<Receiver>();
+		receivers = RandomReceivers.getReceivers(persons,adresses);
+			
 		senders = new ArrayList<Sender>();
-		
 		payments = new ArrayList<Payment>();
 		statuses = new ArrayList<Status>();
 		shimpents = new ArrayList<Shipment>();

@@ -12,7 +12,7 @@ import edu.pjwstk.kor.model.Adress;
 
 public class RandomEmployee {
 	
-	public static List<Employee> getEmployees(List<Person> persons){
+	public static ArrayList<Employee> getEmployees(List<Person> persons){
 		
 		ArrayList<Employee> employees = null;
 		
