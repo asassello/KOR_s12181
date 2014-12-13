@@ -5,15 +5,13 @@ import java.util.Date;
 public class Status {
 
 	private String statusName;
-	private Date statusDateSet;
 	
 	private ArrayList<Shipment> shipmentByStatusList;
 
-	public Status(String statusName, Date statusDateSet,
+	public Status(String statusName, 
 			ArrayList<Shipment> shipmentByStatusList) {
 		super();
 		this.statusName = statusName;
-		this.statusDateSet = statusDateSet;
 		this.shipmentByStatusList = shipmentByStatusList;
 	}
 
@@ -23,14 +21,6 @@ public class Status {
 
 	public void setStatusName(String statusName) {
 		this.statusName = statusName;
-	}
-
-	public Date getStatusDateSet() {
-		return statusDateSet;
-	}
-
-	public void setStatusDateSet(Date statusDateSet) {
-		this.statusDateSet = statusDateSet;
 	}
 
 	public ArrayList<Shipment> getShipmentByStatusList() {
@@ -43,8 +33,7 @@ public class Status {
 
 	@Override
 	public String toString() {
-		return "Status [statusName=" + statusName + ", statusDateSet="
-				+ statusDateSet + ", shipmentByStatusList="
+		return "Status [statusName=" + statusName + ", shipmentByStatusList="
 				+ shipmentByStatusList + "]";
 	}
 	

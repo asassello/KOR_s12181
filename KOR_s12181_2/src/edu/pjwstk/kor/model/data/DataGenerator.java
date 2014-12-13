@@ -74,10 +74,10 @@ public class DataGenerator {
 		paymentTypes = RandomPaymentType.getPaymentTypes();
 		packages = RandomPackage.getPackages(paymentTypes);
 		receivers = RandomReceivers.getReceivers(persons,adresses);
-			
-		senders = new ArrayList<Sender>();
+		senders = RandomSenders.getSenders(persons);
+		statuses = RandomStatuses.getStatuses(); //uwaga! statusy majê niezainicjalizowan¹ listê przesy³ek
 		payments = new ArrayList<Payment>();
-		statuses = new ArrayList<Status>();
+		
 		shimpents = new ArrayList<Shipment>();
 		
 	}

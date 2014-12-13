@@ -2,7 +2,7 @@ package edu.pjwstk.kor.model.data;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 import edu.pjwstk.kor.model.PaymentType;
 

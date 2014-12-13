@@ -10,6 +10,11 @@ public class Sender extends Person{
 		this.senderType = senderType;
 	}
 
+	public Sender(Person person, String senderType) {
+		super(person.getName(), person.getSurname(), person.getPhoneNumber(), person.getEmailAdress(),person.getAdres());
+		this.senderType = senderType;
+	}
+	
 	public String getSenderType() {
 		return senderType;
 	}
