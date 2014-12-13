@@ -10,7 +10,7 @@ import edu.pjwstk.kor.model.Sender;
 import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.Status;
 
-public class RandomStatuses {
+public class RandomStatuse {
 
 	
 	public static ArrayList<Status> getStatuses(){

@@ -9,7 +9,7 @@ import edu.pjwstk.kor.model.Adress;
 import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.Person;
 
-public class RandomReceivers {
+public class RandomReceiver {
 
 	public static ArrayList<Receiver> getReceivers(List<Person> persons, List<Adress> adresses){
 		

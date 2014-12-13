@@ -73,12 +73,12 @@ public class DataGenerator {
 		employees = RandomEmployee.getEmployees(persons);
 		paymentTypes = RandomPaymentType.getPaymentTypes();
 		packages = RandomPackage.getPackages(paymentTypes);
-		receivers = RandomReceivers.getReceivers(persons,adresses);
-		senders = RandomSenders.getSenders(persons);
-		statuses = RandomStatuses.getStatuses(); //uwaga! statusy majê niezainicjalizowan¹ listê przesy³ek
-		payments = new ArrayList<Payment>();
+		receivers = RandomReceiver.getReceivers(persons,adresses);
+		senders = RandomSender.getSenders(persons);
+		statuses = RandomStatuse.getStatuses(); //uwaga! statusy maj¹ niezainicjalizowan¹ listê przesy³ek
+		payments = RandomPayment.getPayments(paymentTypes);
 		
-		shimpents = new ArrayList<Shipment>();
+		shimpents = RandomShipment.getShipments();
 		
 	}
 	private void saveData() {

@@ -9,7 +9,7 @@ import edu.pjwstk.kor.model.Sender;
 
 import edu.pjwstk.kor.model.PaymentType;
 
-public class RandomSenders {
+public class RandomSender {
 
 public static ArrayList<Sender> getSenders(List<Person> persons){
 		
