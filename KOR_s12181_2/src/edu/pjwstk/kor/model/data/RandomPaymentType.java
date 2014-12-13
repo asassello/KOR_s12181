@@ -30,9 +30,11 @@ public class RandomPaymentType {
 		paymentTypeNames.add("Opakowanie ma³e");
 		paymentTypeNames.add("Opakowanie œrednie");
 		paymentTypeNames.add("Opakowanie du¿e");
+		paymentTypeNames.add("Opakowanie max");
 		paymentTypeNames.add("Koperta ma³a");
 		paymentTypeNames.add("Koperta œrednia");
 		paymentTypeNames.add("Koperta du¿a");
+		paymentTypeNames.add("Koperta max");
 		
 		List<Float> paymentPrices = new ArrayList<Float>();
 		paymentPrices.add(Float.parseFloat("12.99"));
@@ -52,11 +54,13 @@ public class RandomPaymentType {
 		paymentPrices.add(Float.parseFloat("8.99"));
 		paymentPrices.add(Float.parseFloat("12.99"));
 		paymentPrices.add(Float.parseFloat("19.99"));
+		paymentPrices.add(Float.parseFloat("0.0"));		
 		paymentPrices.add(Float.parseFloat("2.99"));
 		paymentPrices.add(Float.parseFloat("3.99"));
 		paymentPrices.add(Float.parseFloat("4.99"));
+		paymentPrices.add(Float.parseFloat("0.0"));
 		
-		for (int i=0; i<19; i++) {
+		for (int i=0; i<21; i++) {
 			
 			paymentTypes.add(new PaymentType(paymentTypeNames.get(i),paymentPrices.get(i)));
 		}

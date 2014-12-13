@@ -72,16 +72,14 @@ public class DataGenerator {
 		persons = RandomPerson.getPersons(adresses);
 		employees = RandomEmployee.getEmployees(persons);
 		paymentTypes = RandomPaymentType.getPaymentTypes();
-		
-
-		packages = new ArrayList<Package>();
-		payments = new ArrayList<Payment>();
+		packages = RandomPackage.getPackages(paymentTypes);
 		
 		receivers = new ArrayList<Receiver>();
 		senders = new ArrayList<Sender>();
-		shimpents = new ArrayList<Shipment>();
-		statuses = new ArrayList<Status>();
 		
+		payments = new ArrayList<Payment>();
+		statuses = new ArrayList<Status>();
+		shimpents = new ArrayList<Shipment>();
 		
 	}
 	private void saveData() {
