@@ -45,7 +45,7 @@ public class DataGenerator {
 	private List<Receiver> receivers;
 	private List<Sender> senders;
 	private List<Shipment> shimpents;
-	private List<Status> statuses;
+	private ArrayList<Status> statuses;
 	
 	public static void main(String[] args) {
 		DataGenerator exampleData = new DataGenerator();
@@ -78,7 +78,7 @@ public class DataGenerator {
 		statuses = RandomStatuse.getStatuses(); //uwaga! statusy maj¹ niezainicjalizowan¹ listê przesy³ek
 		payments = RandomPayment.getPayments(paymentTypes);
 		
-		shimpents = RandomShipment.getShipments();
+		shimpents = RandomShipment.getShipments(packages,payments,employees,employees,senders,receivers,statuses);
 		
 	}
 	private void saveData() {

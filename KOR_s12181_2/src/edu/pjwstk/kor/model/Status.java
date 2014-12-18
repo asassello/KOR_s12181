@@ -30,6 +30,10 @@ public class Status {
 	public void setShipmentByStatusList(ArrayList<Shipment> shipmentByStatusList) {
 		this.shipmentByStatusList = shipmentByStatusList;
 	}
+	
+	public void addShipmentByStatusList(Shipment shipmentByStatus) {
+		this.shipmentByStatusList.add(shipmentByStatus);
+	}
 
 	@Override
 	public String toString() {
