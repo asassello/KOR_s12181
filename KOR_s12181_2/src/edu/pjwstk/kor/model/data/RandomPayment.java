@@ -7,13 +7,12 @@ import java.util.Random;
 
 import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.PaymentType;
-import edu.pjwstk.kor.model.Sender;
 
 public class RandomPayment {
 
 public static ArrayList<Payment> getPayments(List<PaymentType> paymentTypes){
 		
-		ArrayList<Payment> payments = null;
+		ArrayList<Payment> payments = new ArrayList<Payment>();
 		
 		List<Date> paymentDates = new ArrayList<Date>();
 		for (int i=0; i<100; i++) {

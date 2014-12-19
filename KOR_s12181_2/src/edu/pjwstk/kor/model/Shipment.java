@@ -141,7 +141,8 @@ public class Shipment {
 				+ emplyDelivering + ", sndr=" + sndr + ", rcvr=" + rcvr
 				+ ", sendDate=" + sendDate + ", deliveredDate=" + deliveredDate
 				+ ", isDelivered=" + isDelivered + ", isLost=" + isLost
-				+ ", isComplaint=" + isComplaint + ", statusList=" + statusList
+				+ ", isComplaint=" + isComplaint 
+				//+ ", statusList=" + statusList
 				+ "]";
 	}
 	

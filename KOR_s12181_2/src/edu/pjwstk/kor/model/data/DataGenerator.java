@@ -61,6 +61,7 @@ public class DataGenerator {
 		System.out.println(exampleData.senders);
 		System.out.println(exampleData.shipments);
 		System.out.println(exampleData.statuses);
+		
 	}
 
 	public DataGenerator() {

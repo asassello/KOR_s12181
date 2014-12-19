@@ -37,11 +37,11 @@ public class Status {
 
 	@Override
 	public String toString() {
-		return "Status [statusName=" + statusName + ", shipmentByStatusList="
-				+ shipmentByStatusList + "]";
+		return "Status [statusName=" + statusName 
+				//+ ", shipmentByStatusList=" + shipmentByStatusList 
+				+ "]"
+				;
 	}
-	
-	
-	
+
 	
 }

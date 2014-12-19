@@ -10,7 +10,7 @@ public class RandomPaymentType {
 	
 	public static ArrayList<PaymentType> getPaymentTypes(){
 		
-		ArrayList<PaymentType> paymentTypes = null;
+		ArrayList<PaymentType> paymentTypes = new ArrayList<PaymentType>();
 		
 		List<String> paymentTypeNames = new ArrayList<String>();
 		paymentTypeNames.add("Paczka krajowa ma³a");

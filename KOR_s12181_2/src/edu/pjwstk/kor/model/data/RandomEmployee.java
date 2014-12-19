@@ -1,6 +1,5 @@
 package edu.pjwstk.kor.model.data;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,9 +13,9 @@ public class RandomEmployee {
 	
 	public static ArrayList<Employee> getEmployees(List<Person> persons){
 		
-		ArrayList<Employee> employees = null;
+		ArrayList<Employee> employees = new ArrayList<Employee>();
 		
-		ArrayList<Employee> bossess = null;
+		ArrayList<Employee> bossess = new ArrayList<Employee>();
 		
 		ArrayList<Adress> bossessAdresses = null;
 		bossessAdresses = RandomAdress.getAdresses(5);

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Date;
 import java.util.Random;
 
-import edu.pjwstk.kor.model.Adress;
 import edu.pjwstk.kor.model.Employee;
 import edu.pjwstk.kor.model.Package;
 import edu.pjwstk.kor.model.Payment;
@@ -41,8 +40,8 @@ public class RandomShipment {
 		isComplaint.add(new Boolean(true));
 		isComplaint.add(new Boolean(false));
 		
-		ArrayList<Shipment> shipments = null;
-		for (int i=0; i<100; i++) {
+		ArrayList<Shipment> shipments = new ArrayList<Shipment>();
+		for (int i=0; i<2; i++) {
 			Random rnd = new Random();
 			int idx1 = rnd.nextInt(pckg.size());
 			int idx2 = rnd.nextInt(pymnt.size());
@@ -52,7 +51,7 @@ public class RandomShipment {
 			int idx6 = rnd.nextInt(rcvr.size());
 			
 			int idx7 = rnd.nextInt(statusList.size());
-			ArrayList<Status> tmpstatusList = null;
+			ArrayList<Status> tmpstatusList = new ArrayList<Status>();
 			for (int j=0; j<idx7; j++){
 				tmpstatusList.add(statusList.get(j));
 			}

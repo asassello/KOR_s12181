@@ -12,7 +12,7 @@ public class RandomPerson {
 
 	public static ArrayList<Person> getPersons(List<Adress> adressess){
 		
-		ArrayList<Person> persons = null;
+		ArrayList<Person> persons = new ArrayList<Person>();
 		
 		List<String> names = new ArrayList<String>();
 		names.add("ANNA");
@@ -249,7 +249,7 @@ public class RandomPerson {
 	
 public static ArrayList<Person> getPersons(List<Adress> adressess, int numberOfPersons){
 		
-		ArrayList<Person> persons = null;
+		ArrayList<Person> persons = new ArrayList<Person>();
 		
 		List<String> names = new ArrayList<String>();
 		names.add("ANNA");

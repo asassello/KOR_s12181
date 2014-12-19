@@ -1,9 +1,9 @@
 package edu.pjwstk.kor.model.data;
 
-import java.util.Collection;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 
 import edu.pjwstk.kor.model.Adress;
 import edu.pjwstk.kor.model.data.DataGenerator;;
@@ -12,7 +12,7 @@ public class RandomAdress {
 
 	public static ArrayList<Adress> getAdresses(){
 		
-		ArrayList<Adress> adresses = null;
+		ArrayList<Adress> adresses = new ArrayList<Adress>();
 	
 			List<String> streets = new ArrayList<String>();
 			streets.add("19 Stycznia");
@@ -206,7 +206,7 @@ public class RandomAdress {
 	
 public static ArrayList<Adress> getAdresses(int numberOfAdressess){
 		
-		ArrayList<Adress> adresses = null;
+		ArrayList<Adress> adresses =  new ArrayList<Adress>();
 	
 			List<String> streets = new ArrayList<String>();
 			streets.add("19 Stycznia");

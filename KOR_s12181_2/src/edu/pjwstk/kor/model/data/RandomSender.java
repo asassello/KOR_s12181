@@ -7,13 +7,11 @@ import java.util.Random;
 import edu.pjwstk.kor.model.Person;
 import edu.pjwstk.kor.model.Sender;
 
-import edu.pjwstk.kor.model.PaymentType;
-
 public class RandomSender {
 
 public static ArrayList<Sender> getSenders(List<Person> persons){
 		
-		ArrayList<Sender> senders = null;
+		ArrayList<Sender> senders = new ArrayList<Sender>();
 		
 		List<String> senderTypes = new ArrayList<String>();
 		senderTypes.add("Klient standardowy");

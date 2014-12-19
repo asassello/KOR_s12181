@@ -11,7 +11,7 @@ public class RandomPackage {
 
 	public static ArrayList<Package> getPackages(List<PaymentType> paymentTypes) {
 		
-		ArrayList<Package> packageTypes = null;
+		ArrayList<Package> packageTypes = new ArrayList<Package>();
 		
 		List<String> sizeTypes = new ArrayList<String>();
 		sizeTypes.add("Paczka lekka");
