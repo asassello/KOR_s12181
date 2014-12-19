@@ -21,7 +21,9 @@ import com.db4o.ext.ExtObjectContainer;
 
 import edu.pjwstk.kor.model.Address;
 import edu.pjwstk.kor.model.Adress;
+
 import edu.pjwstk.kor.model.Employee;
+
 import edu.pjwstk.kor.model.Package;
 import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.PaymentType;
@@ -44,8 +46,8 @@ public class DataGenerator {
 	private List<Person> persons;
 	private List<Receiver> receivers;
 	private List<Sender> senders;
-	private List<Shipment> shimpents;
-	private ArrayList<Status> statuses;
+	private List<Shipment> shipments;
+	private List<Status> statuses;
 	
 	public static void main(String[] args) {
 		DataGenerator exampleData = new DataGenerator();
@@ -57,7 +59,7 @@ public class DataGenerator {
 		System.out.println(exampleData.persons);
 		System.out.println(exampleData.receivers);
 		System.out.println(exampleData.senders);
-		System.out.println(exampleData.shimpents);
+		System.out.println(exampleData.shipments);
 		System.out.println(exampleData.statuses);
 	}
 
@@ -78,11 +80,118 @@ public class DataGenerator {
 		statuses = RandomStatuse.getStatuses(); //uwaga! statusy maj¹ niezainicjalizowan¹ listê przesy³ek
 		payments = RandomPayment.getPayments(paymentTypes);
 		
-		shimpents = RandomShipment.getShipments(packages,payments,employees,employees,senders,receivers,statuses);
+		shipments = RandomShipment.getShipments(packages,payments,employees,employees,senders,receivers,statuses);
 		
 	}
 	private void saveData() {
-		
+		//config
+		ExtObjectContainer con = getConnection().ext();
+    	Configuration config = con.configure();
+    	{
+	    	ObjectClass objectClass = config.objectClass(Adress.class);
+			objectClass.objectField("city").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Employee.class);
+			objectClass.objectField("position").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Package.class);
+			objectClass.objectField("sizeType").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Payment.class);
+			objectClass.objectField("paymentTypeName").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(PaymentType.class);
+			objectClass.objectField("paymentTypeName").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Person.class);
+			objectClass.objectField("surname").indexed(true);
+			objectClass.objectField("name").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Receiver.class);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Sender.class);
+			objectClass.objectField("senderType").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Shipment.class);
+			objectClass.objectField("sendDate").indexed(true);
+			objectClass.objectField("deliveredDate").indexed(true);
+    	}
+    	{
+	    	ObjectClass objectClass = config.objectClass(Status.class);
+			objectClass.objectField("statusName").indexed(true);
+    	}
+    	
+    	//add
+    	ObjectSet<Adress> adress = con.query(Adress.class);
+    	if(adress.isEmpty()) {
+    		for(Adress c : this.adresses) {
+    			con.store(c);
+    		}
+    	}
+    	ObjectSet<Employee> employee = con.query(Employee.class);
+    	if(employee.isEmpty()) {
+    		for(Employee f : this.employees) {
+    			con.store(f);
+    		}
+    	}
+    	ObjectSet<Package> packagess = con.query(Package.class);
+    	if(packagess.isEmpty()) {
+    		for(Package p : this.packages) {
+    			con.store(p);
+    		}
+    	}
+    	ObjectSet<Payment> payment = con.query(Payment.class);
+    	if(payment.isEmpty()) {
+    		for(Payment r : this.payments) {
+    			con.store(r);
+    		}
+    	}
+    	ObjectSet<PaymentType> paymentType = con.query(PaymentType.class);
+    	if(paymentType.isEmpty()) {
+    		for(PaymentType r : this.paymentTypes) {
+    			con.store(r);
+    		}
+    	}
+    	ObjectSet<Person> person = con.query(Person.class);
+    	if(person.isEmpty()) {
+    		for(Person r : this.persons) {
+    			con.store(r);
+    		}
+    	}
+    	ObjectSet<Receiver> receiver = con.query(Receiver.class);
+    	if(receiver.isEmpty()) {
+    		for(Person r : this.receivers) {
+    			con.store(r);
+    		}
+    	}
+    	ObjectSet<Sender> sender = con.query(Sender.class);
+    	if(sender.isEmpty()) {
+    		for(Sender r : this.senders) {
+    			con.store(r);
+    		}
+    	}
+    	ObjectSet<Shipment> shipment = con.query(Shipment.class);
+    	if(shipment.isEmpty()) {
+    		for(Shipment r : this.shipments) {
+    			con.store(r);
+    		}
+    	}
+    	ObjectSet<Status> status = con.query(Status.class);
+    	if(status.isEmpty()) {
+    		for(Status r : this.statuses) {
+    			con.store(r);
+    		}
+    	}
+    	
+    	con.commit();		
 	}
 	
 	
@@ -111,7 +220,7 @@ public class DataGenerator {
 		return senders;
 	}
 	public List<Shipment> getShimpents() {
-		return shimpents;
+		return shipments;
 	}
 	public List<Status> getStatuses() {
 		return statuses;
