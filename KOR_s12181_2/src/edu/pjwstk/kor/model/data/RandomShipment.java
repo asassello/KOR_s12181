@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.Random;
 
 import edu.pjwstk.kor.model.Employee;
-import edu.pjwstk.kor.model.Package;
+import edu.pjwstk.kor.model.Packagement;
 import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.Sender;
@@ -15,7 +15,7 @@ import edu.pjwstk.kor.model.Status;
 
 public class RandomShipment {
 
-	public static ArrayList<Shipment> getShipments(List<Package> pckg, List<Payment> pymnt, List<Employee> emplyReceiving,
+	public static ArrayList<Shipment> getShipments(List<Packagement> pckg, List<Payment> pymnt, List<Employee> emplyReceiving,
 			List<Employee> emplyDelivering, List<Sender> sndr, List<Receiver> rcvr, List<Status> statusList){
 		
 		List<Date> sendDate = new ArrayList<Date>();

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Shipment {
 
-	private Package pckg;
+	private Packagement pckg;
 	private Payment pymnt;
 	private Employee emplyReceiving;
 	private Employee emplyDelivering;
@@ -19,7 +19,7 @@ public class Shipment {
 	
 	private ArrayList<Status> statusList;
 
-	public Shipment(Package pckg, Payment pymnt, Employee emplyReceiving,
+	public Shipment(Packagement pckg, Payment pymnt, Employee emplyReceiving,
 			Employee emplyDelivering, Sender sndr, Receiver rcvr,
 			Date sendDate, Date deliveredDate, Boolean isDelivered,
 			Boolean isLost, Boolean isComplaint, ArrayList<Status> statusList) {
@@ -38,11 +38,11 @@ public class Shipment {
 		this.statusList = statusList;
 	}
 
-	public Package getPckg() {
+	public Packagement getPckg() {
 		return pckg;
 	}
 
-	public void setPckg(Package pckg) {
+	public void setPckg(Packagement pckg) {
 		this.pckg = pckg;
 	}
 

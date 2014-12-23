@@ -1,12 +1,12 @@
 package edu.pjwstk.kor.model;
 
-public class Package {
+public class Packagement {
 
 	private float weightLessThan;
 	private String sizeType;
 	private PaymentType packagePayment;
 	
-	public Package(float weightLessThan, String sizeType, PaymentType packagePayment) {
+	public Packagement(float weightLessThan, String sizeType, PaymentType packagePayment) {
 		super();
 		this.weightLessThan = weightLessThan;
 		this.sizeType = sizeType;
@@ -39,7 +39,7 @@ public class Package {
 
 	@Override
 	public String toString() {
-		return "Package [weightLessThan=" + weightLessThan + ", sizeType=" + sizeType
+		return "Packagement [weightLessThan=" + weightLessThan + ", sizeType=" + sizeType
 				+ ", packagePayment=" + packagePayment + "]";
 	}
 	

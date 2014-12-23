@@ -1,54 +1,54 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="KOR_s12181_2">
-    <property environment="env"/>
-    <property name="ECLIPSE_HOME" value="../../Downloads/eclipse-standard-kepler-SR2-win32-x86_64/eclipse"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="1.7"/>
-    <property name="source" value="1.7"/>
-    <path id="KOR_s12181_2.classpath">
-        <pathelement location="bin"/>
-        <pathelement location="../../Dysk Google/stud/KOR/Referenced_Libraries/KOR_sXXXX/lib/db4o_sbql4j_20111011.jar"/>
-        <pathelement location="../../Dysk Google/stud/KOR/Referenced_Libraries/KOR_sXXXX/lib/junit-4.8.2.jar"/>
-        <pathelement location="../../Dysk Google/stud/KOR/Referenced_Libraries/KOR_sXXXX/lib/sbql4j_0.952_xml.jar"/>
-    </path>
-    <target name="init">
-        <mkdir dir="bin"/>
-        <copy includeemptydirs="false" todir="bin">
-            <fileset dir="src">
-                <exclude name="**/*.ucls"/>
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="bin"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src"/>
-            <classpath refid="KOR_s12181_2.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="KOR_s12181_2" default="SBQL4J_precompile">
+	<property name="SOURCE_DIR" value="src"/>
+	<property name="DEST_DIR" value="dist"/>
+
+	<property name="SBQL4J_LIB" value="sbql4j_0.952_xml.jar" />
+	<property name="DB4O_SBQL4J_LIB" value="db4o_sbql4j_20111011.jar" />
+		
+	<property name="CLASSPATH" value="bin;config;lib/${SBQL4J_LIB};lib/${DB4O_SBQL4J_LIB}"/>
+	
+	<target name="declare">
+		<taskdef name="sbql_pre" 
+			classname="pl.wcislo.sbql4j.java.preprocessor.ant.SBQL4JAntTask"
+			classpath="${CLASSPATH};">
+		</taskdef>
+		<taskdef name="gatherDb4oMetadata" 
+			classname="pl.wcislo.sbql4j.java.preprocessor.ant.GatherDb4oMetadataAntTask"
+			classpath="${CLASSPATH};">
+		</taskdef>
+	</target>
+	
+	<target name="prepare" depends="declare">
+		<delete dir="${DEST_DIR}"/>
+		<mkdir dir="${DEST_DIR}"/>
+	</target>
+	
+	<target name="SBQL4J_precompile" depends="declare">
+		<sbql_pre
+			sourcedir="${SOURCE_DIR}"
+			destdir="${DEST_DIR}"
+			classpath="${CLASSPATH}"
+			codeGenType="NO_STACKS"
+			printExpressionTrace="true"
+			printQueryPretty="true"
+			optimiseDeadQueries="true"
+			optimiseIndependentQueries="true"
+			optimiseDb4oIndexes="true"
+			db4oMetabase="db4oIndexes.xml">
+		</sbql_pre>
+<!-- 
+	try also
+	codeGenType="INTERPRETER" - queries are parsed at runtime and run by interpreter
+	codeGenType="SIMPLE" - generates simple code equal to interpreter
+	codeGenType="NO_QRES" - generates simple code similar to interpeter, but no QRES stack and with some optimizations
+	codeGenType="NO_STACKS" - generates pure java code (still experimental)
+-->
+	</target>
+	<target name="db4oMetadata" depends="declare">
+		<gatherDb4oMetadata
+			destfile="db4oIndexes.xml"
+			dbfile="kor.db">
+		</gatherDb4oMetadata>
+	</target>
 </project>

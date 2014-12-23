@@ -24,7 +24,7 @@ import edu.pjwstk.kor.model.Adress;
 
 import edu.pjwstk.kor.model.Employee;
 
-import edu.pjwstk.kor.model.Package;
+import edu.pjwstk.kor.model.Packagement;
 import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.PaymentType;
 import edu.pjwstk.kor.model.Person;
@@ -40,7 +40,7 @@ public class DataGenerator {
 	
 	private List<Adress> adresses;
 	private List<Employee> employees;
-	private List<Package> packages;
+	private List<Packagement> packages;
 	private List<Payment> payments;
 	private List<PaymentType> paymentTypes;
 	private List<Person> persons;
@@ -75,7 +75,7 @@ public class DataGenerator {
 		persons = RandomPerson.getPersons(adresses);
 		employees = RandomEmployee.getEmployees(persons);
 		paymentTypes = RandomPaymentType.getPaymentTypes();
-		packages = RandomPackage.getPackages(paymentTypes);
+		packages = RandomPackagement.getPackages(paymentTypes);
 		receivers = RandomReceiver.getReceivers(persons,adresses);
 		senders = RandomSender.getSenders(persons);
 		statuses = RandomStatuse.getStatuses(); //uwaga! statusy maj¹ niezainicjalizowan¹ listê przesy³ek
@@ -90,44 +90,39 @@ public class DataGenerator {
     	Configuration config = con.configure();
     	{
 	    	ObjectClass objectClass = config.objectClass(Adress.class);
-			objectClass.objectField("city").indexed(true);
+			//objectClass.objectField("city").indexed(true);
     	}
     	{
 	    	ObjectClass objectClass = config.objectClass(Employee.class);
-			objectClass.objectField("position").indexed(true);
+			//objectClass.objectField("position").indexed(true);
     	}
     	{
-	    	ObjectClass objectClass = config.objectClass(Package.class);
-			objectClass.objectField("sizeType").indexed(true);
-    	}
-    	{
-	    	ObjectClass objectClass = config.objectClass(Payment.class);
-			objectClass.objectField("paymentTypeName").indexed(true);
+	    	ObjectClass objectClass = config.objectClass(Packagement.class);
+			//objectClass.objectField("sizeType").indexed(true);
     	}
     	{
 	    	ObjectClass objectClass = config.objectClass(PaymentType.class);
-			objectClass.objectField("paymentTypeName").indexed(true);
+			//objectClass.objectField("paymentTypeName").indexed(true);
     	}
+
     	{
 	    	ObjectClass objectClass = config.objectClass(Person.class);
-			objectClass.objectField("surname").indexed(true);
-			objectClass.objectField("name").indexed(true);
+			//objectClass.objectField("surname").indexed(true);
     	}
     	{
 	    	ObjectClass objectClass = config.objectClass(Receiver.class);
     	}
     	{
 	    	ObjectClass objectClass = config.objectClass(Sender.class);
-			objectClass.objectField("senderType").indexed(true);
+			//objectClass.objectField("senderType").indexed(true);
     	}
     	{
 	    	ObjectClass objectClass = config.objectClass(Shipment.class);
-			objectClass.objectField("sendDate").indexed(true);
-			objectClass.objectField("deliveredDate").indexed(true);
+			//objectClass.objectField("sendDate").indexed(true);
     	}
     	{
 	    	ObjectClass objectClass = config.objectClass(Status.class);
-			objectClass.objectField("statusName").indexed(true);
+			//objectClass.objectField("statusName").indexed(true);
     	}
     	
     	//add
@@ -143,9 +138,9 @@ public class DataGenerator {
     			con.store(f);
     		}
     	}
-    	ObjectSet<Package> packagess = con.query(Package.class);
+    	ObjectSet<Packagement> packagess = con.query(Packagement.class);
     	if(packagess.isEmpty()) {
-    		for(Package p : this.packages) {
+    		for(Packagement p : this.packages) {
     			con.store(p);
     		}
     	}
@@ -202,7 +197,7 @@ public class DataGenerator {
 	public List<Employee> getEmployees() {
 		return employees;
 	}
-	public List<Package> getPackages() {
+	public List<Packagement> getPackages() {
 		return packages;
 	}
 	public List<Payment> getPayments() {

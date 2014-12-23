@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.pjwstk.kor.model.PaymentType;
-import edu.pjwstk.kor.model.Package;
+import edu.pjwstk.kor.model.Packagement;
 
 
-public class RandomPackage {
+public class RandomPackagement {
 
-	public static ArrayList<Package> getPackages(List<PaymentType> paymentTypes) {
+	public static ArrayList<Packagement> getPackages(List<PaymentType> paymentTypes) {
 		
-		ArrayList<Package> packageTypes = new ArrayList<Package>();
+		ArrayList<Packagement> packageTypes = new ArrayList<Packagement>();
 		
 		List<String> sizeTypes = new ArrayList<String>();
 		sizeTypes.add("Paczka lekka");
@@ -37,7 +37,7 @@ public class RandomPackage {
 		
 		for (int i=0; i<8; i++) {
 			
-			packageTypes.add(new Package(weightLessThan.get(i), sizeTypes.get(i), packagePaymentTypes.get(i)));
+			packageTypes.add(new Packagement(weightLessThan.get(i), sizeTypes.get(i), packagePaymentTypes.get(i)));
 		}
 		
 		return packageTypes;

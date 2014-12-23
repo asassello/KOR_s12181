@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<db4oIndexMetadata>
+<!--  
+  <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Adress</indexedClass>
+    <field>city</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Employee</indexedClass>
+    <field>position</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Package</indexedClass>
+    <field>sizeType</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.PaymentType</indexedClass>
+    <field>paymentTypeName</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Person</indexedClass>
+    <field>surname</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Sender</indexedClass>
+    <field>senderType</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Shipment</indexedClass>
+    <field>sendDate</field>
+  </indexEntry>
+  
+    <indexEntry>
+    <indexedClass>edu.pjwstk.kor.model.Status</indexedClass>
+    <field>statusName</field>
+  </indexEntry>
+
+
+  
+  -->
+</db4oIndexMetadata>
+
