@@ -4,6 +4,7 @@ import java.util.*;
 import com.db4o.ObjectContainer;
 import edu.pjwstk.kor.model.*;
 import edu.pjwstk.kor.model.data.*;
+import java.sql.Struct;
 
 public class MyQuery{
 	
@@ -17,15 +18,80 @@ public class MyQuery{
 	public MyQuery() {
 		data = new DataGenerator();
 		dataBase = data.getConnection();
-		query15();
+		//query01();
+		//query02();
+		//query03();
+		//query04();
+		//query15();
+		//query14();
+		//query13();
+		//query12();
+		query11();
 
 		dataBase.close();
 	}
 	
-	public void query15(){
-
-		List<String> avgWeight = #{ dataBase.(Packagement.weightLessThan) };
-		
+	public void query01(){
+		Collection<String> avgWeight = #{ dataBase.(Packagement.sizeType) };
 		System.out. println(avgWeight);
 	}
+	
+	public void query02(){
+		Collection<Packagement> avgWeight = #{ dataBase.(Packagement) };
+		System.out. println(avgWeight);
+	}
+	
+	public void query03(){
+		Collection<Double> avgWeight = #{ dataBase.(Packagement.weight) };
+		System.out. println(avgWeight);
+	}
+	
+	public void query04(){
+		Double avgWeight = #{ dataBase.(avg(Packagement.weight)) };
+		System.out. println(avgWeight);
+	}
+	
+	public void query15(){
+		Double avgWeight = #{ dataBase.(avg(Shipment.Packagement.weight) as SredniaWagaPaczki) };
+		System.out. println(avgWeight);
+	}
+		
+	public void query14(){
+		//Double percentComplained = #{ dataBase.(  0.00 + count(Shipment where isComplaint == true ) / count(Shipment where 1==1 ) ) };
+		Integer countComplained = #{ dataBase.( count(Shipment where isComplaint == true ) ) };
+		//Integer countNonComplained = #{ dataBase.( count(Shipment where isComplaint == false ) ) };
+		//Integer countAll = #{ dataBase.( count(Shipment where 1==1 ) ) };
+		//System.out. println(percentComplained);
+		System.out. println(countComplained);
+		//System.out. println(countNonComplained);
+		//System.out. println(countAll);
+		
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> complainedShipment = #{ dataBase.( (Shipment as sh where sh.isComplaint == true join Sender as sn join Receiver as rc ).(sh.sendDate as DataWyslania, sn.surname as Od, sh.deliveredDate as DataDostarczenia, rc.surname as Do) ) };
+		System.out. println(complainedShipment);
+		
+	}
+	
+	public void query13(){
+		//Integer shpmnts = #{ dataBase.(count(Shipment) as iloscPaczek) };
+		//Integer employees = #{ dataBase.(count(Employee) as iloscPracownikow) };
+		Integer tmpEmpByPckg = #{ dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == true or sh.emplyDelivering.isTemporary == true) as iloscObsluzonychPrzezTymczasowych) };
+		Integer nonTmpEmpByPckg = #{ dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == false or sh.emplyDelivering.isTemporary == false) as iloscObsluzonychPrzezStalych) };
+		//System.out. println(shpmnts);
+		//System.out. println(employees);
+		System.out. println(tmpEmpByPckg);
+		System.out. println(nonTmpEmpByPckg);
+	}
+	
+	
+	public void query12(){
+		Collection<Receiver> rcvrsWithSecAdress = #{ dataBase.(Receiver where secondaryAdress != 0 ) };
+		System.out. println(rcvrsWithSecAdress);
+	}
+	
+	public void querry11(){
+		
+	
+	}
+	
+
 }

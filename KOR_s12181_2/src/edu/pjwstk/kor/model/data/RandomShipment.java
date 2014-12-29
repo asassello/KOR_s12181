@@ -41,7 +41,7 @@ public class RandomShipment {
 		isComplaint.add(new Boolean(false));
 		
 		ArrayList<Shipment> shipments = new ArrayList<Shipment>();
-		for (int i=0; i<2; i++) {
+		for (int i=0; i<100; i++) {
 			Random rnd = new Random();
 			int idx1 = rnd.nextInt(pckg.size());
 			int idx2 = rnd.nextInt(pymnt.size());

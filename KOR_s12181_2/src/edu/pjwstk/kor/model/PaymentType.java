@@ -3,9 +3,9 @@ package edu.pjwstk.kor.model;
 public class PaymentType {
 
 	private String paymentTypeName;
-	private float paymentPrice;
+	private double paymentPrice;
 	
-	public PaymentType(String paymentTypeName, float paymentPrice) {
+	public PaymentType(String paymentTypeName, double paymentPrice) {
 		super();
 		this.paymentTypeName = paymentTypeName;
 		this.paymentPrice = paymentPrice;
@@ -19,7 +19,7 @@ public class PaymentType {
 		this.paymentTypeName = paymentTypeName;
 	}
 
-	public float getPaymentPrice() {
+	public double getPaymentPrice() {
 		return paymentPrice;
 	}
 

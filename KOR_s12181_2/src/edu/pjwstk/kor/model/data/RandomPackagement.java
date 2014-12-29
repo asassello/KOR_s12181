@@ -33,11 +33,21 @@ public class RandomPackagement {
 		weightLessThan.add(Float.parseFloat("0.99"));
 		weightLessThan.add(Float.parseFloat("1.99"));
 		
+		List<Double> weight = new ArrayList<Double>();
+		weight.add(Double.parseDouble("2.50"));
+		weight.add(Double.parseDouble("10.00"));
+		weight.add(Double.parseDouble("25.00"));
+		weight.add(Double.parseDouble("100.00"));
+		weight.add(Double.parseDouble("0.15"));
+		weight.add(Double.parseDouble("0.35"));
+		weight.add(Double.parseDouble("0.99"));
+		weight.add(Double.parseDouble("1.99"));
+		
 		List<PaymentType> packagePaymentTypes = getPackagePaymentTypes(paymentTypes);
 		
 		for (int i=0; i<8; i++) {
 			
-			packageTypes.add(new Packagement(weightLessThan.get(i), sizeTypes.get(i), packagePaymentTypes.get(i)));
+			packageTypes.add(new Packagement(weightLessThan.get(i), sizeTypes.get(i), packagePaymentTypes.get(i), weight.get(i)));
 		}
 		
 		return packageTypes;
