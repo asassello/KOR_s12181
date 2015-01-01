@@ -143,7 +143,7 @@ public class Shipment {
 				+ ", isDelivered=" + isDelivered + ", isLost=" + isLost
 				+ ", isComplaint=" + isComplaint 
 				//+ ", statusList=" + statusList
-				+ "]";
+				 + "]" + "\n" ;
 	}
 	
 	

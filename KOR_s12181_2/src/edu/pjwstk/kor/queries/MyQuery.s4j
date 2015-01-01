@@ -26,7 +26,10 @@ public class MyQuery{
 		//query14();
 		//query13();
 		//query12();
-		query11();
+		//query11();
+		//query10();
+		//query09();
+		query08();
 
 		dataBase.close();
 	}
@@ -88,10 +91,38 @@ public class MyQuery{
 		System.out. println(rcvrsWithSecAdress);
 	}
 	
-	public void querry11(){
+	public void query11(){
 		
-	
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> empsWithDelayedPckgs =
+		//Integer empsWithDelayedPckgs =
+			//#{ dataBase.(count(Shipment as sh where sh.isComplaint == true))};
+			//#{ dataBase.(Shipment as sh where sh.isComplaint == true).(sh.emplyDelivering.surname as surname, sh.emplyDelivering.name as name, count(sh) as ile)};
+			//#{ dataBase.(Employee as em join Shipment as sh where sh.isComplaint == true ).(unique (em.surname as surname, em.name as name) , sh.sendDate as dataPaczki ) };
+			#{ dataBase.(Shipment as sh where sh.isComplaint == true ).( sh.sendDate as dataWys , sh.deliveredDate as dataDost , sh.emplyDelivering.name as imiePrac, sh.emplyDelivering.surname as nazwiskoPrac) };
+				System.out. println(empsWithDelayedPckgs);
+			
 	}
 	
-
+	public void query10(){
+		Double dealyedPymnts = #{ dataBase.(( 0.0 + count(Payment where isDelayed == true and isPaied == true)) / ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
+		//Double dealyedPymnts1 = #{ dataBase.( 0.0 + count(Payment where isDelayed == true and isPaied == true) ) };
+		//Double dealyedPymnts2 = #{ dataBase.( 0.0 + ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
+		//System.out. println(dealyedPymnts1);
+		//System.out. println(dealyedPymnts2);
+		System.out. println(dealyedPymnts);
+	}
+	
+	public void query09(){
+		Double avgShpmnt = #{ dataBase.(avg(Shipment.Payment.PaymentType.paymentPrice) as sredniaCenaPrzesylki) };
+		Double avgPckgmnt = #{ dataBase.(avg(Shipment.Packagement.PaymentType.paymentPrice) as sredniaCenaPaczki) };
+		System.out. println(avgShpmnt);
+		System.out. println(avgPckgmnt);
+	}
+	
+	public void query08(){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> citiesByNumberOfReceivers = 
+		Collection<String> citiesByNumberOfReceivers =
+				#{ dataBase.(unique(Receiver.Adress.city as miasto)) };
+		System.out. println(citiesByNumberOfReceivers);
+	}
 }

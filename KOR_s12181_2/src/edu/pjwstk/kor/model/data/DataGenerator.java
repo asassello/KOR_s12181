@@ -249,6 +249,11 @@ public class DataGenerator {
 	public static Date randomDate() {
 		return randomDate(1900, 2000);
 	}
+	
+	public static Date randomDatePresent() {
+		return randomDate(2010, 2014);
+	}
+	
 	public static Date randomDate(int minYear, int maxYear) {
 		int year = randomInt(minYear, maxYear);
         int month = randomInt(0, 11);

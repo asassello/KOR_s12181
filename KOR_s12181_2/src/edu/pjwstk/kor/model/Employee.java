@@ -28,7 +28,7 @@ public class Employee extends Person {
 	
 	public Employee getSuperior() {
 		return superior;
-		//mo¿e zwracañ null
+		//mo¿e zwracaæ null
 	}
 
 	public void setSuperior(Employee superior) {
@@ -57,6 +57,36 @@ public class Employee extends Person {
 
 	public void setIsTemporary(Boolean isTemporary) {
 		this.isTemporary = isTemporary;
+	}
+	
+	public String getName() {
+		return super.getName();
+	}
+
+	
+	
+	@Override
+	public String getSurname() {
+		// TODO Auto-generated method stub
+		return super.getSurname();
+	}
+
+	@Override
+	public String getPhoneNumber() {
+		// TODO Auto-generated method stub
+		return super.getPhoneNumber();
+	}
+
+	@Override
+	public String getEmailAdress() {
+		// TODO Auto-generated method stub
+		return super.getEmailAdress();
+	}
+
+	@Override
+	public Adress getAdres() {
+		// TODO Auto-generated method stub
+		return super.getAdres();
 	}
 
 	@Override

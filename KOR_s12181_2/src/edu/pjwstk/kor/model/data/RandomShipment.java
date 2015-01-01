@@ -20,12 +20,12 @@ public class RandomShipment {
 		
 		List<Date> sendDate = new ArrayList<Date>();
 		for (int i=0; i<100; i++) {
-			sendDate.add(DataGenerator.randomDate());
+			sendDate.add(DataGenerator.randomDatePresent());
 		}
 		
 		List<Date> deliveredDate = new ArrayList<Date>();
 		for (int i=0; i<100; i++) {
-			deliveredDate.add(DataGenerator.randomDate());
+			deliveredDate.add(DataGenerator.randomDatePresent());
 		}
 		
 		List<Boolean> isDelivered = new ArrayList<Boolean>();
