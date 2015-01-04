@@ -15,6 +15,18 @@ public class Sender extends Person{
 		this.senderType = senderType;
 	}
 	
+	public String getName() {
+		return super.getName();
+	}
+	
+	public String getSurname() {
+		return super.getSurname();
+	}
+	
+	public String getCity() {
+		return super.getCity();
+	}
+	
 	public String getSenderType() {
 		return senderType;
 	}

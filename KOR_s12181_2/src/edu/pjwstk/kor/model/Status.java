@@ -14,6 +14,10 @@ public class Status {
 		this.statusName = statusName;
 		this.shipmentByStatusList = shipmentByStatusList;
 	}
+	
+	public Integer size() {
+		return shipmentByStatusList.size();
+	}
 
 	public String getStatusName() {
 		return statusName;

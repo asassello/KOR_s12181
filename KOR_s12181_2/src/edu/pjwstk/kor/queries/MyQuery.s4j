@@ -6,6 +6,7 @@ import edu.pjwstk.kor.model.*;
 import edu.pjwstk.kor.model.data.*;
 import java.sql.Struct;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class MyQuery{
 	
@@ -20,31 +21,53 @@ public class MyQuery{
 		}
 	}
 	
-	public MyQuery() throws Exception {
+	public MyQuery() throws Exception 
+	{
 		data = new DataGenerator();
 		dataBase = data.getConnection();
-		//query01();
-		//query02();
-		//query03();
-		//query04();
-		//query15();
-		//query14();
-		//query13();
-		//query12();
-		//query11();
-		//query10();
-		//query09();
-		//query08();
-		//query07(5000);
-		//query06();
+//		query01();
+//		query02();
+//		query03();
+//		query04();
+//		query15();
+//		query14();
+//		query13();
+//		query12();
+//		query11();
+//		query10();
+//		query09();
+//		query08();
+//		query07(5000);
+//		query06();
 //		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//		String dateString = format.format( new Date());
 //		Date date_param = format.parse( "2010-10-31" );  
 //		query05(date_param);
-		query04();
+//		query04();
 //		query03();
 //		query02();
 //		query01();
+		
+//		_query01();
+//		_query02();
+//		_query03();
+//		_query04();
+//		_query15();
+//		_query14();
+//		_query13();
+//		_query12();
+//		_query11();
+//		_query10();
+//		_query09();
+//		_query08();
+//		_query07(5000);
+//		_query06();
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date_param = format.parse( "2010-10-31" );  
+//		_query05(date_param);
+//		_query04();
+//		_query03();
+//		_query02();
+//		_query01();
 		
 
 		dataBase.close();
@@ -175,9 +198,253 @@ public class MyQuery{
 	}
 	
 	public void query04(){
+			
+		//Collection<Integer> statusPrzyjeta = #{ dataBase.( (Shipment as sh).(sh.size()) )  };
+		Integer statusPrzyjeta = #{ dataBase.( count((Shipment as sh where sh.size() == 1).(sh.size())))  };
+		Integer statusWDrodzeDoSortowni =  #{ dataBase.( count((Shipment as sh where sh.size() == 2).(sh.size())))  };
+		Integer statusWSortowni =  #{ dataBase.( count((Shipment as sh where sh.size() == 3).(sh.size())))  };
+		Integer statusWDrodzeDoKlienta =  #{ dataBase.( count((Shipment as sh where sh.size() == 4).(sh.size())))  };
+		Integer statusDostarczona =  #{ dataBase.( count((Shipment as sh where sh.size() == 5).(sh.size())))  };
+		Integer statusNiedostarczonaCzekaWPunkcie =  #{ dataBase.( count((Shipment as sh where sh.size() == 6).(sh.size())))  };
+
+//		System.out. println("statusPrzyjeta: " + statusPrzyjeta);
+//		System.out. println("statusWDrodzeDoSortowni: " + statusWDrodzeDoSortowni);
+//		System.out. println("statusWSortowni: " + statusWSortowni);
+//		System.out. println("statusWDrodzeDoKlienta: " + statusWDrodzeDoKlienta);
+//		System.out. println("statusDostarczona: " + statusDostarczona);
+//		System.out. println("statusNiedostarczonaCzekaWPunkcie: " + statusNiedostarczonaCzekaWPunkcie);
+		
+		Map<String, Integer> query04yMap = new HashMap<String, Integer>();
+		query04yMap.put("statusPrzyjeta", statusPrzyjeta);
+		query04yMap.put("statusWDrodzeDoSortowni", statusWDrodzeDoSortowni);
+		query04yMap.put("statusWSortowni", statusWSortowni);
+		query04yMap.put("statusWDrodzeDoKlienta", statusWDrodzeDoKlienta);
+		query04yMap.put("statusDostarczona", statusDostarczona);
+		query04yMap.put("statusNiedostarczonaCzekaWPunkcie", statusNiedostarczonaCzekaWPunkcie);
+		System.out. println(query04yMap);
+		
+	}
+	
+	public void query03(){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
+		Double avgDaysOfDelivery =
+				#{ dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery)) };
+
+		Double minDaysOfDelivery =
+				#{ dataBase.(0.0+ min(Shipment.fullDaysOfDelivery)) };
+				
+		Double maxDaysOfDelivery =
+				#{ dataBase.(0.0+ max(Shipment.fullDaysOfDelivery)) };
+				
+		Map<String, Double> query03yMap = new HashMap<String, Double>();
+		query03yMap.put("avgDaysOfDelivery", avgDaysOfDelivery);
+		query03yMap.put("minDaysOfDelivery", minDaysOfDelivery);
+		query03yMap.put("maxDaysOfDelivery", maxDaysOfDelivery);
+		System.out. println(query03yMap);
+	}
+	
+	public void query02(){
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> lostPckgsWithSendrAndAdress = 
+		//Collection<Shipment> lostPckgsWithSendrAndAdress =
+				#{ dataBase.( Shipment as sh where sh.isLost == true).(sh.sendDate as dataNadania,sh.deliveredDate as dataZgubienia,sh.sndr.name as imieNadawcy, sh.sndr.surname as nazwiskoNadawcy,  sh.sndr.city as miasto) };
+		System.out. println(lostPckgsWithSendrAndAdress);
+	}
+	
+	public void query01(){
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor = 
+		//Collection<Employee> employeesBySupervisor =
+				#{ dataBase.( Employee as ee where ee.position != "Kierownik"  ).(ee.superior.name as ImiePrzelozonego, ee.superior.surname as NazwiskoPrzelozonego, ee.name as Imie, ee.surname as Nazwisko, ee.position as Stanowisko ) };
+		System.out. println(employeesBySupervisor);
+	}
+	
+	public Double _query15(){
+		Double avgWeight = #{ dataBase.(avg(Shipment.Packagement.weight) as SredniaWagaPaczki) };
+		//System.out. println(avgWeight);
+		return avgWeight;
+	}
+		
+	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query14(){
+		//Double percentComplained = #{ dataBase.(  0.00 + count(Shipment where isComplaint == true ) / count(Shipment where 1==1 ) ) };
+		Integer countComplained = #{ dataBase.( count(Shipment where isComplaint == true ) ) };
+		//Integer countNonComplained = #{ dataBase.( count(Shipment where isComplaint == false ) ) };
+		//Integer countAll = #{ dataBase.( count(Shipment where 1==1 ) ) };
+		//System.out. println(percentComplained);
+		//System.out. println(countComplained);
+		//System.out. println(countNonComplained);
+		//System.out. println(countAll);
+		
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> complainedShipment = #{ dataBase.( (Shipment as sh where sh.isComplaint == true join Sender as sn join Receiver as rc ).(sh.sendDate as DataWyslania, sn.surname as Od, sh.deliveredDate as DataDostarczenia, rc.surname as Do) ) };
+		//System.out. println(complainedShipment);
+		return complainedShipment;
+	}
+	
+	public Map<String, Integer> _query13(){
+		//Integer shpmnts = #{ dataBase.(count(Shipment) as iloscPaczek) };
+		//Integer employees = #{ dataBase.(count(Employee) as iloscPracownikow) };
+		Integer tmpEmpByPckg = #{ dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == true or sh.emplyDelivering.isTemporary == true) as iloscObsluzonychPrzezTymczasowych) };
+		Integer nonTmpEmpByPckg = #{ dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == false or sh.emplyDelivering.isTemporary == false) as iloscObsluzonychPrzezStalych) };
+		//System.out. println(shpmnts);
+		//System.out. println(employees);
+//		System.out. println(tmpEmpByPckg);
+//		System.out. println(nonTmpEmpByPckg);
+		
+		Map<String, Integer> query13yMap = new HashMap<String, Integer>();
+		query13yMap.put("tmpEmpByPckg", tmpEmpByPckg);
+		query13yMap.put("nonTmpEmpByPckg", nonTmpEmpByPckg);
+
+		//System.out. println(query13yMap);
+		return query13yMap;
+	}
+	
+	
+	public Collection<Receiver> _query12(){
+		Collection<Receiver> rcvrsWithSecAdress = #{ dataBase.(Receiver where secondaryAdress != 0 ) };
+		//System.out. println(rcvrsWithSecAdress);
+		return rcvrsWithSecAdress;
+	}
+	
+	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query11(){
+		
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> empsWithDelayedPckgs =
+		//Integer empsWithDelayedPckgs =
+			//#{ dataBase.(count(Shipment as sh where sh.isComplaint == true))};
+			//#{ dataBase.(Shipment as sh where sh.isComplaint == true).(sh.emplyDelivering.surname as surname, sh.emplyDelivering.name as name, count(sh) as ile)};
+			//#{ dataBase.(Employee as em join Shipment as sh where sh.isComplaint == true ).(unique (em.surname as surname, em.name as name) , sh.sendDate as dataPaczki ) };
+			#{ dataBase.(Shipment as sh where sh.isComplaint == true ).( sh.sendDate as dataWys , sh.deliveredDate as dataDost , sh.emplyDelivering.name as imiePrac, sh.emplyDelivering.surname as nazwiskoPrac) };
+				//System.out. println(empsWithDelayedPckgs);
+			return empsWithDelayedPckgs;
+	}
+	
+	public Double  _query10(){
+		Double dealyedPymnts = #{ dataBase.(( 0.0 + count(Payment where isDelayed == true and isPaied == true)) / ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
+		//Double dealyedPymnts1 = #{ dataBase.( 0.0 + count(Payment where isDelayed == true and isPaied == true) ) };
+		//Double dealyedPymnts2 = #{ dataBase.( 0.0 + ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
+		//System.out. println(dealyedPymnts1);
+		//System.out. println(dealyedPymnts2);
+		//System.out. println(dealyedPymnts);
+		return dealyedPymnts;
+	}
+	
+	public Map<String, Double> _query09(){
+		Double avgShpmnt = #{ dataBase.(avg(Shipment.Payment.PaymentType.paymentPrice) as sredniaCenaPrzesylki) };
+		Double avgPckgmnt = #{ dataBase.(avg(Shipment.Packagement.PaymentType.paymentPrice) as sredniaCenaPaczki) };
+//		System.out. println(avgShpmnt);
+//		System.out. println(avgPckgmnt);
+		
+		Map<String, Double> query09yMap = new HashMap<String, Double>();
+		query09yMap.put("avgShpmnt", avgShpmnt);
+		query09yMap.put("avgPckgmnt", avgPckgmnt);
+		
+		return query09yMap;
+	}
+	
+	public Collection<String> _query08(){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> citiesByNumberOfReceivers = 
+		Collection<String> citiesByNumberOfReceivers =
+		//Collection<Integer> citiesByNumberOfReceivers =
+				#{ dataBase.(unique(Receiver.Adress.city) as miasto)};
+		//System.out. println(citiesByNumberOfReceivers);
+				return citiesByNumberOfReceivers;
+	}
+	
+	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query07(Integer param){
+		//Collection<Integer> emplWithSalaryOver =
+		//Collection<Employee> emplWithSalaryOver = 
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> emplWithSalaryOver =
+				#{ dataBase.( Employee as em where em.salary < param  ).(em.name as Imie,  em.surname as Nazwisko, em.salary as Pensja) };
+		//System.out. println(emplWithSalaryOver);
+				return emplWithSalaryOver;
+	}
+	
+	public Double _query06(){
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
 		Double avgNumberOfPackagesPerSender =
 				#{ dataBase.( (0.0 + count(Shipment)) / count(unique(Shipment.Sender)) ) };
-		System.out. println(avgNumberOfPackagesPerSender);
+		//System.out. println(avgNumberOfPackagesPerSender);
+				return avgNumberOfPackagesPerSender;
+	}
+	
+	public Double _query05(Date param){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> pymntSumsByMonth = 
+		//Collection<Payment> pymntSumsFromDate = 
+		//Collection<Double> pymntSumsFromDate =
+		//Double pymntSumsFromDate =
+				//#{ dataBase.(Payment as pm where pm.paymentDate > param).(pm.paymentType.paymentPrice) };
+				//#{ dataBase.(Payment as pm where pm.paymentDate > param).(pm.paymentType.paymentPrice as kwota).(sum(kwota)) };
+				//#{ dataBase.(Payment as pm where pm.paymentDate > param).(sum(pm.PaymentType.paymentPrice) + 0.0) };
+				//#{ dataBase.(0.0 + sum(Payment.PaymentType.paymentPrice)) };
+		Double pymntSumsFromDate2 =
+				#{ dataBase.(0.0 + sum((Payment as pm where pm.paymentDate > param).pm.PaymentType.paymentPrice ) ) };
+		//System.out. println(pymntSumsFromDate);
+		//System.out. println(pymntSumsFromDate2);
+		
+				return pymntSumsFromDate2;
+	}
+	
+	public Map<String, Integer> _query04(){
+			
+		//Collection<Integer> statusPrzyjeta = #{ dataBase.( (Shipment as sh).(sh.size()) )  };
+		Integer statusPrzyjeta = #{ dataBase.( count((Shipment as sh where sh.size() == 1).(sh.size())))  };
+		Integer statusWDrodzeDoSortowni =  #{ dataBase.( count((Shipment as sh where sh.size() == 2).(sh.size())))  };
+		Integer statusWSortowni =  #{ dataBase.( count((Shipment as sh where sh.size() == 3).(sh.size())))  };
+		Integer statusWDrodzeDoKlienta =  #{ dataBase.( count((Shipment as sh where sh.size() == 4).(sh.size())))  };
+		Integer statusDostarczona =  #{ dataBase.( count((Shipment as sh where sh.size() == 5).(sh.size())))  };
+		Integer statusNiedostarczonaCzekaWPunkcie =  #{ dataBase.( count((Shipment as sh where sh.size() == 6).(sh.size())))  };
+
+//		System.out. println("statusPrzyjeta: " + statusPrzyjeta);
+//		System.out. println("statusWDrodzeDoSortowni: " + statusWDrodzeDoSortowni);
+//		System.out. println("statusWSortowni: " + statusWSortowni);
+//		System.out. println("statusWDrodzeDoKlienta: " + statusWDrodzeDoKlienta);
+//		System.out. println("statusDostarczona: " + statusDostarczona);
+//		System.out. println("statusNiedostarczonaCzekaWPunkcie: " + statusNiedostarczonaCzekaWPunkcie);
+		
+		Map<String, Integer> query04yMap = new HashMap<String, Integer>();
+		query04yMap.put("statusPrzyjeta", statusPrzyjeta);
+		query04yMap.put("statusWDrodzeDoSortowni", statusWDrodzeDoSortowni);
+		query04yMap.put("statusWSortowni", statusWSortowni);
+		query04yMap.put("statusWDrodzeDoKlienta", statusWDrodzeDoKlienta);
+		query04yMap.put("statusDostarczona", statusDostarczona);
+		query04yMap.put("statusNiedostarczonaCzekaWPunkcie", statusNiedostarczonaCzekaWPunkcie);
+		//System.out. println(query04yMap);
+		
+		return query04yMap;
+	}
+	
+	public Map<String, Double> _query03(){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
+		Double avgDaysOfDelivery =
+				#{ dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery)) };
+
+		Double minDaysOfDelivery =
+				#{ dataBase.(0.0+ min(Shipment.fullDaysOfDelivery)) };
+				
+		Double maxDaysOfDelivery =
+				#{ dataBase.(0.0+ max(Shipment.fullDaysOfDelivery)) };
+				
+		Map<String, Double> query03yMap = new HashMap<String, Double>();
+		query03yMap.put("avgDaysOfDelivery", avgDaysOfDelivery);
+		query03yMap.put("minDaysOfDelivery", minDaysOfDelivery);
+		query03yMap.put("maxDaysOfDelivery", maxDaysOfDelivery);
+		//System.out. println(query03yMap);
+		
+		return query03yMap;
+	}
+	
+	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct>  _query02(){
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> lostPckgsWithSendrAndAdress = 
+		//Collection<Shipment> lostPckgsWithSendrAndAdress =
+				#{ dataBase.( Shipment as sh where sh.isLost == true).(sh.sendDate as dataNadania,sh.deliveredDate as dataZgubienia,sh.sndr.name as imieNadawcy, sh.sndr.surname as nazwiskoNadawcy,  sh.sndr.city as miasto) };
+		//System.out. println(lostPckgsWithSendrAndAdress);
+				
+				return lostPckgsWithSendrAndAdress;
+	}
+	
+	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query01(){
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor = 
+		//Collection<Employee> employeesBySupervisor =
+				#{ dataBase.( Employee as ee where ee.position != "Kierownik"  ).(ee.superior.name as ImiePrzelozonego, ee.superior.surname as NazwiskoPrzelozonego, ee.name as Imie, ee.surname as Nazwisko, ee.position as Stanowisko) };
+		//System.out. println(employeesBySupervisor);
+				
+				return employeesBySupervisor;
 	}
 }

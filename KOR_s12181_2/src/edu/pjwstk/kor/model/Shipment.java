@@ -1,6 +1,11 @@
 package edu.pjwstk.kor.model;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
+
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 public class Shipment {
 
@@ -18,6 +23,8 @@ public class Shipment {
 	private Boolean isComplaint;
 	
 	private ArrayList<Status> statusList;
+	
+	private Integer fullDaysOfDelivery;
 
 	public Shipment(Packagement pckg, Payment pymnt, Employee emplyReceiving,
 			Employee emplyDelivering, Sender sndr, Receiver rcvr,
@@ -36,6 +43,17 @@ public class Shipment {
 		this.isLost = isLost;
 		this.isComplaint = isComplaint;
 		this.statusList = statusList;
+		this.fullDaysOfDelivery = 0;
+	}
+	
+	public Integer size() {
+		return statusList.size();
+	}
+	
+	public Integer getFullDaysOfDelivery(){
+		
+		return fullDaysOfDelivery = Days.daysBetween(new DateTime(this.getSendDate()) , new DateTime(this.getDeliveredDate())).getDays() ;
+
 	}
 
 	public Packagement getPckg() {

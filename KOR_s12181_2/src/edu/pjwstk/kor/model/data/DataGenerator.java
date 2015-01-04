@@ -61,7 +61,8 @@ public class DataGenerator {
 		System.out.println(exampleData.senders);
 		System.out.println(exampleData.shipments);
 		System.out.println(exampleData.statuses);
-		
+	
+		exampleData.shipments.get(0).getStatusList().size();
 	}
 
 	public DataGenerator() {
@@ -254,6 +255,10 @@ public class DataGenerator {
 		return randomDate(2010, 2014);
 	}
 	
+	public static Date randomDateDelivery() {
+		return randomDate(2014, 2014);
+	}
+	
 	public static Date randomDate(int minYear, int maxYear) {
 		int year = randomInt(minYear, maxYear);
         int month = randomInt(0, 11);
@@ -270,4 +275,6 @@ public class DataGenerator {
 		int r = (int)(Math.random() * 2);
 		return r > 0 ? true : false;		
 	}
+	
+	
 }

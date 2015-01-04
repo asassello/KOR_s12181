@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Date;
 import java.util.Random;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
 import edu.pjwstk.kor.model.Employee;
 import edu.pjwstk.kor.model.Packagement;
 import edu.pjwstk.kor.model.Payment;
@@ -20,12 +23,12 @@ public class RandomShipment {
 		
 		List<Date> sendDate = new ArrayList<Date>();
 		for (int i=0; i<100; i++) {
-			sendDate.add(DataGenerator.randomDatePresent());
+			sendDate.add(DataGenerator.randomDateDelivery());
 		}
 		
 		List<Date> deliveredDate = new ArrayList<Date>();
 		for (int i=0; i<100; i++) {
-			deliveredDate.add(DataGenerator.randomDatePresent());
+			deliveredDate.add(DataGenerator.randomDateDelivery());
 		}
 		
 		List<Boolean> isDelivered = new ArrayList<Boolean>();
@@ -50,16 +53,27 @@ public class RandomShipment {
 			int idx5 = rnd.nextInt(sndr.size());
 			int idx6 = rnd.nextInt(rcvr.size());
 			
-			int idx7 = rnd.nextInt(statusList.size());
+			int idx7 = rnd.nextInt(statusList.size()+1); //aby nie pomin¹æ ostatniego statusu
 			ArrayList<Status> tmpstatusList = new ArrayList<Status>();
+			if(idx7 == 0) tmpstatusList.add(statusList.get(0));
+			else
 			for (int j=0; j<idx7; j++){
 				tmpstatusList.add(statusList.get(j));
 			}
 			int idx8 = rnd.nextInt(sendDate.size());
 			int idx9 = rnd.nextInt(deliveredDate.size());
-			int idx10 = rnd.nextInt(isDelivered.size());
-			int idx11; if(idx10 == 0) idx11 = 1; else idx11 = 0;
-			int idx12 = rnd.nextInt(isComplaint.size());
+			int idx10 = rnd.nextInt(isDelivered.size()); 
+			int idx11; if(idx10 == 0 && i%4 ==0) idx11 = 1; else idx11 = 0;
+			int idx12 = 1;
+			if(i%4 ==0) {idx12 = rnd.nextInt(isComplaint.size());}
+			else {idx12 = 1;}
+			
+			Integer chck = Days.daysBetween(new DateTime(sendDate.get(idx8)),new DateTime(deliveredDate.get(idx9))).getDays(); //jeœli data dostarczenia wczesniejsza ni¿ data wys³ania
+			if(chck < 0 ) { 
+				Date tmpExDate = sendDate.get(idx8); 
+				sendDate.set(idx8, deliveredDate.get(idx9)); 
+				deliveredDate.set(idx9, tmpExDate);
+				}
 			
 			shipments.add(new Shipment(pckg.get(idx1),pymnt.get(idx2),emplyReceiving.get(idx3),emplyDelivering.get(idx4),sndr.get(idx5),rcvr.get(idx6),
 					sendDate.get(idx8), deliveredDate.get(idx9), isDelivered.get(idx10), isLost.get(idx11), isComplaint.get(idx12),

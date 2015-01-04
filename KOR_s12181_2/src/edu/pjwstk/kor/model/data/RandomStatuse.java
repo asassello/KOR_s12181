@@ -24,9 +24,9 @@ public class RandomStatuse {
 		ArrayList<Shipment> shipmentByStatusList = new ArrayList<Shipment>();
 		
 		for (int i=0; i<6; i++) {
-			Random rnd = new Random();
-			int idx1 = rnd.nextInt(statusNames.size());
-			statuses.add(new Status(statusNames.get(idx1),shipmentByStatusList));
+//			Random rnd = new Random();
+//			int idx1 = rnd.nextInt(statusNames.size());
+			statuses.add(new Status(statusNames.get(i),shipmentByStatusList));
 		}
 		
 		return statuses;
