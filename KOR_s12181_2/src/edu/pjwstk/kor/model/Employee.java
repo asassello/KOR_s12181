@@ -3,12 +3,12 @@ package edu.pjwstk.kor.model;
 public class Employee extends Person {
 
 	private Employee superior;
-	private Float salary;
+	private Integer salary;
 	private String position;
 	private Boolean isTemporary;
 	
 	public Employee(String name, String surname, String phoneNumber,
-			String emailAdress, Adress adres, Employee superior, Float salary,
+			String emailAdress, Adress adres, Employee superior, Integer salary,
 			String position, Boolean isTemporary) {
 		super(name, surname, phoneNumber, emailAdress, adres);
 		this.superior = superior;
@@ -17,7 +17,7 @@ public class Employee extends Person {
 		this.isTemporary = isTemporary;
 	}
 	
-	public Employee(Person person, Employee superior, Float salary,
+	public Employee(Person person, Employee superior, Integer salary,
 			String position, Boolean isTemporary) {
 		super(person.getName(), person.getSurname(), person.getPhoneNumber(), person.getEmailAdress(), person.getAdres());
 		this.superior = superior;
@@ -35,11 +35,11 @@ public class Employee extends Person {
 		this.superior = superior;
 	}
 
-	public Float getSalary() {
+	public Integer getSalary() {
 		return salary;
 	}
 
-	public void setSalary(Float salary) {
+	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
 

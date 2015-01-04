@@ -17,6 +17,10 @@ public class Person {
 		this.emailAdress = emailAdress;
 		this.adres = adres;
 	}
+	
+	public String getCity() {
+		return adres.getCity();
+	}
 
 	public String getName() {
 		return name;

@@ -20,6 +20,7 @@ public class Adress {
 	}
 
 	private String city;
+	
 	public String getCity() {
 		return city;
 	}

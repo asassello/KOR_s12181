@@ -5,6 +5,7 @@ import com.db4o.ObjectContainer;
 import edu.pjwstk.kor.model.*;
 import edu.pjwstk.kor.model.data.*;
 import java.sql.Struct;
+import java.text.SimpleDateFormat;
 
 public class MyQuery{
 	
@@ -12,10 +13,14 @@ public class MyQuery{
 	private ObjectContainer dataBase;
 	
 	public static void main(String[] args) {
+		try{
 		MyQuery mainOb = new MyQuery();
+		} catch (Exception e){
+			throw new RuntimeException();
+		}
 	}
 	
-	public MyQuery() {
+	public MyQuery() throws Exception {
 		data = new DataGenerator();
 		dataBase = data.getConnection();
 		//query01();
@@ -29,27 +34,38 @@ public class MyQuery{
 		//query11();
 		//query10();
 		//query09();
-		query08();
+		//query08();
+		//query07(5000);
+		//query06();
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		String dateString = format.format( new Date());
+//		Date date_param = format.parse( "2010-10-31" );  
+//		query05(date_param);
+		query04();
+//		query03();
+//		query02();
+//		query01();
+		
 
 		dataBase.close();
 	}
 	
-	public void query01(){
+	public void query21(){
 		Collection<String> avgWeight = #{ dataBase.(Packagement.sizeType) };
 		System.out. println(avgWeight);
 	}
 	
-	public void query02(){
+	public void query22(){
 		Collection<Packagement> avgWeight = #{ dataBase.(Packagement) };
 		System.out. println(avgWeight);
 	}
 	
-	public void query03(){
+	public void query23(){
 		Collection<Double> avgWeight = #{ dataBase.(Packagement.weight) };
 		System.out. println(avgWeight);
 	}
 	
-	public void query04(){
+	public void query24(){
 		Double avgWeight = #{ dataBase.(avg(Packagement.weight)) };
 		System.out. println(avgWeight);
 	}
@@ -122,7 +138,46 @@ public class MyQuery{
 	public void query08(){
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> citiesByNumberOfReceivers = 
 		Collection<String> citiesByNumberOfReceivers =
-				#{ dataBase.(unique(Receiver.Adress.city as miasto)) };
+		//Collection<Integer> citiesByNumberOfReceivers =
+				#{ dataBase.(unique(Receiver.Adress.city) as miasto)};
 		System.out. println(citiesByNumberOfReceivers);
+	}
+	
+	public void query07(Integer param){
+		//Collection<Integer> emplWithSalaryOver =
+		//Collection<Employee> emplWithSalaryOver = 
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> emplWithSalaryOver =
+				#{ dataBase.( Employee as em where em.salary < param  ).(em.name as Imie,  em.surname as Nazwisko, em.salary as Pensja) };
+		System.out. println(emplWithSalaryOver);
+	}
+	
+	public void query06(){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
+		Double avgNumberOfPackagesPerSender =
+				#{ dataBase.( (0.0 + count(Shipment)) / count(unique(Shipment.Sender)) ) };
+		System.out. println(avgNumberOfPackagesPerSender);
+	}
+	
+	public void query05(Date param){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> pymntSumsByMonth = 
+		//Collection<Payment> pymntSumsFromDate = 
+		//Collection<Double> pymntSumsFromDate =
+		//Double pymntSumsFromDate =
+				//#{ dataBase.(Payment as pm where pm.paymentDate > param).(pm.paymentType.paymentPrice) };
+				//#{ dataBase.(Payment as pm where pm.paymentDate > param).(pm.paymentType.paymentPrice as kwota).(sum(kwota)) };
+				//#{ dataBase.(Payment as pm where pm.paymentDate > param).(sum(pm.PaymentType.paymentPrice) + 0.0) };
+				//#{ dataBase.(0.0 + sum(Payment.PaymentType.paymentPrice)) };
+		Double pymntSumsFromDate2 =
+				#{ dataBase.(0.0 + sum((Payment as pm where pm.paymentDate > param).pm.PaymentType.paymentPrice ) ) };
+		//System.out. println(pymntSumsFromDate);
+		System.out. println(pymntSumsFromDate2);
+		
+	}
+	
+	public void query04(){
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
+		Double avgNumberOfPackagesPerSender =
+				#{ dataBase.( (0.0 + count(Shipment)) / count(unique(Shipment.Sender)) ) };
+		System.out. println(avgNumberOfPackagesPerSender);
 	}
 }

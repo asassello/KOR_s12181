@@ -24,13 +24,13 @@ public class RandomEmployee {
 		for (int i=0; i<5; i++) {
 			Random rnd = new Random();
 			int idx1 = rnd.nextInt(bossessPersons.size());			
-			bossess.add(new Employee(bossessPersons.get(idx1),null, Float.parseFloat("10000"),"Kierownik",new Boolean(false)));
+			bossess.add(new Employee(bossessPersons.get(idx1),null, Integer.parseInt("10000"),"Kierownik",new Boolean(false)));
 		}
 		
-		List<Float> salaries = new ArrayList<Float>();
+		List<Integer> salaries = new ArrayList<Integer>();
 		for(int i=0; i<100; i++) {
 			Random rnd = new Random();
-			float n = 1750 + rnd.nextInt(8000);
+			Integer n = 1750 + rnd.nextInt(8000);
 			salaries.add(n);
 		}
 		

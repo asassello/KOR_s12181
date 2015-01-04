@@ -22,6 +22,10 @@ public class Receiver extends Person {
 	public void setSecondaryAdress(Adress secondaryAdress) {
 		this.secondaryAdress = secondaryAdress;
 	}
+	
+	public String getCity() {
+		return super.getCity();
+	}
 
 	@Override
 	public String toString() {

@@ -20,6 +20,12 @@ public class Payment {
 	public PaymentType getPaymentType() {
 		return paymentType;
 	}
+	
+	public double getPaymentPrice() {
+		return paymentType.getPaymentPrice();
+	}
+	
+	
 
 	public void setPaymentType(PaymentType paymentType) {
 		this.paymentType = paymentType;

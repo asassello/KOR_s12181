@@ -19,7 +19,7 @@ public static ArrayList<Sender> getSenders(List<Person> persons){
 		senderTypes.add("Klient VIP");
 		senderTypes.add("Klient VIP");
 		
-		for (int i=0; i<100; i++) {
+		for (int i=0; i<60; i++) {
 			Random rnd = new Random();
 			int idx1 = rnd.nextInt(senderTypes.size());
 			int idx2 = rnd.nextInt(persons.size());

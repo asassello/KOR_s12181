@@ -16,7 +16,7 @@ public static ArrayList<Payment> getPayments(List<PaymentType> paymentTypes){
 		
 		List<Date> paymentDates = new ArrayList<Date>();
 		for (int i=0; i<100; i++) {
-			paymentDates.add(DataGenerator.randomDate());
+			paymentDates.add(DataGenerator.randomDatePresent());
 		}
 		
 		List<Boolean> isPaieds = new ArrayList<Boolean>();
