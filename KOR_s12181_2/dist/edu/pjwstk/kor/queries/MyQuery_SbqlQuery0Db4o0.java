@@ -39,22 +39,28 @@ import pl.wcislo.sbql4j.util.Utils;
 import pl.wcislo.sbql4j.xml.model.*;
 import pl.wcislo.sbql4j.xml.parser.store.*;
 
+import java.sql.Struct;
+
+import java.text.SimpleDateFormat;
+
 import java.util.*;
+import java.util.Date;
 
 
-public class MyQuery_SbqlQuery0Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Packagement>> {
+public class MyQuery_SbqlQuery0Db4o0 implements Db4oSBQLQuery<java.util.Collection<java.lang.String>> {
     public MyQuery_SbqlQuery0Db4o0() {
     }
 
     /**
-     * query='dataBase.Packagement'
+     * query='dataBase.Packagement.getSizeType()'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Packagement> executeQuery(
+    public java.util.Collection<java.lang.String> executeQuery(
         final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Packagement
+        //evaluateExpression - start Packagement.getSizeType()
         final LocalTransaction transLocal = (LocalTransaction) t;
 
+        //visitDotExpression - start Packagement.getSizeType()
         //visitIdentifierExpression - start Packagement
         final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
             new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
@@ -68,11 +74,39 @@ public class MyQuery_SbqlQuery0Db4o0 implements Db4oSBQLQuery<java.util.Collecti
         }
 
         //visitIdentifierExpression - end Packagement
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_ident_Packagement,
-            ocb);
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
+        int _dotIndex = 0;
 
-        return _ident_Packagement;
+        for (edu.pjwstk.kor.model.Packagement _dotEl : _ident_Packagement) {
+            if (_dotEl == null) {
+                continue;
+            }
 
-        //evaluateExpression - end Packagement
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
+            }
+
+            //visitMethodExpression - start getSizeType()
+            java.lang.String _mth_getSizeTypeResult = _dotEl.getSizeType();
+
+            if (_mth_getSizeTypeResult != null) {
+                ocb.activate(_mth_getSizeTypeResult, 1);
+            }
+
+            //visitMethodExpression - end getSizeType()
+            if (_mth_getSizeTypeResult != null) {
+                ocb.activate(_mth_getSizeTypeResult, 1);
+            }
+
+            _dotResult.add(_mth_getSizeTypeResult);
+            _dotIndex++;
+        }
+
+        //visitDotExpression - end Packagement.getSizeType()
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_dotResult, ocb);
+
+        return _dotResult;
+
+        //evaluateExpression - end Packagement.getSizeType()
     }
 }

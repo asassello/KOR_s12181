@@ -34,7 +34,12 @@ import pl.wcislo.sbql4j.util.Utils;
 import pl.wcislo.sbql4j.xml.model.*;
 import pl.wcislo.sbql4j.xml.parser.store.*;
 
+import java.sql.Struct;
+
+import java.text.SimpleDateFormat;
+
 import java.util.*;
+import java.util.Date;
 
 
 public class MyQuery_SbqlQuery0 {
@@ -45,21 +50,21 @@ public class MyQuery_SbqlQuery0 {
     }
 
     /**
-     * original query='dataBase.(Packagement)'
+     * original query='dataBase.(Packagement.sizeType)'
      *
-     * query after optimization='dataBase.Packagement'
+     * query after optimization='dataBase.Packagement.getSizeType()'
     */
-    public java.util.Collection<edu.pjwstk.kor.model.Packagement> executeQuery() {
-        //evaluateExpression - start dataBase.Packagement
-        //visitDotExpression - start dataBase.Packagement
+    public java.util.Collection<java.lang.String> executeQuery() {
+        //evaluateExpression - start dataBase.Packagement.getSizeType()
+        //visitDotExpression - start dataBase.Packagement.getSizeType()
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<edu.pjwstk.kor.model.Packagement> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery0Db4o0());
+        java.util.Collection<java.lang.String> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery0Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.Packagement
+        //evaluateExpression - end dataBase.Packagement.getSizeType()
     }
 }
