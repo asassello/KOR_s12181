@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Packagement;
+import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery1 {
     }
 
     /**
-     * original query='dataBase.(Packagement)'
+     * original query='dataBase.( count(Shipment where isComplaint == true ) )'
      *
-     * query after optimization='dataBase.Packagement'
+     * query after optimization='dataBase.( count((Shipment where getIsComplaint() == true)))'
     */
-    public java.util.Collection<edu.pjwstk.kor.model.Packagement> executeQuery() {
-        //evaluateExpression - start dataBase.Packagement
-        //visitDotExpression - start dataBase.Packagement
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Shipment where getIsComplaint() == true)))
+        //visitDotExpression - start dataBase.( count((Shipment where getIsComplaint() == true)))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<edu.pjwstk.kor.model.Packagement> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery1Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery1Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.Packagement
+        //evaluateExpression - end dataBase.( count((Shipment where getIsComplaint() == true)))
     }
 }

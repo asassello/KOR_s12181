@@ -47,44 +47,72 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery40Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Employee>> {
-    private java.lang.Integer param;
-
-    public MyQuery_SbqlQuery40Db4o0(java.lang.Integer param) {
-        this.param = param;
+public class MyQuery_SbqlQuery40Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
+    public MyQuery_SbqlQuery40Db4o0() {
     }
 
     /**
-     * query='dataBase.(Employee as em where em.getSalary() < param)'
+     * query='dataBase.( count((Receiver.getCity() as rc where rc == "Gdansk")))'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Employee> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Employee as em where em.getSalary() < param
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  count((Receiver.getCity() as rc where rc == "Gdansk"))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitWhereExpression - start Employee as em where em.getSalary() < param
-        //visitAsExpression - start Employee as em
-        //visitIdentifierExpression - start Employee
-        final java.util.Collection<edu.pjwstk.kor.model.Employee> _ident_Employee =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
-        ClassMetadata _classMeta60 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Employee");
-        long[] _ids60 = _classMeta60.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Receiver.getCity() as rc where rc == "Gdansk"))
+        //visitWhereExpression - start Receiver.getCity() as rc where rc == "Gdansk"
+        //visitAsExpression - start Receiver.getCity() as rc
+        //visitDotExpression - start Receiver.getCity()
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
+        ClassMetadata _classMeta57 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
+        long[] _ids57 = _classMeta57.getIDs(transLocal);
 
-        for (long _id60 : _ids60) {
-            LazyObjectReference _ref60 = transLocal.lazyReferenceFor((int) _id60);
-            _ident_Employee.add((edu.pjwstk.kor.model.Employee) _ref60.getObject());
+        for (long _id57 : _ids57) {
+            LazyObjectReference _ref57 = transLocal.lazyReferenceFor((int) _id57);
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref57.getObject());
         }
 
-        //visitIdentifierExpression - end Employee
-        java.util.Collection<edu.pjwstk.kor.model.Employee> _asResult_em = _ident_Employee;
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
+        int _dotIndex = 0;
 
-        //visitAsExpression - end Employee as em
-        java.util.Collection<edu.pjwstk.kor.model.Employee> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
+            if (_dotEl == null) {
+                continue;
+            }
+
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
+            }
+
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl.getCity();
+
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            _dotResult.add(_mth_getCityResult);
+            _dotIndex++;
+        }
+
+        //visitDotExpression - end Receiver.getCity()
+        java.util.Collection<java.lang.String> _asResult_rc = _dotResult;
+
+        //visitAsExpression - end Receiver.getCity() as rc
+        java.util.Collection<java.lang.String> _whereResult = new java.util.ArrayList<java.lang.String>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Employee _whereEl : _asResult_em) {
+        for (java.lang.String _whereEl : _asResult_rc) {
             if (_whereEl == null) {
                 continue;
             }
@@ -93,52 +121,39 @@ public class MyQuery_SbqlQuery40Db4o0 implements Db4oSBQLQuery<java.util.Collect
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start em.getSalary() < param
-            //visitDotExpression - start em.getSalary()
-            //visitIdentifierExpression - start em
-            edu.pjwstk.kor.model.Employee _ident_em = _whereEl;
+            //visitBinaryAExpression - start rc == "Gdansk"
+            //visitIdentifierExpression - start rc
+            java.lang.String _ident_rc = _whereEl;
 
-            if (_ident_em != null) {
-                ocb.activate(_ident_em, 1);
+            if (_ident_rc != null) {
+                ocb.activate(_ident_rc, 1);
             }
 
-            //visitIdentifierExpression - end em
-            edu.pjwstk.kor.model.Employee _dotEl = _ident_em;
+            //visitIdentifierExpression - end rc
+            //visitLiteralExpression - start "Gdansk"
+            //visitLiteralExpression - end "Gdansk"
+            //OperatorEquals - start rc == "Gdansk"
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_ident_rc,
+                    "Gdansk");
 
-            if (_ident_em != null) {
-                ocb.activate(_ident_em, 2);
-            }
-
-            //visitMethodExpression - start getSalary()
-            java.lang.Integer _mth_getSalaryResult = _dotEl.getSalary();
-
-            if (_mth_getSalaryResult != null) {
-                ocb.activate(_mth_getSalaryResult, 1);
-            }
-
-            //visitMethodExpression - end getSalary()
-            //visitDotExpression - end em.getSalary()
-            //visitIdentifierExpression - start param
-            java.lang.Integer _ident_param = param;
-
-            //visitIdentifierExpression - end param
-            //OperatorLess - start em.getSalary() < param
-            Boolean _lessResult = _mth_getSalaryResult < _ident_param;
-
-            //OperatorLess - end em.getSalary() < param
-            //visitBinaryAExpression - end em.getSalary() < param
-            if (_lessResult) {
+            //OperatorEquals - end rc == "Gdansk"
+            //visitBinaryAExpression - end rc == "Gdansk"
+            if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
 
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Employee as em where em.getSalary() < param
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
+        //visitWhereExpression - end Receiver.getCity() as rc where rc == "Gdansk"
+        //OperatorCount - start  count((Receiver.getCity() as rc where rc == "Gdansk"))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Receiver.getCity() as rc where rc == "Gdansk"))
+        //visitUnaryExpression - end  count((Receiver.getCity() as rc where rc == "Gdansk"))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
-        return _whereResult;
+        return _countResult;
 
-        //evaluateExpression - end Employee as em where em.getSalary() < param
+        //evaluateExpression - end  count((Receiver.getCity() as rc where rc == "Gdansk"))
     }
 }

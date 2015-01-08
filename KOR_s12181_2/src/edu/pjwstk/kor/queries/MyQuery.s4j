@@ -8,10 +8,10 @@ import java.sql.Struct;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class MyQuery{
+public class  MyQuery{
 	
-	private static DataGenerator data;
-	private static ObjectContainer dataBase;
+	public static DataGenerator data;
+	public static ObjectContainer dataBase;
 	
 	public static void main(String[] args) {
 		try{
@@ -21,7 +21,15 @@ public class MyQuery{
 		}
 	}
 	
-	public MyQuery() throws Exception 
+	public void polacz(){
+		this.dataBase = data.getConnection();
+	}
+	
+	public void rozlacz(){
+		this.dataBase.close();
+	}
+	
+	public MyQuery()
 	{
 		  data = new DataGenerator();
 		  dataBase = data.getConnection();
@@ -47,31 +55,31 @@ public class MyQuery{
 //		query02();
 //		query01();
 		
-		_query01();
-		_query02();
-		_query03();
-		_query04();
-		_query15();
-		_query14();
-		_query13();
-		_query12();
-		_query11();
-		_query10();
-		_query09();
-		_query08();
-		_query07(5000);
-		_query06();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		Date date_param = format.parse( "2010-10-31" );  
-		_query05(date_param);
-		_query04();
-		_query03();
-		_query02();
-		_query01();
+//		_query01();
+//		_query02();
+//		_query03();
+//		_query04();
+//		_query15();
+//		_query14();
+//		_query13();
+//		_query12();
+//		_query11();
+//		_query10();
+//		_query09();
+//		_query08();
+//		_query07(5000);
+//		_query06();
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date_param = format.parse( "2010-10-31" );  
+//		_query05(date_param);
+//		_query04();
+//		_query03();
+//		_query02();
+//		_query01();
 		
-		System.out. println("Koniec");
-
-		dataBase.close();
+//		System.out. println("Koniec");
+//
+//		dataBase.close();
 	}
 	
 	public void query15(){
@@ -238,13 +246,16 @@ public class MyQuery{
 		System.out. println(employeesBySupervisor);
 	}
 	
-	public static Double _query15(){
-		Double avgWeight = #{ dataBase.(avg(Shipment.Packagement.weight) as SredniaWagaPaczki) };
+	public  Map<String, Double>  _query15(){
+		Double avgPckgWeight = #{ dataBase.(avg(Shipment.Packagement.weight) as SredniaWagaPaczki) };
 		//System.out. println(avgWeight);
-		return avgWeight;
+		Map<String, Double> query15yMap = new HashMap<String, Double>();
+		query15yMap.put("avgPckgWeight", avgPckgWeight);
+		
+		return query15yMap;
 	}
 		
-	public  static Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query14(){
+	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query14(){
 		//Double percentComplained = #{ dataBase.(  0.00 + count(Shipment where isComplaint == true ) / count(Shipment where 1==1 ) ) };
 		Integer countComplained = #{ dataBase.( count(Shipment where isComplaint == true ) ) };
 		//Integer countNonComplained = #{ dataBase.( count(Shipment where isComplaint == false ) ) };
@@ -254,12 +265,12 @@ public class MyQuery{
 		//System.out. println(countNonComplained);
 		//System.out. println(countAll);
 		
-		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> complainedShipment = #{ dataBase.( (Shipment as sh where sh.isComplaint == true join Sender as sn join Receiver as rc ).(sh.sendDate as DataWyslania, sn.surname as Od, sh.deliveredDate as DataDostarczenia, rc.surname as Do) ) };
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> complainedShipment = #{ dataBase.( (Shipment as sh where sh.isComplaint == true join sh.sndr as sn join sh.rcvr as rc ).(sh.sendDate as DataWyslania, sh.sndr.surname as Od, sh.deliveredDate as DataDostarczenia, sh.rcvr.surname as Do) ) };
 		//System.out. println(complainedShipment);
 		return complainedShipment;
 	}
 	
-	public static Map<String, Integer> _query13(){
+	public  Map<String, Integer> _query13(){
 		//Integer shpmnts = #{ dataBase.(count(Shipment) as iloscPaczek) };
 		//Integer employees = #{ dataBase.(count(Employee) as iloscPracownikow) };
 		Integer tmpEmpByPckg = #{ dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == true or sh.emplyDelivering.isTemporary == true) as iloscObsluzonychPrzezTymczasowych) };
@@ -278,13 +289,13 @@ public class MyQuery{
 	}
 	
 	
-	public static Collection<Receiver> _query12(){
-		Collection<Receiver> rcvrsWithSecAdress = #{ dataBase.(Receiver where secondaryAdress != 0 ) };
+	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query12(){
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> rcvrsWithSecAdress = #{ dataBase.(Receiver where secondaryAdress != 0 ).(name as Imie, surname as Nazwisko, city as Miasto, emailAdress as email) };
 		//System.out. println(rcvrsWithSecAdress);
 		return rcvrsWithSecAdress;
 	}
 	
-	public static Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query11(){
+	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query11(){
 		
 		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> empsWithDelayedPckgs =
 		//Integer empsWithDelayedPckgs =
@@ -296,17 +307,20 @@ public class MyQuery{
 			return empsWithDelayedPckgs;
 	}
 	
-	public static Double  _query10(){
-		Double dealyedPymnts = #{ dataBase.(( 0.0 + count(Payment where isDelayed == true and isPaied == true)) / ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
+	public  Map<String, Double>  _query10(){
+		Double nmbrDealyedPymnts = #{ dataBase.(( 0.0 + count(Payment where isDelayed == true and isPaied == true)) / ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
 		//Double dealyedPymnts1 = #{ dataBase.( 0.0 + count(Payment where isDelayed == true and isPaied == true) ) };
 		//Double dealyedPymnts2 = #{ dataBase.( 0.0 + ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  ) };
 		//System.out. println(dealyedPymnts1);
 		//System.out. println(dealyedPymnts2);
 		//System.out. println(dealyedPymnts);
-		return dealyedPymnts;
+		Map<String, Double> query10yMap = new HashMap<String, Double>();
+		query10yMap.put("nmbrDealyedPymnts", nmbrDealyedPymnts);
+		
+		return query10yMap;
 	}
 	
-	public static Map<String, Double> _query09(){
+	public  Map<String, Double> _query09(){
 		Double avgShpmnt = #{ dataBase.(avg(Shipment.Payment.PaymentType.paymentPrice) as sredniaCenaPrzesylki) };
 		Double avgPckgmnt = #{ dataBase.(avg(Shipment.Packagement.PaymentType.paymentPrice) as sredniaCenaPaczki) };
 //		System.out. println(avgShpmnt);
@@ -319,16 +333,58 @@ public class MyQuery{
 		return query09yMap;
 	}
 	
-	public static Collection<String> _query08(){
-		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> citiesByNumberOfReceivers = 
-		Collection<String> citiesByNumberOfReceivers =
-		//Collection<Integer> citiesByNumberOfReceivers =
-				#{ dataBase.(unique(Receiver.Adress.city) as miasto)};
-		//System.out. println(citiesByNumberOfReceivers);
-				return citiesByNumberOfReceivers;
-	}
+//	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query08(){
+//		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> citiesByNumberOfReceivers =
+//		//Collection<String> citiesByNumberOfReceivers =
+//		//Collection<Integer> citiesByNumberOfReceivers =
+//				#{ dataBase.(unique(Receiver.Adress.city) as miasto).(miasto as UnikalneMiasto, "TAK" as Ocena) };
+//		//System.out. println(citiesByNumberOfReceivers);
+//				return citiesByNumberOfReceivers;
+//	}
 	
-	public static Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query07(Integer param){
+	public  Map<String, Integer> _query08(){
+	//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> citiesByNumberOfReceivers =
+	//Collection<String> citiesByNumberOfReceivers =
+	//Collection<Integer> citiesByNumberOfReceivers =
+		Integer warszawa  = #{ dataBase.(count(Receiver.city as rc where rc == "Warszawa")) };
+		Integer lodz  = #{ dataBase.(count(Receiver.city as rc where rc == "Lodz")) };
+		Integer poznan  = #{ dataBase.(count(Receiver.city as rc where rc == "Poznan")) };
+		Integer wroclaw  = #{ dataBase.(count(Receiver.city as rc where rc == "Wroclaw")) };
+		Integer krakow  = #{ dataBase.(count(Receiver.city as rc where rc == "Krakow")) };
+		Integer gdansk  = #{ dataBase.(count(Receiver.city as rc where rc == "Gdansk")) };
+		Integer szczecin  = #{ dataBase.(count(Receiver.city as rc where rc == "Szczecin")) };
+		Integer rzeszow  = #{ dataBase.(count(Receiver.city as rc where rc == "Rzeszow")) };
+		Integer katowice  = #{ dataBase.(count(Receiver.city as rc where rc == "Katowice")) };
+			//#{ dataBase.(unique(Receiver.Adress.city) as miasto).(miasto as UnikalneMiasto, "TAK" as Ocena) };
+		
+		System.out. println(katowice);
+		System.out. println(krakow);
+		System.out. println(lodz);
+		System.out. println(poznan);
+		System.out. println(rzeszow);
+		System.out. println(szczecin);
+		System.out. println(warszawa);
+		System.out. println(wroclaw);
+		
+	//System.out. println(citiesByNumberOfReceivers);
+			Map<String, Integer> query08yMap = new HashMap<String, Integer>();
+			query08yMap.put("Gdansk", gdansk);
+			query08yMap.put("Katowice", katowice);
+			query08yMap.put("Krakow", krakow);
+			query08yMap.put("Lodz", lodz);
+			query08yMap.put("Poznan", poznan);
+			query08yMap.put("Rzeszow", rzeszow);
+			query08yMap.put("Szczecin", szczecin);
+			query08yMap.put("Warszawa", warszawa);
+			query08yMap.put("Wroclaw", wroclaw);
+			
+			//query13yMap.put("nonTmpEmpByPckg", nonTmpEmpByPckg);
+
+			//System.out. println(query13yMap);
+			return query08yMap;
+}
+	
+	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query07(Integer param){
 		//Collection<Integer> emplWithSalaryOver =
 		//Collection<Employee> emplWithSalaryOver = 
 		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> emplWithSalaryOver =
@@ -337,15 +393,20 @@ public class MyQuery{
 				return emplWithSalaryOver;
 	}
 	
-	public static Double _query06(){
+	public  Map<String, Double> _query06(){
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
 		Double avgNumberOfPackagesPerSender =
 				#{ dataBase.( (0.0 + count(Shipment)) / count(unique(Shipment.Sender)) ) };
 		//System.out. println(avgNumberOfPackagesPerSender);
-				return avgNumberOfPackagesPerSender;
+				//return avgNumberOfPackagesPerSender;
+				
+				Map<String, Double> query06yMap = new HashMap<String, Double>();
+				query06yMap.put("avgNumberOfPackagesPerSender", avgNumberOfPackagesPerSender);
+				
+				return query06yMap;
 	}
 	
-	public static Double _query05(Date param){
+	public  Map<String, Double> _query05(Date param){
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> pymntSumsByMonth = 
 		//Collection<Payment> pymntSumsFromDate = 
 		//Collection<Double> pymntSumsFromDate =
@@ -359,10 +420,13 @@ public class MyQuery{
 		//System.out. println(pymntSumsFromDate);
 		//System.out. println(pymntSumsFromDate2);
 		
-				return pymntSumsFromDate2;
+				Map<String, Double> query05yMap = new HashMap<String, Double>();
+				query05yMap.put("pymntSumsFromDate", pymntSumsFromDate2);
+				
+				return query05yMap;
 	}
 	
-	public static Map<String, Integer> _query04(){
+	public  Map<String, Integer> _query04(){
 			
 		//Collection<Integer> statusPrzyjeta = #{ dataBase.( (Shipment as sh).(sh.size()) )  };
 		Integer statusPrzyjeta = #{ dataBase.( count((Shipment as sh where sh.size() == 1).(sh.size())))  };
@@ -391,7 +455,7 @@ public class MyQuery{
 		return query04yMap;
 	}
 	
-	public static Map<String, Double> _query03(){
+	public  Map<String, Double> _query03(){
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
 		Double avgDaysOfDelivery =
 				#{ dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery)) };
@@ -411,7 +475,7 @@ public class MyQuery{
 		return query03yMap;
 	}
 	
-	public static Collection<pl.wcislo.sbql4j.java.model.runtime.Struct>  _query02(){
+	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct>  _query02(){
 		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> lostPckgsWithSendrAndAdress = 
 		//Collection<Shipment> lostPckgsWithSendrAndAdress =
 				#{ dataBase.( Shipment as sh where sh.isLost == true).(sh.sendDate as dataNadania,sh.deliveredDate as dataZgubienia,sh.sndr.name as imieNadawcy, sh.sndr.surname as nazwiskoNadawcy,  sh.sndr.city as miasto) };
@@ -420,12 +484,23 @@ public class MyQuery{
 				return lostPckgsWithSendrAndAdress;
 	}
 	
-	public static Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query01(){
-		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor = 
-		//Collection<Employee> employeesBySupervisor =
+	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct>
+	//public ArrayList
+	_query01(){
+		this.polacz();
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor =
 				#{ dataBase.( Employee as ee where ee.position != "Kierownik"  ).(ee.superior.name as ImiePrzelozonego, ee.superior.surname as NazwiskoPrzelozonego, ee.name as Imie, ee.surname as Nazwisko, ee.position as Stanowisko) };
-		//System.out. println(employeesBySupervisor);
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor2 =
+				//#{ dataBase.( Employee as ee where ee.position != "Kierownik"  ).(ee.superior.name, ee.superior.surname, ee.name, ee.surname, ee.position) };
+				//System.out.println(employeesBySupervisor);
+					//System.out.println("\n\n");
 				
+				//ArrayList res_query01 = new ArrayList(employeesBySupervisor);
+				//ArrayList res_query02 = new ArrayList(employeesBySupervisor2);
+				//System.out.println(res_query01);
+				//System.out.println(res_query02);
 				return employeesBySupervisor;
+				//return res_query01;
+				
 	}
 }

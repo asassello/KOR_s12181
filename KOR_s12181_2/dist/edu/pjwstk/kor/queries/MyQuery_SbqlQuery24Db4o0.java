@@ -47,89 +47,94 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery24Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery24Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Employee>> {
     public MyQuery_SbqlQuery24Db4o0() {
     }
 
     /**
-     * query='dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))'
+     * query='dataBase.(Employee as ee where ee.getPosition() != "Kierownik")'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
-        final Transaction t) {
-        //evaluateExpression - start 0.0 +  avg(Shipment.getFullDaysOfDelivery())
+    public java.util.Collection<edu.pjwstk.kor.model.Employee> executeQuery(
+        final ObjectContainerBase ocb, final Transaction t) {
+        //evaluateExpression - start Employee as ee where ee.getPosition() != "Kierownik"
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start 0.0 +  avg(Shipment.getFullDaysOfDelivery())
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  avg(Shipment.getFullDaysOfDelivery())
-        //visitDotExpression - start Shipment.getFullDaysOfDelivery()
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        //visitWhereExpression - start Employee as ee where ee.getPosition() != "Kierownik"
+        //visitAsExpression - start Employee as ee
+        //visitIdentifierExpression - start Employee
+        final java.util.Collection<edu.pjwstk.kor.model.Employee> _ident_Employee =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
         ClassMetadata _classMeta35 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+                                        .getClassMetadata("edu.pjwstk.kor.model.Employee");
         long[] _ids35 = _classMeta35.getIDs(transLocal);
 
         for (long _id35 : _ids35) {
             LazyObjectReference _ref35 = transLocal.lazyReferenceFor((int) _id35);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref35.getObject());
+            _ident_Employee.add((edu.pjwstk.kor.model.Employee) _ref35.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<java.lang.Integer> _dotResult = new java.util.ArrayList<java.lang.Integer>();
-        int _dotIndex = 0;
+        //visitIdentifierExpression - end Employee
+        java.util.Collection<edu.pjwstk.kor.model.Employee> _asResult_ee = _ident_Employee;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
-            if (_dotEl == null) {
+        //visitAsExpression - end Employee as ee
+        java.util.Collection<edu.pjwstk.kor.model.Employee> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
+        int _whereLoopIndex = 0;
+
+        for (edu.pjwstk.kor.model.Employee _whereEl : _asResult_ee) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl != null) {
-                ocb.activate(_dotEl, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitMethodExpression - start getFullDaysOfDelivery()
-            java.lang.Integer _mth_getFullDaysOfDeliveryResult = _dotEl.getFullDaysOfDelivery();
+            //visitBinaryAExpression - start ee.getPosition() != "Kierownik"
+            //visitDotExpression - start ee.getPosition()
+            //visitIdentifierExpression - start ee
+            edu.pjwstk.kor.model.Employee _ident_ee = _whereEl;
 
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            if (_ident_ee != null) {
+                ocb.activate(_ident_ee, 1);
             }
 
-            //visitMethodExpression - end getFullDaysOfDelivery()
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            //visitIdentifierExpression - end ee
+            edu.pjwstk.kor.model.Employee _dotEl = _ident_ee;
+
+            if (_ident_ee != null) {
+                ocb.activate(_ident_ee, 2);
             }
 
-            _dotResult.add(_mth_getFullDaysOfDeliveryResult);
-            _dotIndex++;
+            //visitMethodExpression - start getPosition()
+            java.lang.String _mth_getPositionResult = _dotEl.getPosition();
+
+            if (_mth_getPositionResult != null) {
+                ocb.activate(_mth_getPositionResult, 1);
+            }
+
+            //visitMethodExpression - end getPosition()
+            //visitDotExpression - end ee.getPosition()
+            //visitLiteralExpression - start "Kierownik"
+            //visitLiteralExpression - end "Kierownik"
+            //OperatorEquals - start ee.getPosition() != "Kierownik"
+            java.lang.Boolean _not_equalsResult = !OperatorUtils.equalsSafe(_mth_getPositionResult,
+                    "Kierownik");
+
+            //OperatorEquals - end ee.getPosition() != "Kierownik"
+            //visitBinaryAExpression - end ee.getPosition() != "Kierownik"
+            if (_not_equalsResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.getFullDaysOfDelivery()
-        //OperatorAvg - start  avg(Shipment.getFullDaysOfDelivery())
-        java.lang.Double _avgResult = 0d;
+        //visitWhereExpression - end Employee as ee where ee.getPosition() != "Kierownik"
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
 
-        if ((_dotResult != null) && !_dotResult.isEmpty()) {
-            Number _avgSum4 = null;
+        return _whereResult;
 
-            for (Number _avgEl4 : _dotResult) {
-                _avgSum4 = MathUtils.sum(_avgSum4, _avgEl4);
-            }
-
-            _avgResult = _avgSum4.doubleValue() / _dotResult.size();
-        }
-
-        //OperatorAvg - end  avg(Shipment.getFullDaysOfDelivery())
-        //visitUnaryExpression - end  avg(Shipment.getFullDaysOfDelivery())
-        //OperatorPlus - start 0.0 +  avg(Shipment.getFullDaysOfDelivery())
-        java.lang.Double _plusResult = 0.0 + _avgResult;
-        //OperatorPlus - end 0.0 +  avg(Shipment.getFullDaysOfDelivery())
-        //visitBinaryAExpression - end 0.0 +  avg(Shipment.getFullDaysOfDelivery())
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_plusResult, ocb);
-
-        return _plusResult;
-
-        //evaluateExpression - end 0.0 +  avg(Shipment.getFullDaysOfDelivery())
+        //evaluateExpression - end Employee as ee where ee.getPosition() != "Kierownik"
     }
 }

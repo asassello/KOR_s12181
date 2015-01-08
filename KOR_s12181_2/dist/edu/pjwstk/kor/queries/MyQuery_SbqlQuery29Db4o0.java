@@ -47,121 +47,180 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery29Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery29Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery29Db4o0() {
     }
 
     /**
-     * query='dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)'
+     * query='dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych)'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
+        //evaluateExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitAsExpression - start  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
-        //visitUnaryExpression - start  avg(Shipment.Packagement.getWeight())
-        //visitDotExpression - start Shipment.Packagement.getWeight()
-        //visitDotExpression - start Shipment.Packagement
+        //visitAsExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
+        //visitUnaryExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
+        //visitWhereExpression - start Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
+        //visitAsExpression - start Shipment as sh
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta40 = ocb.classCollection()
+        ClassMetadata _classMeta41 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids40 = _classMeta40.getIDs(transLocal);
+        long[] _ids41 = _classMeta41.getIDs(transLocal);
 
-        for (long _id40 : _ids40) {
-            LazyObjectReference _ref40 = transLocal.lazyReferenceFor((int) _id40);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref40.getObject());
+        for (long _id41 : _ids41) {
+            LazyObjectReference _ref41 = transLocal.lazyReferenceFor((int) _id41);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref41.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Packagement> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
-        int _dotIndex = 0;
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
-            if (_dotEl == null) {
+        //visitAsExpression - end Shipment as sh
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        int _whereLoopIndex = 0;
+
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl != null) {
-                ocb.activate(_dotEl, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitIdentifierExpression - start Packagement
-            final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
-            ClassMetadata _classMeta41 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Packagement");
-            long[] _ids41 = _classMeta41.getIDs(transLocal);
+            //visitBinaryAExpression - start sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
+            //OperatorOr - start sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
+            //visitBinaryAExpression - start sh.getEmplyReceiving().getIsTemporary() == false
+            //visitDotExpression - start sh.getEmplyReceiving().getIsTemporary()
+            //visitDotExpression - start sh.getEmplyReceiving()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
 
-            for (long _id41 : _ids41) {
-                LazyObjectReference _ref41 = transLocal.lazyReferenceFor((int) _id41);
-                _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref41.getObject());
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 1);
             }
 
-            //visitIdentifierExpression - end Packagement
-            if (_ident_Packagement != null) {
-                ocb.activate(_ident_Packagement, 2);
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
+
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 2);
             }
 
-            _dotResult.addAll(_ident_Packagement);
-            _dotIndex++;
+            //visitMethodExpression - start getEmplyReceiving()
+            edu.pjwstk.kor.model.Employee _mth_getEmplyReceivingResult = _dotEl.getEmplyReceiving();
+
+            if (_mth_getEmplyReceivingResult != null) {
+                ocb.activate(_mth_getEmplyReceivingResult, 1);
+            }
+
+            //visitMethodExpression - end getEmplyReceiving()
+            //visitDotExpression - end sh.getEmplyReceiving()
+            edu.pjwstk.kor.model.Employee _dotEl1 = _mth_getEmplyReceivingResult;
+
+            if (_mth_getEmplyReceivingResult != null) {
+                ocb.activate(_mth_getEmplyReceivingResult, 2);
+            }
+
+            //visitMethodExpression - start getIsTemporary()
+            java.lang.Boolean _mth_getIsTemporaryResult = _dotEl1.getIsTemporary();
+
+            if (_mth_getIsTemporaryResult != null) {
+                ocb.activate(_mth_getIsTemporaryResult, 1);
+            }
+
+            //visitMethodExpression - end getIsTemporary()
+            //visitDotExpression - end sh.getEmplyReceiving().getIsTemporary()
+            //visitLiteralExpression - start false
+            //visitLiteralExpression - end false
+            //OperatorEquals - start sh.getEmplyReceiving().getIsTemporary() == false
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsTemporaryResult,
+                    false);
+
+            //OperatorEquals - end sh.getEmplyReceiving().getIsTemporary() == false
+            //visitBinaryAExpression - end sh.getEmplyReceiving().getIsTemporary() == false
+            java.lang.Boolean _orResult;
+
+            if (!_equalsResult) {
+                _orResult = true;
+            } else {
+                //visitBinaryAExpression - start sh.getEmplyDelivering().getIsTemporary() == false
+                //visitDotExpression - start sh.getEmplyDelivering().getIsTemporary()
+                //visitDotExpression - start sh.getEmplyDelivering()
+                //visitIdentifierExpression - start sh
+                edu.pjwstk.kor.model.Shipment _ident_sh1 = _whereEl;
+
+                if (_ident_sh1 != null) {
+                    ocb.activate(_ident_sh1, 1);
+                }
+
+                //visitIdentifierExpression - end sh
+                edu.pjwstk.kor.model.Shipment _dotEl2 = _ident_sh1;
+
+                if (_ident_sh1 != null) {
+                    ocb.activate(_ident_sh1, 2);
+                }
+
+                //visitMethodExpression - start getEmplyDelivering()
+                edu.pjwstk.kor.model.Employee _mth_getEmplyDeliveringResult = _dotEl2.getEmplyDelivering();
+
+                if (_mth_getEmplyDeliveringResult != null) {
+                    ocb.activate(_mth_getEmplyDeliveringResult, 1);
+                }
+
+                //visitMethodExpression - end getEmplyDelivering()
+                //visitDotExpression - end sh.getEmplyDelivering()
+                edu.pjwstk.kor.model.Employee _dotEl3 = _mth_getEmplyDeliveringResult;
+
+                if (_mth_getEmplyDeliveringResult != null) {
+                    ocb.activate(_mth_getEmplyDeliveringResult, 2);
+                }
+
+                //visitMethodExpression - start getIsTemporary()
+                java.lang.Boolean _mth_getIsTemporaryResult1 = _dotEl3.getIsTemporary();
+
+                if (_mth_getIsTemporaryResult1 != null) {
+                    ocb.activate(_mth_getIsTemporaryResult1, 1);
+                }
+
+                //visitMethodExpression - end getIsTemporary()
+                //visitDotExpression - end sh.getEmplyDelivering().getIsTemporary()
+                //visitLiteralExpression - start false
+                //visitLiteralExpression - end false
+                //OperatorEquals - start sh.getEmplyDelivering().getIsTemporary() == false
+                java.lang.Boolean _equalsResult1 = OperatorUtils.equalsSafe(_mth_getIsTemporaryResult1,
+                        false);
+                //OperatorEquals - end sh.getEmplyDelivering().getIsTemporary() == false
+                //visitBinaryAExpression - end sh.getEmplyDelivering().getIsTemporary() == false
+                _orResult = _equalsResult1;
+            }
+
+            //OperatorOr - end sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
+            //visitBinaryAExpression - end sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
+            if (_orResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.Packagement
-        java.util.Collection<java.lang.Double> _dotResult1 = new java.util.ArrayList<java.lang.Double>();
-        int _dotIndex1 = 0;
+        //visitWhereExpression - end Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
+        //OperatorCount - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
+        java.lang.Integer _countResult = _whereResult.size();
 
-        for (edu.pjwstk.kor.model.Packagement _dotEl1 : _dotResult) {
-            if (_dotEl1 == null) {
-                continue;
-            }
-
-            if (_dotEl1 != null) {
-                ocb.activate(_dotEl1, 1);
-            }
-
-            //visitMethodExpression - start getWeight()
-            java.lang.Double _mth_getWeightResult = _dotEl1.getWeight();
-
-            if (_mth_getWeightResult != null) {
-                ocb.activate(_mth_getWeightResult, 1);
-            }
-
-            //visitMethodExpression - end getWeight()
-            if (_mth_getWeightResult != null) {
-                ocb.activate(_mth_getWeightResult, 1);
-            }
-
-            _dotResult1.add(_mth_getWeightResult);
-            _dotIndex1++;
-        }
-
-        //visitDotExpression - end Shipment.Packagement.getWeight()
-        //OperatorAvg - start  avg(Shipment.Packagement.getWeight())
-        java.lang.Double _avgResult = 0d;
-
-        if ((_dotResult1 != null) && !_dotResult1.isEmpty()) {
-            Number _avgSum5 = null;
-
-            for (Number _avgEl5 : _dotResult1) {
-                _avgSum5 = MathUtils.sum(_avgSum5, _avgEl5);
-            }
-
-            _avgResult = _avgSum5.doubleValue() / _dotResult1.size();
-        }
-
-        //OperatorAvg - end  avg(Shipment.Packagement.getWeight())
-        //visitUnaryExpression - end  avg(Shipment.Packagement.getWeight())
-        java.lang.Double _asResult_SredniaWagaPaczki = _avgResult;
-        //visitAsExpression - end  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_SredniaWagaPaczki,
+        //OperatorCount - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
+        //visitUnaryExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
+        java.lang.Integer _asResult_iloscObsluzonychPrzezStalych = _countResult;
+        //visitAsExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_iloscObsluzonychPrzezStalych,
             ocb);
 
-        return _asResult_SredniaWagaPaczki;
+        return _asResult_iloscObsluzonychPrzezStalych;
 
-        //evaluateExpression - end  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
+        //evaluateExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
     }
 }

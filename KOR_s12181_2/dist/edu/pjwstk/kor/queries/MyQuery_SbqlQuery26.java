@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery26 {
     }
 
     /**
-     * original query='dataBase.(0.0+ max(Shipment.fullDaysOfDelivery))'
+     * original query='dataBase.( count(Shipment where isComplaint == true ) )'
      *
-     * query after optimization='dataBase.(0.0 +  max(Shipment.getFullDaysOfDelivery()))'
+     * query after optimization='dataBase.( count((Shipment where getIsComplaint() == true)))'
     */
-    public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.(0.0 +  max(Shipment.getFullDaysOfDelivery()))
-        //visitDotExpression - start dataBase.(0.0 +  max(Shipment.getFullDaysOfDelivery()))
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Shipment where getIsComplaint() == true)))
+        //visitDotExpression - start dataBase.( count((Shipment where getIsComplaint() == true)))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery26Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery26Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(0.0 +  max(Shipment.getFullDaysOfDelivery()))
+        //evaluateExpression - end dataBase.( count((Shipment where getIsComplaint() == true)))
     }
 }

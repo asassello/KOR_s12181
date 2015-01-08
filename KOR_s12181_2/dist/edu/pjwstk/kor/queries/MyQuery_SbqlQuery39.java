@@ -3,7 +3,6 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Adress;
 import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.data.*;
 
@@ -51,21 +50,21 @@ public class MyQuery_SbqlQuery39 {
     }
 
     /**
-     * original query='dataBase.(unique(Receiver.Adress.city) as miasto)'
+     * original query='dataBase.(count(Receiver.city as rc where rc == "Krakow"))'
      *
-     * query after optimization='dataBase.( unique Receiver.Adress.getCity() as miasto)'
+     * query after optimization='dataBase.( count((Receiver.getCity() as rc where rc == "Krakow")))'
     */
-    public java.util.Collection<java.lang.String> executeQuery() {
-        //evaluateExpression - start dataBase.( unique Receiver.Adress.getCity() as miasto)
-        //visitDotExpression - start dataBase.( unique Receiver.Adress.getCity() as miasto)
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Krakow")))
+        //visitDotExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Krakow")))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<java.lang.String> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery39Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery39Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( unique Receiver.Adress.getCity() as miasto)
+        //evaluateExpression - end dataBase.( count((Receiver.getCity() as rc where rc == "Krakow")))
     }
 }

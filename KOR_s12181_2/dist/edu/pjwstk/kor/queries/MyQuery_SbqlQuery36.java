@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Payment;
+import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery36 {
     }
 
     /**
-     * original query='dataBase.(( 0.0 + count(Payment where isDelayed == true and isPaied == true)) / ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  )'
+     * original query='dataBase.(count(Receiver.city as rc where rc == "Lodz"))'
      *
-     * query after optimization='dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))'
+     * query after optimization='dataBase.( count((Receiver.getCity() as rc where rc == "Lodz")))'
     */
-    public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))
-        //visitDotExpression - start dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Lodz")))
+        //visitDotExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Lodz")))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery36Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery36Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))
+        //evaluateExpression - end dataBase.( count((Receiver.getCity() as rc where rc == "Lodz")))
     }
 }

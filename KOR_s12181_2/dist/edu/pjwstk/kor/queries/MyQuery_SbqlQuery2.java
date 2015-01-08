@@ -3,7 +3,9 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Packagement;
+import edu.pjwstk.kor.model.Receiver;
+import edu.pjwstk.kor.model.Sender;
+import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +52,22 @@ public class MyQuery_SbqlQuery2 {
     }
 
     /**
-     * original query='dataBase.(Packagement.weight)'
+     * original query='dataBase.( (Shipment as sh where sh.isComplaint == true join Sender as sn join Receiver as rc ).(sh.sendDate as DataWyslania, sn.surname as Od, sh.deliveredDate as DataDostarczenia, rc.surname as Do) )'
      *
-     * query after optimization='dataBase.Packagement.getWeight()'
+     * query after optimization='dataBase.(Receiver as rc group as _aux0).((Sender as sn group as _aux1).(Shipment as sh where sh.getIsComplaint() == true join _aux1) join _aux0).(sh.getSendDate() as DataWyslania, sn.getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, rc.getSurname() as Do)'
     */
-    public java.util.Collection<java.lang.Double> executeQuery() {
-        //evaluateExpression - start dataBase.Packagement.getWeight()
-        //visitDotExpression - start dataBase.Packagement.getWeight()
+    public java.util.Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> executeQuery() {
+        //evaluateExpression - start dataBase.(Receiver as rc group as _aux0).((Sender as sn group as _aux1).(Shipment as sh where sh.getIsComplaint() == true join _aux1) join _aux0).(sh.getSendDate() as DataWyslania, sn.getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, rc.getSurname() as Do)
+        //visitDotExpression - start dataBase.(Receiver as rc group as _aux0).((Sender as sn group as _aux1).(Shipment as sh where sh.getIsComplaint() == true join _aux1) join _aux0).(sh.getSendDate() as DataWyslania, sn.getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, rc.getSurname() as Do)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<java.lang.Double> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery2Db4o0());
+        java.util.Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _queryResult =
+            _ident_dataBase.query(new MyQuery_SbqlQuery2Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.Packagement.getWeight()
+        //evaluateExpression - end dataBase.(Receiver as rc group as _aux0).((Sender as sn group as _aux1).(Shipment as sh where sh.getIsComplaint() == true join _aux1) join _aux0).(sh.getSendDate() as DataWyslania, sn.getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, rc.getSurname() as Do)
     }
 }

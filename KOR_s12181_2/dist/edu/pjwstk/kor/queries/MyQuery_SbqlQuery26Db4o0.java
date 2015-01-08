@@ -47,85 +47,79 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery26Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery26Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery26Db4o0() {
     }
 
     /**
-     * query='dataBase.(0.0 +  max(Shipment.getFullDaysOfDelivery()))'
+     * query='dataBase.( count((Shipment where getIsComplaint() == true)))'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start 0.0 +  max(Shipment.getFullDaysOfDelivery())
+        //evaluateExpression - start  count((Shipment where getIsComplaint() == true))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start 0.0 +  max(Shipment.getFullDaysOfDelivery())
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  max(Shipment.getFullDaysOfDelivery())
-        //visitDotExpression - start Shipment.getFullDaysOfDelivery()
+        //visitUnaryExpression - start  count((Shipment where getIsComplaint() == true))
+        //visitWhereExpression - start Shipment where getIsComplaint() == true
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta37 = ocb.classCollection()
+        ClassMetadata _classMeta38 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids37 = _classMeta37.getIDs(transLocal);
+        long[] _ids38 = _classMeta38.getIDs(transLocal);
 
-        for (long _id37 : _ids37) {
-            LazyObjectReference _ref37 = transLocal.lazyReferenceFor((int) _id37);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref37.getObject());
+        for (long _id38 : _ids38) {
+            LazyObjectReference _ref38 = transLocal.lazyReferenceFor((int) _id38);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref38.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<java.lang.Integer> _dotResult = new java.util.ArrayList<java.lang.Integer>();
-        int _dotIndex = 0;
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
-            if (_dotEl == null) {
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _ident_Shipment) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl != null) {
-                ocb.activate(_dotEl, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitMethodExpression - start getFullDaysOfDelivery()
-            java.lang.Integer _mth_getFullDaysOfDeliveryResult = _dotEl.getFullDaysOfDelivery();
+            //visitBinaryAExpression - start getIsComplaint() == true
+            //visitMethodExpression - start getIsComplaint()
+            java.lang.Boolean _mth_getIsComplaintResult = _whereEl.getIsComplaint();
 
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            if (_mth_getIsComplaintResult != null) {
+                ocb.activate(_mth_getIsComplaintResult, 1);
             }
 
-            //visitMethodExpression - end getFullDaysOfDelivery()
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            //visitMethodExpression - end getIsComplaint()
+            //visitLiteralExpression - start true
+            //visitLiteralExpression - end true
+            //OperatorEquals - start getIsComplaint() == true
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsComplaintResult,
+                    true);
+
+            //OperatorEquals - end getIsComplaint() == true
+            //visitBinaryAExpression - end getIsComplaint() == true
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
             }
 
-            _dotResult.add(_mth_getFullDaysOfDeliveryResult);
-            _dotIndex++;
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.getFullDaysOfDelivery()
-        //OperatorMax - start  max(Shipment.getFullDaysOfDelivery())
-        Number _max0 = null;
+        //visitWhereExpression - end Shipment where getIsComplaint() == true
+        //OperatorCount - start  count((Shipment where getIsComplaint() == true))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Shipment where getIsComplaint() == true))
+        //visitUnaryExpression - end  count((Shipment where getIsComplaint() == true))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
-        for (Number _maxEl0 : _dotResult) {
-            _max0 = MathUtils.max(_max0, _maxEl0);
-        }
+        return _countResult;
 
-        java.lang.Integer _maxResult = (java.lang.Integer) _max0;
-
-        //OperatorMax - end  max(Shipment.getFullDaysOfDelivery())
-        //visitUnaryExpression - end  max(Shipment.getFullDaysOfDelivery())
-        //OperatorPlus - start 0.0 +  max(Shipment.getFullDaysOfDelivery())
-        java.lang.Double _plusResult = 0.0 + _maxResult;
-        //OperatorPlus - end 0.0 +  max(Shipment.getFullDaysOfDelivery())
-        //visitBinaryAExpression - end 0.0 +  max(Shipment.getFullDaysOfDelivery())
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_plusResult, ocb);
-
-        return _plusResult;
-
-        //evaluateExpression - end 0.0 +  max(Shipment.getFullDaysOfDelivery())
+        //evaluateExpression - end  count((Shipment where getIsComplaint() == true))
     }
 }

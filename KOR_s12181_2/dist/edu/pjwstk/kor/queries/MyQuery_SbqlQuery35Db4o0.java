@@ -47,41 +47,72 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery35Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Shipment>> {
+public class MyQuery_SbqlQuery35Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery35Db4o0() {
     }
 
     /**
-     * query='dataBase.(Shipment as sh where sh.getIsComplaint() == true)'
+     * query='dataBase.( count((Receiver.getCity() as rc where rc == "Warszawa")))'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Shipment> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Shipment as sh where sh.getIsComplaint() == true
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  count((Receiver.getCity() as rc where rc == "Warszawa"))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitWhereExpression - start Shipment as sh where sh.getIsComplaint() == true
-        //visitAsExpression - start Shipment as sh
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta49 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids49 = _classMeta49.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Receiver.getCity() as rc where rc == "Warszawa"))
+        //visitWhereExpression - start Receiver.getCity() as rc where rc == "Warszawa"
+        //visitAsExpression - start Receiver.getCity() as rc
+        //visitDotExpression - start Receiver.getCity()
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
+        ClassMetadata _classMeta52 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
+        long[] _ids52 = _classMeta52.getIDs(transLocal);
 
-        for (long _id49 : _ids49) {
-            LazyObjectReference _ref49 = transLocal.lazyReferenceFor((int) _id49);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref49.getObject());
+        for (long _id52 : _ids52) {
+            LazyObjectReference _ref52 = transLocal.lazyReferenceFor((int) _id52);
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref52.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
+        int _dotIndex = 0;
 
-        //visitAsExpression - end Shipment as sh
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
+            if (_dotEl == null) {
+                continue;
+            }
+
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
+            }
+
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl.getCity();
+
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            _dotResult.add(_mth_getCityResult);
+            _dotIndex++;
+        }
+
+        //visitDotExpression - end Receiver.getCity()
+        java.util.Collection<java.lang.String> _asResult_rc = _dotResult;
+
+        //visitAsExpression - end Receiver.getCity() as rc
+        java.util.Collection<java.lang.String> _whereResult = new java.util.ArrayList<java.lang.String>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
+        for (java.lang.String _whereEl : _asResult_rc) {
             if (_whereEl == null) {
                 continue;
             }
@@ -90,39 +121,23 @@ public class MyQuery_SbqlQuery35Db4o0 implements Db4oSBQLQuery<java.util.Collect
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.getIsComplaint() == true
-            //visitDotExpression - start sh.getIsComplaint()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
+            //visitBinaryAExpression - start rc == "Warszawa"
+            //visitIdentifierExpression - start rc
+            java.lang.String _ident_rc = _whereEl;
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 1);
+            if (_ident_rc != null) {
+                ocb.activate(_ident_rc, 1);
             }
 
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
+            //visitIdentifierExpression - end rc
+            //visitLiteralExpression - start "Warszawa"
+            //visitLiteralExpression - end "Warszawa"
+            //OperatorEquals - start rc == "Warszawa"
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_ident_rc,
+                    "Warszawa");
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 2);
-            }
-
-            //visitMethodExpression - start getIsComplaint()
-            java.lang.Boolean _mth_getIsComplaintResult = _dotEl.getIsComplaint();
-
-            if (_mth_getIsComplaintResult != null) {
-                ocb.activate(_mth_getIsComplaintResult, 1);
-            }
-
-            //visitMethodExpression - end getIsComplaint()
-            //visitDotExpression - end sh.getIsComplaint()
-            //visitLiteralExpression - start true
-            //visitLiteralExpression - end true
-            //OperatorEquals - start sh.getIsComplaint() == true
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsComplaintResult,
-                    true);
-
-            //OperatorEquals - end sh.getIsComplaint() == true
-            //visitBinaryAExpression - end sh.getIsComplaint() == true
+            //OperatorEquals - end rc == "Warszawa"
+            //visitBinaryAExpression - end rc == "Warszawa"
             if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
@@ -130,11 +145,15 @@ public class MyQuery_SbqlQuery35Db4o0 implements Db4oSBQLQuery<java.util.Collect
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.getIsComplaint() == true
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
+        //visitWhereExpression - end Receiver.getCity() as rc where rc == "Warszawa"
+        //OperatorCount - start  count((Receiver.getCity() as rc where rc == "Warszawa"))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Receiver.getCity() as rc where rc == "Warszawa"))
+        //visitUnaryExpression - end  count((Receiver.getCity() as rc where rc == "Warszawa"))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
-        return _whereResult;
+        return _countResult;
 
-        //evaluateExpression - end Shipment as sh where sh.getIsComplaint() == true
+        //evaluateExpression - end  count((Receiver.getCity() as rc where rc == "Warszawa"))
     }
 }

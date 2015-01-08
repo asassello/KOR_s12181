@@ -52,36 +52,62 @@ public class MyQuery_SbqlQuery12Db4o0 implements Db4oSBQLQuery<java.lang.Double>
     }
 
     /**
-     * query='dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)'
+     * query='dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))'
     '
      **/
     public java.lang.Double executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
+        //evaluateExpression - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitAsExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
-        //visitUnaryExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        //visitDotExpression - start Shipment.Payment.getPaymentType().getPaymentPrice()
-        //visitDotExpression - start Shipment.Payment.getPaymentType()
-        //visitDotExpression - start Shipment.Payment
+        //visitBinaryAExpression - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+        //visitBinaryAExpression - start 0.0 +  count(Shipment)
+        //visitLiteralExpression - start 0.0
+        //visitLiteralExpression - end 0.0
+        //visitUnaryExpression - start  count(Shipment)
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta17 = ocb.classCollection()
+        ClassMetadata _classMeta21 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids17 = _classMeta17.getIDs(transLocal);
+        long[] _ids21 = _classMeta21.getIDs(transLocal);
 
-        for (long _id17 : _ids17) {
-            LazyObjectReference _ref17 = transLocal.lazyReferenceFor((int) _id17);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref17.getObject());
+        for (long _id21 : _ids21) {
+            LazyObjectReference _ref21 = transLocal.lazyReferenceFor((int) _id21);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref21.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Payment> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+        //OperatorCount - start  count(Shipment)
+        java.lang.Integer _countResult = _ident_Shipment.size();
+
+        //OperatorCount - end  count(Shipment)
+        //visitUnaryExpression - end  count(Shipment)
+        //OperatorPlus - start 0.0 +  count(Shipment)
+        java.lang.Double _plusResult = 0.0 + _countResult;
+
+        //OperatorPlus - end 0.0 +  count(Shipment)
+        //visitBinaryAExpression - end 0.0 +  count(Shipment)
+        //visitUnaryExpression - start  count( unique Shipment.Sender)
+        //visitUnaryExpression - start  unique Shipment.Sender
+        //visitDotExpression - start Shipment.Sender
+        //visitIdentifierExpression - start Shipment
+        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment1 =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        ClassMetadata _classMeta22 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+        long[] _ids22 = _classMeta22.getIDs(transLocal);
+
+        for (long _id22 : _ids22) {
+            LazyObjectReference _ref22 = transLocal.lazyReferenceFor((int) _id22);
+            _ident_Shipment1.add((edu.pjwstk.kor.model.Shipment) _ref22.getObject());
+        }
+
+        //visitIdentifierExpression - end Shipment
+        java.util.Collection<edu.pjwstk.kor.model.Sender> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
         int _dotIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
+        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment1) {
             if (_dotEl == null) {
                 continue;
             }
@@ -90,108 +116,49 @@ public class MyQuery_SbqlQuery12Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl, 1);
             }
 
-            //visitIdentifierExpression - start Payment
-            final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-            ClassMetadata _classMeta18 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Payment");
-            long[] _ids18 = _classMeta18.getIDs(transLocal);
+            //visitIdentifierExpression - start Sender
+            final java.util.Collection<edu.pjwstk.kor.model.Sender> _ident_Sender =
+                new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
+            ClassMetadata _classMeta23 = ocb.classCollection()
+                                            .getClassMetadata("edu.pjwstk.kor.model.Sender");
+            long[] _ids23 = _classMeta23.getIDs(transLocal);
 
-            for (long _id18 : _ids18) {
-                LazyObjectReference _ref18 = transLocal.lazyReferenceFor((int) _id18);
-                _ident_Payment.add((edu.pjwstk.kor.model.Payment) _ref18.getObject());
+            for (long _id23 : _ids23) {
+                LazyObjectReference _ref23 = transLocal.lazyReferenceFor((int) _id23);
+                _ident_Sender.add((edu.pjwstk.kor.model.Sender) _ref23.getObject());
             }
 
-            //visitIdentifierExpression - end Payment
-            if (_ident_Payment != null) {
-                ocb.activate(_ident_Payment, 2);
+            //visitIdentifierExpression - end Sender
+            if (_ident_Sender != null) {
+                ocb.activate(_ident_Sender, 2);
             }
 
-            _dotResult.addAll(_ident_Payment);
+            _dotResult.addAll(_ident_Sender);
             _dotIndex++;
         }
 
-        //visitDotExpression - end Shipment.Payment
-        java.util.Collection<edu.pjwstk.kor.model.PaymentType> _dotResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
-        int _dotIndex1 = 0;
+        //visitDotExpression - end Shipment.Sender
+        //OperatorUnique - start  unique Shipment.Sender
+        java.util.Collection<edu.pjwstk.kor.model.Sender> _uniqueResult = new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
+        Set<edu.pjwstk.kor.model.Sender> _tmp1 = new LinkedHashSet<edu.pjwstk.kor.model.Sender>();
+        _tmp1.addAll(_dotResult);
+        _uniqueResult.addAll(_tmp1);
 
-        for (edu.pjwstk.kor.model.Payment _dotEl1 : _dotResult) {
-            if (_dotEl1 == null) {
-                continue;
-            }
+        //OperatorUnique - end  unique Shipment.Sender
+        //visitUnaryExpression - end  unique Shipment.Sender
+        //OperatorCount - start  count( unique Shipment.Sender)
+        java.lang.Integer _countResult1 = _uniqueResult.size();
 
-            if (_dotEl1 != null) {
-                ocb.activate(_dotEl1, 1);
-            }
+        //OperatorCount - end  count( unique Shipment.Sender)
+        //visitUnaryExpression - end  count( unique Shipment.Sender)
+        //OperatorDivide - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+        java.lang.Double _divideResult = _plusResult / _countResult1;
+        //OperatorDivide - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+        //visitBinaryAExpression - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_divideResult, ocb);
 
-            //visitMethodExpression - start getPaymentType()
-            edu.pjwstk.kor.model.PaymentType _mth_getPaymentTypeResult = _dotEl1.getPaymentType();
+        return _divideResult;
 
-            if (_mth_getPaymentTypeResult != null) {
-                ocb.activate(_mth_getPaymentTypeResult, 1);
-            }
-
-            //visitMethodExpression - end getPaymentType()
-            if (_mth_getPaymentTypeResult != null) {
-                ocb.activate(_mth_getPaymentTypeResult, 1);
-            }
-
-            _dotResult1.add(_mth_getPaymentTypeResult);
-            _dotIndex1++;
-        }
-
-        //visitDotExpression - end Shipment.Payment.getPaymentType()
-        java.util.Collection<java.lang.Double> _dotResult2 = new java.util.ArrayList<java.lang.Double>();
-        int _dotIndex2 = 0;
-
-        for (edu.pjwstk.kor.model.PaymentType _dotEl2 : _dotResult1) {
-            if (_dotEl2 == null) {
-                continue;
-            }
-
-            if (_dotEl2 != null) {
-                ocb.activate(_dotEl2, 1);
-            }
-
-            //visitMethodExpression - start getPaymentPrice()
-            java.lang.Double _mth_getPaymentPriceResult = _dotEl2.getPaymentPrice();
-
-            if (_mth_getPaymentPriceResult != null) {
-                ocb.activate(_mth_getPaymentPriceResult, 1);
-            }
-
-            //visitMethodExpression - end getPaymentPrice()
-            if (_mth_getPaymentPriceResult != null) {
-                ocb.activate(_mth_getPaymentPriceResult, 1);
-            }
-
-            _dotResult2.add(_mth_getPaymentPriceResult);
-            _dotIndex2++;
-        }
-
-        //visitDotExpression - end Shipment.Payment.getPaymentType().getPaymentPrice()
-        //OperatorAvg - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        java.lang.Double _avgResult = 0d;
-
-        if ((_dotResult2 != null) && !_dotResult2.isEmpty()) {
-            Number _avgSum2 = null;
-
-            for (Number _avgEl2 : _dotResult2) {
-                _avgSum2 = MathUtils.sum(_avgSum2, _avgEl2);
-            }
-
-            _avgResult = _avgSum2.doubleValue() / _dotResult2.size();
-        }
-
-        //OperatorAvg - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        //visitUnaryExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        java.lang.Double _asResult_sredniaCenaPrzesylki = _avgResult;
-        //visitAsExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_sredniaCenaPrzesylki,
-            ocb);
-
-        return _asResult_sredniaCenaPrzesylki;
-
-        //evaluateExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
+        //evaluateExpression - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
     }
 }

@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery49 {
     }
 
     /**
-     * original query='dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery))'
+     * original query='dataBase.( count((Shipment as sh where sh.size() == 3).(sh.size())))'
      *
-     * query after optimization='dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))'
+     * query after optimization='dataBase.( count((Shipment as sh where sh.size() == 3).sh.size()))'
     */
-    public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))
-        //visitDotExpression - start dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.size() == 3).sh.size()))
+        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.size() == 3).sh.size()))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery49Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery49Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))
+        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.size() == 3).sh.size()))
     }
 }

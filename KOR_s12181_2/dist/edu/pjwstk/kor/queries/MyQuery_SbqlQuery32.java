@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Shipment;
+import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery32 {
     }
 
     /**
-     * original query='dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == true or sh.emplyDelivering.isTemporary == true) as iloscObsluzonychPrzezTymczasowych)'
+     * original query='dataBase.(( 0.0 + count(Payment where isDelayed == true and isPaied == true)) / ( count(Payment where isDelayed == false and isPaied == true) + count(Payment where isDelayed == true and isPaied == true )  )  )'
      *
-     * query after optimization='dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych)'
+     * query after optimization='dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))'
     */
-    public java.lang.Integer executeQuery() {
-        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych)
-        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych)
+    public java.lang.Double executeQuery() {
+        //evaluateExpression - start dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))
+        //visitDotExpression - start dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery32Db4o0());
+        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery32Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych)
+        //evaluateExpression - end dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))
     }
 }

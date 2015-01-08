@@ -50,13 +50,13 @@ public class MyQuery_SbqlQuery48 {
     }
 
     /**
-     * original query='dataBase.( count((Shipment as sh where sh.size() == 6).(sh.size())))'
+     * original query='dataBase.( count((Shipment as sh where sh.size() == 2).(sh.size())))'
      *
-     * query after optimization='dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))'
+     * query after optimization='dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))'
     */
     public java.lang.Integer executeQuery() {
-        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))
-        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))
+        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))
+        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
@@ -65,6 +65,6 @@ public class MyQuery_SbqlQuery48 {
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))
+        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))
     }
 }

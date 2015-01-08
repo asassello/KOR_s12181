@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Shipment;
+import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery5 {
     }
 
     /**
-     * original query='dataBase.( count(Shipment where isComplaint == true ) )'
+     * original query='dataBase.(Receiver where secondaryAdress != 0 )'
      *
-     * query after optimization='dataBase.( count((Shipment where getIsComplaint() == true)))'
+     * query after optimization='dataBase.(Receiver where getSecondaryAdress() != 0)'
     */
-    public java.lang.Integer executeQuery() {
-        //evaluateExpression - start dataBase.( count((Shipment where getIsComplaint() == true)))
-        //visitDotExpression - start dataBase.( count((Shipment where getIsComplaint() == true)))
+    public java.util.Collection<edu.pjwstk.kor.model.Receiver> executeQuery() {
+        //evaluateExpression - start dataBase.(Receiver where getSecondaryAdress() != 0)
+        //visitDotExpression - start dataBase.(Receiver where getSecondaryAdress() != 0)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery5Db4o0());
+        java.util.Collection<edu.pjwstk.kor.model.Receiver> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery5Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( count((Shipment where getIsComplaint() == true)))
+        //evaluateExpression - end dataBase.(Receiver where getSecondaryAdress() != 0)
     }
 }

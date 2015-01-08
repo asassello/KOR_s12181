@@ -47,37 +47,79 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery1Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Packagement>> {
+public class MyQuery_SbqlQuery1Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery1Db4o0() {
     }
 
     /**
-     * query='dataBase.Packagement'
+     * query='dataBase.( count((Shipment where getIsComplaint() == true)))'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Packagement> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Packagement
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  count((Shipment where getIsComplaint() == true))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitIdentifierExpression - start Packagement
-        final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
-        ClassMetadata _classMeta1 = ocb.classCollection()
-                                       .getClassMetadata("edu.pjwstk.kor.model.Packagement");
-        long[] _ids1 = _classMeta1.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Shipment where getIsComplaint() == true))
+        //visitWhereExpression - start Shipment where getIsComplaint() == true
+        //visitIdentifierExpression - start Shipment
+        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        ClassMetadata _classMeta2 = ocb.classCollection()
+                                       .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+        long[] _ids2 = _classMeta2.getIDs(transLocal);
 
-        for (long _id1 : _ids1) {
-            LazyObjectReference _ref1 = transLocal.lazyReferenceFor((int) _id1);
-            _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref1.getObject());
+        for (long _id2 : _ids2) {
+            LazyObjectReference _ref2 = transLocal.lazyReferenceFor((int) _id2);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref2.getObject());
         }
 
-        //visitIdentifierExpression - end Packagement
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_ident_Packagement,
-            ocb);
+        //visitIdentifierExpression - end Shipment
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        int _whereLoopIndex = 0;
 
-        return _ident_Packagement;
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _ident_Shipment) {
+            if (_whereEl == null) {
+                continue;
+            }
 
-        //evaluateExpression - end Packagement
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
+            }
+
+            //visitBinaryAExpression - start getIsComplaint() == true
+            //visitMethodExpression - start getIsComplaint()
+            java.lang.Boolean _mth_getIsComplaintResult = _whereEl.getIsComplaint();
+
+            if (_mth_getIsComplaintResult != null) {
+                ocb.activate(_mth_getIsComplaintResult, 1);
+            }
+
+            //visitMethodExpression - end getIsComplaint()
+            //visitLiteralExpression - start true
+            //visitLiteralExpression - end true
+            //OperatorEquals - start getIsComplaint() == true
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsComplaintResult,
+                    true);
+
+            //OperatorEquals - end getIsComplaint() == true
+            //visitBinaryAExpression - end getIsComplaint() == true
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
+        }
+
+        //visitWhereExpression - end Shipment where getIsComplaint() == true
+        //OperatorCount - start  count((Shipment where getIsComplaint() == true))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Shipment where getIsComplaint() == true))
+        //visitUnaryExpression - end  count((Shipment where getIsComplaint() == true))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+
+        return _countResult;
+
+        //evaluateExpression - end  count((Shipment where getIsComplaint() == true))
     }
 }

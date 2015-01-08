@@ -3,7 +3,9 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Receiver;
+import edu.pjwstk.kor.model.Packagement;
+import edu.pjwstk.kor.model.PaymentType;
+import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +52,21 @@ public class MyQuery_SbqlQuery9 {
     }
 
     /**
-     * original query='dataBase.(Receiver where secondaryAdress != 0 )'
+     * original query='dataBase.(avg(Shipment.Packagement.PaymentType.paymentPrice) as sredniaCenaPaczki)'
      *
-     * query after optimization='dataBase.(Receiver where getSecondaryAdress() != 0)'
+     * query after optimization='dataBase.( avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki)'
     */
-    public java.util.Collection<edu.pjwstk.kor.model.Receiver> executeQuery() {
-        //evaluateExpression - start dataBase.(Receiver where getSecondaryAdress() != 0)
-        //visitDotExpression - start dataBase.(Receiver where getSecondaryAdress() != 0)
+    public java.lang.Double executeQuery() {
+        //evaluateExpression - start dataBase.( avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki)
+        //visitDotExpression - start dataBase.( avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<edu.pjwstk.kor.model.Receiver> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery9Db4o0());
+        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery9Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(Receiver where getSecondaryAdress() != 0)
+        //evaluateExpression - end dataBase.( avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki)
     }
 }

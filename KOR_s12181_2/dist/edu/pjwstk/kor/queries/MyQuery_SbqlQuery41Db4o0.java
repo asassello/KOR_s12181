@@ -47,67 +47,40 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery41Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery41Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery41Db4o0() {
     }
 
     /**
-     * query='dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))'
+     * query='dataBase.( count((Receiver.getCity() as rc where rc == "Szczecin")))'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+        //evaluateExpression - start  count((Receiver.getCity() as rc where rc == "Szczecin"))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        //visitBinaryAExpression - start 0.0 +  count(Shipment)
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  count(Shipment)
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta61 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids61 = _classMeta61.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Receiver.getCity() as rc where rc == "Szczecin"))
+        //visitWhereExpression - start Receiver.getCity() as rc where rc == "Szczecin"
+        //visitAsExpression - start Receiver.getCity() as rc
+        //visitDotExpression - start Receiver.getCity()
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
+        ClassMetadata _classMeta58 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
+        long[] _ids58 = _classMeta58.getIDs(transLocal);
 
-        for (long _id61 : _ids61) {
-            LazyObjectReference _ref61 = transLocal.lazyReferenceFor((int) _id61);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref61.getObject());
+        for (long _id58 : _ids58) {
+            LazyObjectReference _ref58 = transLocal.lazyReferenceFor((int) _id58);
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref58.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        //OperatorCount - start  count(Shipment)
-        java.lang.Integer _countResult = _ident_Shipment.size();
-
-        //OperatorCount - end  count(Shipment)
-        //visitUnaryExpression - end  count(Shipment)
-        //OperatorPlus - start 0.0 +  count(Shipment)
-        java.lang.Double _plusResult = 0.0 + _countResult;
-
-        //OperatorPlus - end 0.0 +  count(Shipment)
-        //visitBinaryAExpression - end 0.0 +  count(Shipment)
-        //visitUnaryExpression - start  count( unique Shipment.Sender)
-        //visitUnaryExpression - start  unique Shipment.Sender
-        //visitDotExpression - start Shipment.Sender
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment1 =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta62 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids62 = _classMeta62.getIDs(transLocal);
-
-        for (long _id62 : _ids62) {
-            LazyObjectReference _ref62 = transLocal.lazyReferenceFor((int) _id62);
-            _ident_Shipment1.add((edu.pjwstk.kor.model.Shipment) _ref62.getObject());
-        }
-
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Sender> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
         int _dotIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment1) {
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
             if (_dotEl == null) {
                 continue;
             }
@@ -116,49 +89,71 @@ public class MyQuery_SbqlQuery41Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl, 1);
             }
 
-            //visitIdentifierExpression - start Sender
-            final java.util.Collection<edu.pjwstk.kor.model.Sender> _ident_Sender =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
-            ClassMetadata _classMeta63 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Sender");
-            long[] _ids63 = _classMeta63.getIDs(transLocal);
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl.getCity();
 
-            for (long _id63 : _ids63) {
-                LazyObjectReference _ref63 = transLocal.lazyReferenceFor((int) _id63);
-                _ident_Sender.add((edu.pjwstk.kor.model.Sender) _ref63.getObject());
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
             }
 
-            //visitIdentifierExpression - end Sender
-            if (_ident_Sender != null) {
-                ocb.activate(_ident_Sender, 2);
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
             }
 
-            _dotResult.addAll(_ident_Sender);
+            _dotResult.add(_mth_getCityResult);
             _dotIndex++;
         }
 
-        //visitDotExpression - end Shipment.Sender
-        //OperatorUnique - start  unique Shipment.Sender
-        java.util.Collection<edu.pjwstk.kor.model.Sender> _uniqueResult = new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
-        Set<edu.pjwstk.kor.model.Sender> _tmp3 = new LinkedHashSet<edu.pjwstk.kor.model.Sender>();
-        _tmp3.addAll(_dotResult);
-        _uniqueResult.addAll(_tmp3);
+        //visitDotExpression - end Receiver.getCity()
+        java.util.Collection<java.lang.String> _asResult_rc = _dotResult;
 
-        //OperatorUnique - end  unique Shipment.Sender
-        //visitUnaryExpression - end  unique Shipment.Sender
-        //OperatorCount - start  count( unique Shipment.Sender)
-        java.lang.Integer _countResult1 = _uniqueResult.size();
+        //visitAsExpression - end Receiver.getCity() as rc
+        java.util.Collection<java.lang.String> _whereResult = new java.util.ArrayList<java.lang.String>();
+        int _whereLoopIndex = 0;
 
-        //OperatorCount - end  count( unique Shipment.Sender)
-        //visitUnaryExpression - end  count( unique Shipment.Sender)
-        //OperatorDivide - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        java.lang.Double _divideResult = _plusResult / _countResult1;
-        //OperatorDivide - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        //visitBinaryAExpression - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_divideResult, ocb);
+        for (java.lang.String _whereEl : _asResult_rc) {
+            if (_whereEl == null) {
+                continue;
+            }
 
-        return _divideResult;
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
+            }
 
-        //evaluateExpression - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+            //visitBinaryAExpression - start rc == "Szczecin"
+            //visitIdentifierExpression - start rc
+            java.lang.String _ident_rc = _whereEl;
+
+            if (_ident_rc != null) {
+                ocb.activate(_ident_rc, 1);
+            }
+
+            //visitIdentifierExpression - end rc
+            //visitLiteralExpression - start "Szczecin"
+            //visitLiteralExpression - end "Szczecin"
+            //OperatorEquals - start rc == "Szczecin"
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_ident_rc,
+                    "Szczecin");
+
+            //OperatorEquals - end rc == "Szczecin"
+            //visitBinaryAExpression - end rc == "Szczecin"
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
+        }
+
+        //visitWhereExpression - end Receiver.getCity() as rc where rc == "Szczecin"
+        //OperatorCount - start  count((Receiver.getCity() as rc where rc == "Szczecin"))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Receiver.getCity() as rc where rc == "Szczecin"))
+        //visitUnaryExpression - end  count((Receiver.getCity() as rc where rc == "Szczecin"))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+
+        return _countResult;
+
+        //evaluateExpression - end  count((Receiver.getCity() as rc where rc == "Szczecin"))
     }
 }

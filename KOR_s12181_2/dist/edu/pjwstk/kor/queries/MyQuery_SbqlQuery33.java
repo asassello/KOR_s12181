@@ -3,6 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
+import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
@@ -50,21 +51,21 @@ public class MyQuery_SbqlQuery33 {
     }
 
     /**
-     * original query='dataBase.(count(Shipment as sh where sh.emplyReceiving.isTemporary == false or sh.emplyDelivering.isTemporary == false) as iloscObsluzonychPrzezStalych)'
+     * original query='dataBase.(avg(Shipment.Payment.PaymentType.paymentPrice) as sredniaCenaPrzesylki)'
      *
-     * query after optimization='dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych)'
+     * query after optimization='dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)'
     */
-    public java.lang.Integer executeQuery() {
-        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych)
-        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych)
+    public java.lang.Double executeQuery() {
+        //evaluateExpression - start dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
+        //visitDotExpression - start dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery33Db4o0());
+        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery33Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych)
+        //evaluateExpression - end dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
     }
 }

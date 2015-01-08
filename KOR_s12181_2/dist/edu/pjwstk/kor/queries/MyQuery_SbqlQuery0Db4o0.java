@@ -47,37 +47,40 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery0Db4o0 implements Db4oSBQLQuery<java.util.Collection<java.lang.String>> {
+public class MyQuery_SbqlQuery0Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
     public MyQuery_SbqlQuery0Db4o0() {
     }
 
     /**
-     * query='dataBase.Packagement.getSizeType()'
+     * query='dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)'
     '
      **/
-    public java.util.Collection<java.lang.String> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Packagement.getSizeType()
+    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitDotExpression - start Packagement.getSizeType()
-        //visitIdentifierExpression - start Packagement
-        final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
+        //visitAsExpression - start  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
+        //visitUnaryExpression - start  avg(Shipment.Packagement.getWeight())
+        //visitDotExpression - start Shipment.Packagement.getWeight()
+        //visitDotExpression - start Shipment.Packagement
+        //visitIdentifierExpression - start Shipment
+        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
         ClassMetadata _classMeta0 = ocb.classCollection()
-                                       .getClassMetadata("edu.pjwstk.kor.model.Packagement");
+                                       .getClassMetadata("edu.pjwstk.kor.model.Shipment");
         long[] _ids0 = _classMeta0.getIDs(transLocal);
 
         for (long _id0 : _ids0) {
             LazyObjectReference _ref0 = transLocal.lazyReferenceFor((int) _id0);
-            _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref0.getObject());
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref0.getObject());
         }
 
-        //visitIdentifierExpression - end Packagement
-        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
+        //visitIdentifierExpression - end Shipment
+        java.util.Collection<edu.pjwstk.kor.model.Packagement> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
         int _dotIndex = 0;
 
-        for (edu.pjwstk.kor.model.Packagement _dotEl : _ident_Packagement) {
+        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
             if (_dotEl == null) {
                 continue;
             }
@@ -86,27 +89,79 @@ public class MyQuery_SbqlQuery0Db4o0 implements Db4oSBQLQuery<java.util.Collecti
                 ocb.activate(_dotEl, 1);
             }
 
-            //visitMethodExpression - start getSizeType()
-            java.lang.String _mth_getSizeTypeResult = _dotEl.getSizeType();
+            //visitIdentifierExpression - start Packagement
+            final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
+                new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
+            ClassMetadata _classMeta1 = ocb.classCollection()
+                                           .getClassMetadata("edu.pjwstk.kor.model.Packagement");
+            long[] _ids1 = _classMeta1.getIDs(transLocal);
 
-            if (_mth_getSizeTypeResult != null) {
-                ocb.activate(_mth_getSizeTypeResult, 1);
+            for (long _id1 : _ids1) {
+                LazyObjectReference _ref1 = transLocal.lazyReferenceFor((int) _id1);
+                _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref1.getObject());
             }
 
-            //visitMethodExpression - end getSizeType()
-            if (_mth_getSizeTypeResult != null) {
-                ocb.activate(_mth_getSizeTypeResult, 1);
+            //visitIdentifierExpression - end Packagement
+            if (_ident_Packagement != null) {
+                ocb.activate(_ident_Packagement, 2);
             }
 
-            _dotResult.add(_mth_getSizeTypeResult);
+            _dotResult.addAll(_ident_Packagement);
             _dotIndex++;
         }
 
-        //visitDotExpression - end Packagement.getSizeType()
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_dotResult, ocb);
+        //visitDotExpression - end Shipment.Packagement
+        java.util.Collection<java.lang.Double> _dotResult1 = new java.util.ArrayList<java.lang.Double>();
+        int _dotIndex1 = 0;
 
-        return _dotResult;
+        for (edu.pjwstk.kor.model.Packagement _dotEl1 : _dotResult) {
+            if (_dotEl1 == null) {
+                continue;
+            }
 
-        //evaluateExpression - end Packagement.getSizeType()
+            if (_dotEl1 != null) {
+                ocb.activate(_dotEl1, 1);
+            }
+
+            //visitMethodExpression - start getWeight()
+            java.lang.Double _mth_getWeightResult = _dotEl1.getWeight();
+
+            if (_mth_getWeightResult != null) {
+                ocb.activate(_mth_getWeightResult, 1);
+            }
+
+            //visitMethodExpression - end getWeight()
+            if (_mth_getWeightResult != null) {
+                ocb.activate(_mth_getWeightResult, 1);
+            }
+
+            _dotResult1.add(_mth_getWeightResult);
+            _dotIndex1++;
+        }
+
+        //visitDotExpression - end Shipment.Packagement.getWeight()
+        //OperatorAvg - start  avg(Shipment.Packagement.getWeight())
+        java.lang.Double _avgResult = 0d;
+
+        if ((_dotResult1 != null) && !_dotResult1.isEmpty()) {
+            Number _avgSum0 = null;
+
+            for (Number _avgEl0 : _dotResult1) {
+                _avgSum0 = MathUtils.sum(_avgSum0, _avgEl0);
+            }
+
+            _avgResult = _avgSum0.doubleValue() / _dotResult1.size();
+        }
+
+        //OperatorAvg - end  avg(Shipment.Packagement.getWeight())
+        //visitUnaryExpression - end  avg(Shipment.Packagement.getWeight())
+        java.lang.Double _asResult_SredniaWagaPaczki = _avgResult;
+        //visitAsExpression - end  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_SredniaWagaPaczki,
+            ocb);
+
+        return _asResult_SredniaWagaPaczki;
+
+        //evaluateExpression - end  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
     }
 }

@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Shipment;
+import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,13 +50,13 @@ public class MyQuery_SbqlQuery43 {
     }
 
     /**
-     * original query='dataBase.( count((Shipment as sh where sh.size() == 1).(sh.size())))'
+     * original query='dataBase.(count(Receiver.city as rc where rc == "Katowice"))'
      *
-     * query after optimization='dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))'
+     * query after optimization='dataBase.( count((Receiver.getCity() as rc where rc == "Katowice")))'
     */
     public java.lang.Integer executeQuery() {
-        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))
-        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))
+        //evaluateExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Katowice")))
+        //visitDotExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Katowice")))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
@@ -65,6 +65,6 @@ public class MyQuery_SbqlQuery43 {
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))
+        //evaluateExpression - end dataBase.( count((Receiver.getCity() as rc where rc == "Katowice")))
     }
 }

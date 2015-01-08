@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Payment;
+import edu.pjwstk.kor.model.Sender;
 import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
@@ -51,13 +51,13 @@ public class MyQuery_SbqlQuery12 {
     }
 
     /**
-     * original query='dataBase.(avg(Shipment.Payment.PaymentType.paymentPrice) as sredniaCenaPrzesylki)'
+     * original query='dataBase.( (0.0 + count(Shipment)) / count(unique(Shipment.Sender)) )'
      *
-     * query after optimization='dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)'
+     * query after optimization='dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))'
     */
     public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
-        //visitDotExpression - start dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
+        //evaluateExpression - start dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))
+        //visitDotExpression - start dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
@@ -66,6 +66,6 @@ public class MyQuery_SbqlQuery12 {
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
+        //evaluateExpression - end dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))
     }
 }

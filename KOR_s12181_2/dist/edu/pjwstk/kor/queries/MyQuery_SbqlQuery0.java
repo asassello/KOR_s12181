@@ -4,6 +4,7 @@ import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
 import edu.pjwstk.kor.model.Packagement;
+import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -50,21 +51,21 @@ public class MyQuery_SbqlQuery0 {
     }
 
     /**
-     * original query='dataBase.(Packagement.sizeType)'
+     * original query='dataBase.(avg(Shipment.Packagement.weight) as SredniaWagaPaczki)'
      *
-     * query after optimization='dataBase.Packagement.getSizeType()'
+     * query after optimization='dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)'
     */
-    public java.util.Collection<java.lang.String> executeQuery() {
-        //evaluateExpression - start dataBase.Packagement.getSizeType()
-        //visitDotExpression - start dataBase.Packagement.getSizeType()
+    public java.lang.Double executeQuery() {
+        //evaluateExpression - start dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)
+        //visitDotExpression - start dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<java.lang.String> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery0Db4o0());
+        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery0Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.Packagement.getSizeType()
+        //evaluateExpression - end dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)
     }
 }

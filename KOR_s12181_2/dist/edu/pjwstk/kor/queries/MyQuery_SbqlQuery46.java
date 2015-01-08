@@ -3,7 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Shipment;
+import edu.pjwstk.kor.model.Payment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -44,27 +44,31 @@ import java.util.Date;
 
 public class MyQuery_SbqlQuery46 {
     private com.db4o.ObjectContainer dataBase;
+    private java.util.Date param;
 
-    public MyQuery_SbqlQuery46(final com.db4o.ObjectContainer dataBase) {
+    public MyQuery_SbqlQuery46(final com.db4o.ObjectContainer dataBase,
+        final java.util.Date param) {
         this.dataBase = dataBase;
+        this.param = param;
     }
 
     /**
-     * original query='dataBase.( count((Shipment as sh where sh.size() == 4).(sh.size())))'
+     * original query='dataBase.(0.0 + sum((Payment as pm where pm.paymentDate > param).pm.PaymentType.paymentPrice ) )'
      *
-     * query after optimization='dataBase.( count((Shipment as sh where sh.size() == 4).sh.size()))'
+     * query after optimization='dataBase.(0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice())'
     */
-    public java.lang.Integer executeQuery() {
-        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.size() == 4).sh.size()))
-        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.size() == 4).sh.size()))
+    public java.lang.Double executeQuery() {
+        //evaluateExpression - start dataBase.(0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice())
+        //visitDotExpression - start dataBase.(0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice())
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery46Db4o0());
+        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery46Db4o0(
+                    param));
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.size() == 4).sh.size()))
+        //evaluateExpression - end dataBase.(0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice())
     }
 }

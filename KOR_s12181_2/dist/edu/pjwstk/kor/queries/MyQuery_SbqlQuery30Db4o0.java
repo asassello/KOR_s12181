@@ -47,38 +47,37 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery30Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
+public class MyQuery_SbqlQuery30Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Receiver>> {
     public MyQuery_SbqlQuery30Db4o0() {
     }
 
     /**
-     * query='dataBase.( count((Shipment where getIsComplaint() == true)))'
+     * query='dataBase.(Receiver where getSecondaryAdress() != 0)'
     '
      **/
-    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
-        final Transaction t) {
-        //evaluateExpression - start  count((Shipment where getIsComplaint() == true))
+    public java.util.Collection<edu.pjwstk.kor.model.Receiver> executeQuery(
+        final ObjectContainerBase ocb, final Transaction t) {
+        //evaluateExpression - start Receiver where getSecondaryAdress() != 0
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitUnaryExpression - start  count((Shipment where getIsComplaint() == true))
-        //visitWhereExpression - start Shipment where getIsComplaint() == true
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        //visitWhereExpression - start Receiver where getSecondaryAdress() != 0
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
         ClassMetadata _classMeta42 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
         long[] _ids42 = _classMeta42.getIDs(transLocal);
 
         for (long _id42 : _ids42) {
             LazyObjectReference _ref42 = transLocal.lazyReferenceFor((int) _id42);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref42.getObject());
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref42.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<edu.pjwstk.kor.model.Receiver> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _whereEl : _ident_Shipment) {
+        for (edu.pjwstk.kor.model.Receiver _whereEl : _ident_Receiver) {
             if (_whereEl == null) {
                 continue;
             }
@@ -87,39 +86,35 @@ public class MyQuery_SbqlQuery30Db4o0 implements Db4oSBQLQuery<java.lang.Integer
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start getIsComplaint() == true
-            //visitMethodExpression - start getIsComplaint()
-            java.lang.Boolean _mth_getIsComplaintResult = _whereEl.getIsComplaint();
+            //visitBinaryAExpression - start getSecondaryAdress() != 0
+            //visitMethodExpression - start getSecondaryAdress()
+            edu.pjwstk.kor.model.Adress _mth_getSecondaryAdressResult = _whereEl.getSecondaryAdress();
 
-            if (_mth_getIsComplaintResult != null) {
-                ocb.activate(_mth_getIsComplaintResult, 1);
+            if (_mth_getSecondaryAdressResult != null) {
+                ocb.activate(_mth_getSecondaryAdressResult, 1);
             }
 
-            //visitMethodExpression - end getIsComplaint()
-            //visitLiteralExpression - start true
-            //visitLiteralExpression - end true
-            //OperatorEquals - start getIsComplaint() == true
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsComplaintResult,
-                    true);
+            //visitMethodExpression - end getSecondaryAdress()
+            //visitLiteralExpression - start 0
+            //visitLiteralExpression - end 0
+            //OperatorEquals - start getSecondaryAdress() != 0
+            java.lang.Boolean _not_equalsResult = !OperatorUtils.equalsSafe(_mth_getSecondaryAdressResult,
+                    0);
 
-            //OperatorEquals - end getIsComplaint() == true
-            //visitBinaryAExpression - end getIsComplaint() == true
-            if (_equalsResult) {
+            //OperatorEquals - end getSecondaryAdress() != 0
+            //visitBinaryAExpression - end getSecondaryAdress() != 0
+            if (_not_equalsResult) {
                 _whereResult.add(_whereEl);
             }
 
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Shipment where getIsComplaint() == true
-        //OperatorCount - start  count((Shipment where getIsComplaint() == true))
-        java.lang.Integer _countResult = _whereResult.size();
-        //OperatorCount - end  count((Shipment where getIsComplaint() == true))
-        //visitUnaryExpression - end  count((Shipment where getIsComplaint() == true))
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+        //visitWhereExpression - end Receiver where getSecondaryAdress() != 0
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
 
-        return _countResult;
+        return _whereResult;
 
-        //evaluateExpression - end  count((Shipment where getIsComplaint() == true))
+        //evaluateExpression - end Receiver where getSecondaryAdress() != 0
     }
 }

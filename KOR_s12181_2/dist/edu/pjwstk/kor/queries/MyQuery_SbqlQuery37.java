@@ -3,8 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Payment;
-import edu.pjwstk.kor.model.Shipment;
+import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -51,21 +50,21 @@ public class MyQuery_SbqlQuery37 {
     }
 
     /**
-     * original query='dataBase.(avg(Shipment.Payment.PaymentType.paymentPrice) as sredniaCenaPrzesylki)'
+     * original query='dataBase.(count(Receiver.city as rc where rc == "Poznan"))'
      *
-     * query after optimization='dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)'
+     * query after optimization='dataBase.( count((Receiver.getCity() as rc where rc == "Poznan")))'
     */
-    public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
-        //visitDotExpression - start dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Poznan")))
+        //visitDotExpression - start dataBase.( count((Receiver.getCity() as rc where rc == "Poznan")))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery37Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery37Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)
+        //evaluateExpression - end dataBase.( count((Receiver.getCity() as rc where rc == "Poznan")))
     }
 }

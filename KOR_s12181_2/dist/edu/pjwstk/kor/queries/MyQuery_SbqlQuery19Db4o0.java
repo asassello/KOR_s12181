@@ -52,17 +52,17 @@ public class MyQuery_SbqlQuery19Db4o0 implements Db4oSBQLQuery<java.lang.Integer
     }
 
     /**
-     * query='dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))'
+     * query='dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))'
     '
      **/
     public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  count((Shipment as sh where sh.size() == 2).sh.size())
+        //evaluateExpression - start  count((Shipment as sh where sh.size() == 6).sh.size())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 2).sh.size())
-        //visitDotExpression - start (Shipment as sh where sh.size() == 2).sh.size()
-        //visitWhereExpression - start Shipment as sh where sh.size() == 2
+        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 6).sh.size())
+        //visitDotExpression - start (Shipment as sh where sh.size() == 6).sh.size()
+        //visitWhereExpression - start Shipment as sh where sh.size() == 6
         //visitAsExpression - start Shipment as sh
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
@@ -92,7 +92,7 @@ public class MyQuery_SbqlQuery19Db4o0 implements Db4oSBQLQuery<java.lang.Integer
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.size() == 2
+            //visitBinaryAExpression - start sh.size() == 6
             //visitDotExpression - start sh.size()
             //visitIdentifierExpression - start sh
             edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
@@ -117,14 +117,14 @@ public class MyQuery_SbqlQuery19Db4o0 implements Db4oSBQLQuery<java.lang.Integer
 
             //visitMethodExpression - end size()
             //visitDotExpression - end sh.size()
-            //visitLiteralExpression - start 2
-            //visitLiteralExpression - end 2
-            //OperatorEquals - start sh.size() == 2
+            //visitLiteralExpression - start 6
+            //visitLiteralExpression - end 6
+            //OperatorEquals - start sh.size() == 6
             java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
-                    2);
+                    6);
 
-            //OperatorEquals - end sh.size() == 2
-            //visitBinaryAExpression - end sh.size() == 2
+            //OperatorEquals - end sh.size() == 6
+            //visitBinaryAExpression - end sh.size() == 6
             if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
@@ -132,7 +132,7 @@ public class MyQuery_SbqlQuery19Db4o0 implements Db4oSBQLQuery<java.lang.Integer
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.size() == 2
+        //visitWhereExpression - end Shipment as sh where sh.size() == 6
         java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
         int _dotIndex2 = 0;
 
@@ -177,15 +177,15 @@ public class MyQuery_SbqlQuery19Db4o0 implements Db4oSBQLQuery<java.lang.Integer
             _dotIndex2++;
         }
 
-        //visitDotExpression - end (Shipment as sh where sh.size() == 2).sh.size()
-        //OperatorCount - start  count((Shipment as sh where sh.size() == 2).sh.size())
+        //visitDotExpression - end (Shipment as sh where sh.size() == 6).sh.size()
+        //OperatorCount - start  count((Shipment as sh where sh.size() == 6).sh.size())
         java.lang.Integer _countResult = _dotResult2.size();
-        //OperatorCount - end  count((Shipment as sh where sh.size() == 2).sh.size())
-        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 2).sh.size())
+        //OperatorCount - end  count((Shipment as sh where sh.size() == 6).sh.size())
+        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 6).sh.size())
         pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
         return _countResult;
 
-        //evaluateExpression - end  count((Shipment as sh where sh.size() == 2).sh.size())
+        //evaluateExpression - end  count((Shipment as sh where sh.size() == 6).sh.size())
     }
 }

@@ -52,19 +52,18 @@ public class MyQuery_SbqlQuery25Db4o0 implements Db4oSBQLQuery<java.lang.Double>
     }
 
     /**
-     * query='dataBase.(0.0 +  min(Shipment.getFullDaysOfDelivery()))'
+     * query='dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)'
     '
      **/
     public java.lang.Double executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start 0.0 +  min(Shipment.getFullDaysOfDelivery())
+        //evaluateExpression - start  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  min(Shipment.getFullDaysOfDelivery())
-        //visitDotExpression - start Shipment.getFullDaysOfDelivery()
+        //visitAsExpression - start  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
+        //visitUnaryExpression - start  avg(Shipment.Packagement.getWeight())
+        //visitDotExpression - start Shipment.Packagement.getWeight()
+        //visitDotExpression - start Shipment.Packagement
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
@@ -78,7 +77,7 @@ public class MyQuery_SbqlQuery25Db4o0 implements Db4oSBQLQuery<java.lang.Double>
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<java.lang.Integer> _dotResult = new java.util.ArrayList<java.lang.Integer>();
+        java.util.Collection<edu.pjwstk.kor.model.Packagement> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
         int _dotIndex = 0;
 
         for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
@@ -90,42 +89,79 @@ public class MyQuery_SbqlQuery25Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl, 1);
             }
 
-            //visitMethodExpression - start getFullDaysOfDelivery()
-            java.lang.Integer _mth_getFullDaysOfDeliveryResult = _dotEl.getFullDaysOfDelivery();
+            //visitIdentifierExpression - start Packagement
+            final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
+                new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
+            ClassMetadata _classMeta37 = ocb.classCollection()
+                                            .getClassMetadata("edu.pjwstk.kor.model.Packagement");
+            long[] _ids37 = _classMeta37.getIDs(transLocal);
 
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            for (long _id37 : _ids37) {
+                LazyObjectReference _ref37 = transLocal.lazyReferenceFor((int) _id37);
+                _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref37.getObject());
             }
 
-            //visitMethodExpression - end getFullDaysOfDelivery()
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            //visitIdentifierExpression - end Packagement
+            if (_ident_Packagement != null) {
+                ocb.activate(_ident_Packagement, 2);
             }
 
-            _dotResult.add(_mth_getFullDaysOfDeliveryResult);
+            _dotResult.addAll(_ident_Packagement);
             _dotIndex++;
         }
 
-        //visitDotExpression - end Shipment.getFullDaysOfDelivery()
-        //OperatorMin - start  min(Shipment.getFullDaysOfDelivery())
-        Number _min0 = null;
+        //visitDotExpression - end Shipment.Packagement
+        java.util.Collection<java.lang.Double> _dotResult1 = new java.util.ArrayList<java.lang.Double>();
+        int _dotIndex1 = 0;
 
-        for (Number _minEl0 : _dotResult) {
-            _min0 = MathUtils.min(_min0, _minEl0);
+        for (edu.pjwstk.kor.model.Packagement _dotEl1 : _dotResult) {
+            if (_dotEl1 == null) {
+                continue;
+            }
+
+            if (_dotEl1 != null) {
+                ocb.activate(_dotEl1, 1);
+            }
+
+            //visitMethodExpression - start getWeight()
+            java.lang.Double _mth_getWeightResult = _dotEl1.getWeight();
+
+            if (_mth_getWeightResult != null) {
+                ocb.activate(_mth_getWeightResult, 1);
+            }
+
+            //visitMethodExpression - end getWeight()
+            if (_mth_getWeightResult != null) {
+                ocb.activate(_mth_getWeightResult, 1);
+            }
+
+            _dotResult1.add(_mth_getWeightResult);
+            _dotIndex1++;
         }
 
-        java.lang.Integer _minResult = (java.lang.Integer) _min0;
+        //visitDotExpression - end Shipment.Packagement.getWeight()
+        //OperatorAvg - start  avg(Shipment.Packagement.getWeight())
+        java.lang.Double _avgResult = 0d;
 
-        //OperatorMin - end  min(Shipment.getFullDaysOfDelivery())
-        //visitUnaryExpression - end  min(Shipment.getFullDaysOfDelivery())
-        //OperatorPlus - start 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        java.lang.Double _plusResult = 0.0 + _minResult;
-        //OperatorPlus - end 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        //visitBinaryAExpression - end 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_plusResult, ocb);
+        if ((_dotResult1 != null) && !_dotResult1.isEmpty()) {
+            Number _avgSum4 = null;
 
-        return _plusResult;
+            for (Number _avgEl4 : _dotResult1) {
+                _avgSum4 = MathUtils.sum(_avgSum4, _avgEl4);
+            }
 
-        //evaluateExpression - end 0.0 +  min(Shipment.getFullDaysOfDelivery())
+            _avgResult = _avgSum4.doubleValue() / _dotResult1.size();
+        }
+
+        //OperatorAvg - end  avg(Shipment.Packagement.getWeight())
+        //visitUnaryExpression - end  avg(Shipment.Packagement.getWeight())
+        java.lang.Double _asResult_SredniaWagaPaczki = _avgResult;
+        //visitAsExpression - end  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_SredniaWagaPaczki,
+            ocb);
+
+        return _asResult_SredniaWagaPaczki;
+
+        //evaluateExpression - end  avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki
     }
 }

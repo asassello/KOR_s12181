@@ -52,28 +52,28 @@ public class MyQuery_SbqlQuery48Db4o0 implements Db4oSBQLQuery<java.lang.Integer
     }
 
     /**
-     * query='dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))'
+     * query='dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))'
     '
      **/
     public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  count((Shipment as sh where sh.size() == 6).sh.size())
+        //evaluateExpression - start  count((Shipment as sh where sh.size() == 2).sh.size())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 6).sh.size())
-        //visitDotExpression - start (Shipment as sh where sh.size() == 6).sh.size()
-        //visitWhereExpression - start Shipment as sh where sh.size() == 6
+        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 2).sh.size())
+        //visitDotExpression - start (Shipment as sh where sh.size() == 2).sh.size()
+        //visitWhereExpression - start Shipment as sh where sh.size() == 2
         //visitAsExpression - start Shipment as sh
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta70 = ocb.classCollection()
+        ClassMetadata _classMeta67 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids70 = _classMeta70.getIDs(transLocal);
+        long[] _ids67 = _classMeta67.getIDs(transLocal);
 
-        for (long _id70 : _ids70) {
-            LazyObjectReference _ref70 = transLocal.lazyReferenceFor((int) _id70);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref70.getObject());
+        for (long _id67 : _ids67) {
+            LazyObjectReference _ref67 = transLocal.lazyReferenceFor((int) _id67);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref67.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
@@ -92,7 +92,7 @@ public class MyQuery_SbqlQuery48Db4o0 implements Db4oSBQLQuery<java.lang.Integer
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.size() == 6
+            //visitBinaryAExpression - start sh.size() == 2
             //visitDotExpression - start sh.size()
             //visitIdentifierExpression - start sh
             edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
@@ -117,14 +117,14 @@ public class MyQuery_SbqlQuery48Db4o0 implements Db4oSBQLQuery<java.lang.Integer
 
             //visitMethodExpression - end size()
             //visitDotExpression - end sh.size()
-            //visitLiteralExpression - start 6
-            //visitLiteralExpression - end 6
-            //OperatorEquals - start sh.size() == 6
+            //visitLiteralExpression - start 2
+            //visitLiteralExpression - end 2
+            //OperatorEquals - start sh.size() == 2
             java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
-                    6);
+                    2);
 
-            //OperatorEquals - end sh.size() == 6
-            //visitBinaryAExpression - end sh.size() == 6
+            //OperatorEquals - end sh.size() == 2
+            //visitBinaryAExpression - end sh.size() == 2
             if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
@@ -132,7 +132,7 @@ public class MyQuery_SbqlQuery48Db4o0 implements Db4oSBQLQuery<java.lang.Integer
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.size() == 6
+        //visitWhereExpression - end Shipment as sh where sh.size() == 2
         java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
         int _dotIndex2 = 0;
 
@@ -177,15 +177,15 @@ public class MyQuery_SbqlQuery48Db4o0 implements Db4oSBQLQuery<java.lang.Integer
             _dotIndex2++;
         }
 
-        //visitDotExpression - end (Shipment as sh where sh.size() == 6).sh.size()
-        //OperatorCount - start  count((Shipment as sh where sh.size() == 6).sh.size())
+        //visitDotExpression - end (Shipment as sh where sh.size() == 2).sh.size()
+        //OperatorCount - start  count((Shipment as sh where sh.size() == 2).sh.size())
         java.lang.Integer _countResult = _dotResult2.size();
-        //OperatorCount - end  count((Shipment as sh where sh.size() == 6).sh.size())
-        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 6).sh.size())
+        //OperatorCount - end  count((Shipment as sh where sh.size() == 2).sh.size())
+        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 2).sh.size())
         pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
         return _countResult;
 
-        //evaluateExpression - end  count((Shipment as sh where sh.size() == 6).sh.size())
+        //evaluateExpression - end  count((Shipment as sh where sh.size() == 2).sh.size())
     }
 }

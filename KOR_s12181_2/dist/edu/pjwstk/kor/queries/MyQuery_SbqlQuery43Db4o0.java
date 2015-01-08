@@ -52,38 +52,67 @@ public class MyQuery_SbqlQuery43Db4o0 implements Db4oSBQLQuery<java.lang.Integer
     }
 
     /**
-     * query='dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))'
+     * query='dataBase.( count((Receiver.getCity() as rc where rc == "Katowice")))'
     '
      **/
     public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  count((Shipment as sh where sh.size() == 1).sh.size())
+        //evaluateExpression - start  count((Receiver.getCity() as rc where rc == "Katowice"))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 1).sh.size())
-        //visitDotExpression - start (Shipment as sh where sh.size() == 1).sh.size()
-        //visitWhereExpression - start Shipment as sh where sh.size() == 1
-        //visitAsExpression - start Shipment as sh
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta65 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids65 = _classMeta65.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Receiver.getCity() as rc where rc == "Katowice"))
+        //visitWhereExpression - start Receiver.getCity() as rc where rc == "Katowice"
+        //visitAsExpression - start Receiver.getCity() as rc
+        //visitDotExpression - start Receiver.getCity()
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
+        ClassMetadata _classMeta60 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
+        long[] _ids60 = _classMeta60.getIDs(transLocal);
 
-        for (long _id65 : _ids65) {
-            LazyObjectReference _ref65 = transLocal.lazyReferenceFor((int) _id65);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref65.getObject());
+        for (long _id60 : _ids60) {
+            LazyObjectReference _ref60 = transLocal.lazyReferenceFor((int) _id60);
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref60.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
+        int _dotIndex = 0;
 
-        //visitAsExpression - end Shipment as sh
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
+            if (_dotEl == null) {
+                continue;
+            }
+
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
+            }
+
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl.getCity();
+
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            _dotResult.add(_mth_getCityResult);
+            _dotIndex++;
+        }
+
+        //visitDotExpression - end Receiver.getCity()
+        java.util.Collection<java.lang.String> _asResult_rc = _dotResult;
+
+        //visitAsExpression - end Receiver.getCity() as rc
+        java.util.Collection<java.lang.String> _whereResult = new java.util.ArrayList<java.lang.String>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
+        for (java.lang.String _whereEl : _asResult_rc) {
             if (_whereEl == null) {
                 continue;
             }
@@ -92,39 +121,23 @@ public class MyQuery_SbqlQuery43Db4o0 implements Db4oSBQLQuery<java.lang.Integer
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.size() == 1
-            //visitDotExpression - start sh.size()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
+            //visitBinaryAExpression - start rc == "Katowice"
+            //visitIdentifierExpression - start rc
+            java.lang.String _ident_rc = _whereEl;
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 1);
+            if (_ident_rc != null) {
+                ocb.activate(_ident_rc, 1);
             }
 
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
+            //visitIdentifierExpression - end rc
+            //visitLiteralExpression - start "Katowice"
+            //visitLiteralExpression - end "Katowice"
+            //OperatorEquals - start rc == "Katowice"
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_ident_rc,
+                    "Katowice");
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 2);
-            }
-
-            //visitMethodExpression - start size()
-            java.lang.Integer _mth_sizeResult = _dotEl.size();
-
-            if (_mth_sizeResult != null) {
-                ocb.activate(_mth_sizeResult, 1);
-            }
-
-            //visitMethodExpression - end size()
-            //visitDotExpression - end sh.size()
-            //visitLiteralExpression - start 1
-            //visitLiteralExpression - end 1
-            //OperatorEquals - start sh.size() == 1
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
-                    1);
-
-            //OperatorEquals - end sh.size() == 1
-            //visitBinaryAExpression - end sh.size() == 1
+            //OperatorEquals - end rc == "Katowice"
+            //visitBinaryAExpression - end rc == "Katowice"
             if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
@@ -132,60 +145,15 @@ public class MyQuery_SbqlQuery43Db4o0 implements Db4oSBQLQuery<java.lang.Integer
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.size() == 1
-        java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
-        int _dotIndex2 = 0;
-
-        for (edu.pjwstk.kor.model.Shipment _dotEl2 : _whereResult) {
-            if (_dotEl2 == null) {
-                continue;
-            }
-
-            if (_dotEl2 != null) {
-                ocb.activate(_dotEl2, 1);
-            }
-
-            //visitDotExpression - start sh.size()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl2;
-
-            if (_ident_sh1 != null) {
-                ocb.activate(_ident_sh1, 1);
-            }
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl1 = _ident_sh1;
-
-            if (_ident_sh1 != null) {
-                ocb.activate(_ident_sh1, 2);
-            }
-
-            //visitMethodExpression - start size()
-            java.lang.Integer _mth_sizeResult1 = _dotEl1.size();
-
-            if (_mth_sizeResult1 != null) {
-                ocb.activate(_mth_sizeResult1, 1);
-            }
-
-            //visitMethodExpression - end size()
-            //visitDotExpression - end sh.size()
-            if (_mth_sizeResult1 != null) {
-                ocb.activate(_mth_sizeResult1, 1);
-            }
-
-            _dotResult2.add(_mth_sizeResult1);
-            _dotIndex2++;
-        }
-
-        //visitDotExpression - end (Shipment as sh where sh.size() == 1).sh.size()
-        //OperatorCount - start  count((Shipment as sh where sh.size() == 1).sh.size())
-        java.lang.Integer _countResult = _dotResult2.size();
-        //OperatorCount - end  count((Shipment as sh where sh.size() == 1).sh.size())
-        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 1).sh.size())
+        //visitWhereExpression - end Receiver.getCity() as rc where rc == "Katowice"
+        //OperatorCount - start  count((Receiver.getCity() as rc where rc == "Katowice"))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Receiver.getCity() as rc where rc == "Katowice"))
+        //visitUnaryExpression - end  count((Receiver.getCity() as rc where rc == "Katowice"))
         pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
         return _countResult;
 
-        //evaluateExpression - end  count((Shipment as sh where sh.size() == 1).sh.size())
+        //evaluateExpression - end  count((Receiver.getCity() as rc where rc == "Katowice"))
     }
 }

@@ -187,14 +187,14 @@ public class RandomAdress {
 			streets.add("¯wirki i Wigury");
 
 			List<String> cities = new ArrayList<String>();
-			cities.add("£ódŸ");
+			cities.add("Lodz");
 			cities.add("Warszawa");
-			cities.add("Poznañ");
-			cities.add("Wroc³aw");
-			cities.add("Kraków");
-			cities.add("Gdañsk");
+			cities.add("Poznan");
+			cities.add("Wroclaw");
+			cities.add("Krakow");
+			cities.add("Gdansk");
 			cities.add("Szczecin");
-			cities.add("Rzeszów");
+			cities.add("Rzeszow");
 			cities.add("Katowice");
 			
 			for(int i=0; i<100; i++){
@@ -381,14 +381,14 @@ public static ArrayList<Adress> getAdresses(int numberOfAdressess){
 			streets.add("¯wirki i Wigury");
 
 			List<String> cities = new ArrayList<String>();
-			cities.add("£ódŸ");
+			cities.add("Lodz");
 			cities.add("Warszawa");
-			cities.add("Poznañ");
-			cities.add("Wroc³aw");
-			cities.add("Kraków");
-			cities.add("Gdañsk");
+			cities.add("Poznan");
+			cities.add("Wroclaw");
+			cities.add("Krakow");
+			cities.add("Gdansk");
 			cities.add("Szczecin");
-			cities.add("Rzeszów");
+			cities.add("Rzeszow");
 			cities.add("Katowice");
 			
 			for(int i=0; i<numberOfAdressess; i++){

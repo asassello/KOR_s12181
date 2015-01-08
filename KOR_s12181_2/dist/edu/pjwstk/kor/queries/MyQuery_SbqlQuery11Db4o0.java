@@ -47,41 +47,44 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery11Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
-    public MyQuery_SbqlQuery11Db4o0() {
+public class MyQuery_SbqlQuery11Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Employee>> {
+    private java.lang.Integer param;
+
+    public MyQuery_SbqlQuery11Db4o0(java.lang.Integer param) {
+        this.param = param;
     }
 
     /**
-     * query='dataBase.((0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))))'
+     * query='dataBase.(Employee as em where em.getSalary() < param)'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
-        final Transaction t) {
-        //evaluateExpression - start (0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))
+    public java.util.Collection<edu.pjwstk.kor.model.Employee> executeQuery(
+        final ObjectContainerBase ocb, final Transaction t) {
+        //evaluateExpression - start Employee as em where em.getSalary() < param
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start (0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))
-        //visitBinaryAExpression - start 0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitWhereExpression - start Payment where getIsDelayed() == true and getIsPaied() == true
-        //visitIdentifierExpression - start Payment
-        final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-        ClassMetadata _classMeta14 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Payment");
-        long[] _ids14 = _classMeta14.getIDs(transLocal);
+        //visitWhereExpression - start Employee as em where em.getSalary() < param
+        //visitAsExpression - start Employee as em
+        //visitIdentifierExpression - start Employee
+        final java.util.Collection<edu.pjwstk.kor.model.Employee> _ident_Employee =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
+        ClassMetadata _classMeta20 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Employee");
+        long[] _ids20 = _classMeta20.getIDs(transLocal);
 
-        for (long _id14 : _ids14) {
-            LazyObjectReference _ref14 = transLocal.lazyReferenceFor((int) _id14);
-            _ident_Payment.add((edu.pjwstk.kor.model.Payment) _ref14.getObject());
+        for (long _id20 : _ids20) {
+            LazyObjectReference _ref20 = transLocal.lazyReferenceFor((int) _id20);
+            _ident_Employee.add((edu.pjwstk.kor.model.Employee) _ref20.getObject());
         }
 
-        //visitIdentifierExpression - end Payment
-        java.util.Collection<edu.pjwstk.kor.model.Payment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+        //visitIdentifierExpression - end Employee
+        java.util.Collection<edu.pjwstk.kor.model.Employee> _asResult_em = _ident_Employee;
+
+        //visitAsExpression - end Employee as em
+        java.util.Collection<edu.pjwstk.kor.model.Employee> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Payment _whereEl : _ident_Payment) {
+        for (edu.pjwstk.kor.model.Employee _whereEl : _asResult_em) {
             if (_whereEl == null) {
                 continue;
             }
@@ -90,253 +93,52 @@ public class MyQuery_SbqlQuery11Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start getIsDelayed() == true and getIsPaied() == true
-            //OperatorAnd - start getIsDelayed() == true and getIsPaied() == true
-            //visitBinaryAExpression - start getIsDelayed() == true
-            //visitMethodExpression - start getIsDelayed()
-            java.lang.Boolean _mth_getIsDelayedResult = _whereEl.getIsDelayed();
+            //visitBinaryAExpression - start em.getSalary() < param
+            //visitDotExpression - start em.getSalary()
+            //visitIdentifierExpression - start em
+            edu.pjwstk.kor.model.Employee _ident_em = _whereEl;
 
-            if (_mth_getIsDelayedResult != null) {
-                ocb.activate(_mth_getIsDelayedResult, 1);
+            if (_ident_em != null) {
+                ocb.activate(_ident_em, 1);
             }
 
-            //visitMethodExpression - end getIsDelayed()
-            //visitLiteralExpression - start true
-            //visitLiteralExpression - end true
-            //OperatorEquals - start getIsDelayed() == true
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsDelayedResult,
-                    true);
+            //visitIdentifierExpression - end em
+            edu.pjwstk.kor.model.Employee _dotEl = _ident_em;
 
-            //OperatorEquals - end getIsDelayed() == true
-            //visitBinaryAExpression - end getIsDelayed() == true
-            java.lang.Boolean _andResult;
-
-            if (!_equalsResult) {
-                _andResult = false;
-            } else {
-                //visitBinaryAExpression - start getIsPaied() == true
-                //visitMethodExpression - start getIsPaied()
-                java.lang.Boolean _mth_getIsPaiedResult = _whereEl.getIsPaied();
-
-                if (_mth_getIsPaiedResult != null) {
-                    ocb.activate(_mth_getIsPaiedResult, 1);
-                }
-
-                //visitMethodExpression - end getIsPaied()
-                //visitLiteralExpression - start true
-                //visitLiteralExpression - end true
-                //OperatorEquals - start getIsPaied() == true
-                java.lang.Boolean _equalsResult1 = OperatorUtils.equalsSafe(_mth_getIsPaiedResult,
-                        true);
-                //OperatorEquals - end getIsPaied() == true
-                //visitBinaryAExpression - end getIsPaied() == true
-                _andResult = _equalsResult1;
+            if (_ident_em != null) {
+                ocb.activate(_ident_em, 2);
             }
 
-            //OperatorAnd - end getIsDelayed() == true and getIsPaied() == true
-            //visitBinaryAExpression - end getIsDelayed() == true and getIsPaied() == true
-            if (_andResult) {
+            //visitMethodExpression - start getSalary()
+            java.lang.Integer _mth_getSalaryResult = _dotEl.getSalary();
+
+            if (_mth_getSalaryResult != null) {
+                ocb.activate(_mth_getSalaryResult, 1);
+            }
+
+            //visitMethodExpression - end getSalary()
+            //visitDotExpression - end em.getSalary()
+            //visitIdentifierExpression - start param
+            java.lang.Integer _ident_param = param;
+
+            //visitIdentifierExpression - end param
+            //OperatorLess - start em.getSalary() < param
+            Boolean _lessResult = _mth_getSalaryResult < _ident_param;
+
+            //OperatorLess - end em.getSalary() < param
+            //visitBinaryAExpression - end em.getSalary() < param
+            if (_lessResult) {
                 _whereResult.add(_whereEl);
             }
 
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Payment where getIsDelayed() == true and getIsPaied() == true
-        //OperatorCount - start  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        java.lang.Integer _countResult = _whereResult.size();
+        //visitWhereExpression - end Employee as em where em.getSalary() < param
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
 
-        //OperatorCount - end  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitUnaryExpression - end  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //OperatorPlus - start 0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        java.lang.Double _plusResult = 0.0 + _countResult;
+        return _whereResult;
 
-        //OperatorPlus - end 0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitBinaryAExpression - end 0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitBinaryAExpression - start  count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitUnaryExpression - start  count((Payment where getIsDelayed() == false and getIsPaied() == true))
-        //visitWhereExpression - start Payment where getIsDelayed() == false and getIsPaied() == true
-        //visitIdentifierExpression - start Payment
-        final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment1 =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-        ClassMetadata _classMeta15 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Payment");
-        long[] _ids15 = _classMeta15.getIDs(transLocal);
-
-        for (long _id15 : _ids15) {
-            LazyObjectReference _ref15 = transLocal.lazyReferenceFor((int) _id15);
-            _ident_Payment1.add((edu.pjwstk.kor.model.Payment) _ref15.getObject());
-        }
-
-        //visitIdentifierExpression - end Payment
-        java.util.Collection<edu.pjwstk.kor.model.Payment> _whereResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-        int _whereLoopIndex1 = 0;
-
-        for (edu.pjwstk.kor.model.Payment _whereEl1 : _ident_Payment1) {
-            if (_whereEl1 == null) {
-                continue;
-            }
-
-            if (_whereEl1 != null) {
-                ocb.activate(_whereEl1, 1);
-            }
-
-            //visitBinaryAExpression - start getIsDelayed() == false and getIsPaied() == true
-            //OperatorAnd - start getIsDelayed() == false and getIsPaied() == true
-            //visitBinaryAExpression - start getIsDelayed() == false
-            //visitMethodExpression - start getIsDelayed()
-            java.lang.Boolean _mth_getIsDelayedResult1 = _whereEl1.getIsDelayed();
-
-            if (_mth_getIsDelayedResult1 != null) {
-                ocb.activate(_mth_getIsDelayedResult1, 1);
-            }
-
-            //visitMethodExpression - end getIsDelayed()
-            //visitLiteralExpression - start false
-            //visitLiteralExpression - end false
-            //OperatorEquals - start getIsDelayed() == false
-            java.lang.Boolean _equalsResult2 = OperatorUtils.equalsSafe(_mth_getIsDelayedResult1,
-                    false);
-
-            //OperatorEquals - end getIsDelayed() == false
-            //visitBinaryAExpression - end getIsDelayed() == false
-            java.lang.Boolean _andResult1;
-
-            if (!_equalsResult2) {
-                _andResult1 = false;
-            } else {
-                //visitBinaryAExpression - start getIsPaied() == true
-                //visitMethodExpression - start getIsPaied()
-                java.lang.Boolean _mth_getIsPaiedResult1 = _whereEl1.getIsPaied();
-
-                if (_mth_getIsPaiedResult1 != null) {
-                    ocb.activate(_mth_getIsPaiedResult1, 1);
-                }
-
-                //visitMethodExpression - end getIsPaied()
-                //visitLiteralExpression - start true
-                //visitLiteralExpression - end true
-                //OperatorEquals - start getIsPaied() == true
-                java.lang.Boolean _equalsResult3 = OperatorUtils.equalsSafe(_mth_getIsPaiedResult1,
-                        true);
-                //OperatorEquals - end getIsPaied() == true
-                //visitBinaryAExpression - end getIsPaied() == true
-                _andResult1 = _equalsResult3;
-            }
-
-            //OperatorAnd - end getIsDelayed() == false and getIsPaied() == true
-            //visitBinaryAExpression - end getIsDelayed() == false and getIsPaied() == true
-            if (_andResult1) {
-                _whereResult1.add(_whereEl1);
-            }
-
-            _whereLoopIndex1++;
-        }
-
-        //visitWhereExpression - end Payment where getIsDelayed() == false and getIsPaied() == true
-        //OperatorCount - start  count((Payment where getIsDelayed() == false and getIsPaied() == true))
-        java.lang.Integer _countResult1 = _whereResult1.size();
-
-        //OperatorCount - end  count((Payment where getIsDelayed() == false and getIsPaied() == true))
-        //visitUnaryExpression - end  count((Payment where getIsDelayed() == false and getIsPaied() == true))
-        //visitUnaryExpression - start  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitWhereExpression - start Payment where getIsDelayed() == true and getIsPaied() == true
-        //visitIdentifierExpression - start Payment
-        final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment2 =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-        ClassMetadata _classMeta16 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Payment");
-        long[] _ids16 = _classMeta16.getIDs(transLocal);
-
-        for (long _id16 : _ids16) {
-            LazyObjectReference _ref16 = transLocal.lazyReferenceFor((int) _id16);
-            _ident_Payment2.add((edu.pjwstk.kor.model.Payment) _ref16.getObject());
-        }
-
-        //visitIdentifierExpression - end Payment
-        java.util.Collection<edu.pjwstk.kor.model.Payment> _whereResult2 = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-        int _whereLoopIndex2 = 0;
-
-        for (edu.pjwstk.kor.model.Payment _whereEl2 : _ident_Payment2) {
-            if (_whereEl2 == null) {
-                continue;
-            }
-
-            if (_whereEl2 != null) {
-                ocb.activate(_whereEl2, 1);
-            }
-
-            //visitBinaryAExpression - start getIsDelayed() == true and getIsPaied() == true
-            //OperatorAnd - start getIsDelayed() == true and getIsPaied() == true
-            //visitBinaryAExpression - start getIsDelayed() == true
-            //visitMethodExpression - start getIsDelayed()
-            java.lang.Boolean _mth_getIsDelayedResult2 = _whereEl2.getIsDelayed();
-
-            if (_mth_getIsDelayedResult2 != null) {
-                ocb.activate(_mth_getIsDelayedResult2, 1);
-            }
-
-            //visitMethodExpression - end getIsDelayed()
-            //visitLiteralExpression - start true
-            //visitLiteralExpression - end true
-            //OperatorEquals - start getIsDelayed() == true
-            java.lang.Boolean _equalsResult4 = OperatorUtils.equalsSafe(_mth_getIsDelayedResult2,
-                    true);
-
-            //OperatorEquals - end getIsDelayed() == true
-            //visitBinaryAExpression - end getIsDelayed() == true
-            java.lang.Boolean _andResult2;
-
-            if (!_equalsResult4) {
-                _andResult2 = false;
-            } else {
-                //visitBinaryAExpression - start getIsPaied() == true
-                //visitMethodExpression - start getIsPaied()
-                java.lang.Boolean _mth_getIsPaiedResult2 = _whereEl2.getIsPaied();
-
-                if (_mth_getIsPaiedResult2 != null) {
-                    ocb.activate(_mth_getIsPaiedResult2, 1);
-                }
-
-                //visitMethodExpression - end getIsPaied()
-                //visitLiteralExpression - start true
-                //visitLiteralExpression - end true
-                //OperatorEquals - start getIsPaied() == true
-                java.lang.Boolean _equalsResult5 = OperatorUtils.equalsSafe(_mth_getIsPaiedResult2,
-                        true);
-                //OperatorEquals - end getIsPaied() == true
-                //visitBinaryAExpression - end getIsPaied() == true
-                _andResult2 = _equalsResult5;
-            }
-
-            //OperatorAnd - end getIsDelayed() == true and getIsPaied() == true
-            //visitBinaryAExpression - end getIsDelayed() == true and getIsPaied() == true
-            if (_andResult2) {
-                _whereResult2.add(_whereEl2);
-            }
-
-            _whereLoopIndex2++;
-        }
-
-        //visitWhereExpression - end Payment where getIsDelayed() == true and getIsPaied() == true
-        //OperatorCount - start  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        java.lang.Integer _countResult2 = _whereResult2.size();
-
-        //OperatorCount - end  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitUnaryExpression - end  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //OperatorPlus - start  count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        java.lang.Integer _plusResult1 = _countResult1 + _countResult2;
-
-        //OperatorPlus - end  count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //visitBinaryAExpression - end  count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true))
-        //OperatorDivide - start (0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))
-        java.lang.Double _divideResult = _plusResult / _plusResult1;
-        //OperatorDivide - end (0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))
-        //visitBinaryAExpression - end (0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_divideResult, ocb);
-
-        return _divideResult;
-
-        //evaluateExpression - end (0.0 +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))/ ( count((Payment where getIsDelayed() == false and getIsPaied() == true)) +  count((Payment where getIsDelayed() == true and getIsPaied() == true)))
+        //evaluateExpression - end Employee as em where em.getSalary() < param
     }
 }

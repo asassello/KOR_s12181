@@ -47,180 +47,151 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery8Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
+public class MyQuery_SbqlQuery8Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
     public MyQuery_SbqlQuery8Db4o0() {
     }
 
     /**
-     * query='dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych)'
+     * query='dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)'
     '
      **/
-    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
+        //evaluateExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitAsExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
-        //visitUnaryExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
-        //visitWhereExpression - start Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
-        //visitAsExpression - start Shipment as sh
+        //visitAsExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
+        //visitUnaryExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
+        //visitDotExpression - start Shipment.Payment.getPaymentType().getPaymentPrice()
+        //visitDotExpression - start Shipment.Payment.getPaymentType()
+        //visitDotExpression - start Shipment.Payment
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta11 = ocb.classCollection()
+        ClassMetadata _classMeta13 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids11 = _classMeta11.getIDs(transLocal);
+        long[] _ids13 = _classMeta13.getIDs(transLocal);
 
-        for (long _id11 : _ids11) {
-            LazyObjectReference _ref11 = transLocal.lazyReferenceFor((int) _id11);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref11.getObject());
+        for (long _id13 : _ids13) {
+            LazyObjectReference _ref13 = transLocal.lazyReferenceFor((int) _id13);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref13.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
+        java.util.Collection<edu.pjwstk.kor.model.Payment> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+        int _dotIndex = 0;
 
-        //visitAsExpression - end Shipment as sh
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        int _whereLoopIndex = 0;
-
-        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
-            if (_whereEl == null) {
+        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
+            if (_dotEl == null) {
                 continue;
             }
 
-            if (_whereEl != null) {
-                ocb.activate(_whereEl, 1);
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
-            //OperatorOr - start sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
-            //visitBinaryAExpression - start sh.getEmplyReceiving().getIsTemporary() == false
-            //visitDotExpression - start sh.getEmplyReceiving().getIsTemporary()
-            //visitDotExpression - start sh.getEmplyReceiving()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
+            //visitIdentifierExpression - start Payment
+            final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment =
+                new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+            ClassMetadata _classMeta14 = ocb.classCollection()
+                                            .getClassMetadata("edu.pjwstk.kor.model.Payment");
+            long[] _ids14 = _classMeta14.getIDs(transLocal);
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 1);
+            for (long _id14 : _ids14) {
+                LazyObjectReference _ref14 = transLocal.lazyReferenceFor((int) _id14);
+                _ident_Payment.add((edu.pjwstk.kor.model.Payment) _ref14.getObject());
             }
 
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
-
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 2);
+            //visitIdentifierExpression - end Payment
+            if (_ident_Payment != null) {
+                ocb.activate(_ident_Payment, 2);
             }
 
-            //visitMethodExpression - start getEmplyReceiving()
-            edu.pjwstk.kor.model.Employee _mth_getEmplyReceivingResult = _dotEl.getEmplyReceiving();
-
-            if (_mth_getEmplyReceivingResult != null) {
-                ocb.activate(_mth_getEmplyReceivingResult, 1);
-            }
-
-            //visitMethodExpression - end getEmplyReceiving()
-            //visitDotExpression - end sh.getEmplyReceiving()
-            edu.pjwstk.kor.model.Employee _dotEl1 = _mth_getEmplyReceivingResult;
-
-            if (_mth_getEmplyReceivingResult != null) {
-                ocb.activate(_mth_getEmplyReceivingResult, 2);
-            }
-
-            //visitMethodExpression - start getIsTemporary()
-            java.lang.Boolean _mth_getIsTemporaryResult = _dotEl1.getIsTemporary();
-
-            if (_mth_getIsTemporaryResult != null) {
-                ocb.activate(_mth_getIsTemporaryResult, 1);
-            }
-
-            //visitMethodExpression - end getIsTemporary()
-            //visitDotExpression - end sh.getEmplyReceiving().getIsTemporary()
-            //visitLiteralExpression - start false
-            //visitLiteralExpression - end false
-            //OperatorEquals - start sh.getEmplyReceiving().getIsTemporary() == false
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsTemporaryResult,
-                    false);
-
-            //OperatorEquals - end sh.getEmplyReceiving().getIsTemporary() == false
-            //visitBinaryAExpression - end sh.getEmplyReceiving().getIsTemporary() == false
-            java.lang.Boolean _orResult;
-
-            if (!_equalsResult) {
-                _orResult = true;
-            } else {
-                //visitBinaryAExpression - start sh.getEmplyDelivering().getIsTemporary() == false
-                //visitDotExpression - start sh.getEmplyDelivering().getIsTemporary()
-                //visitDotExpression - start sh.getEmplyDelivering()
-                //visitIdentifierExpression - start sh
-                edu.pjwstk.kor.model.Shipment _ident_sh1 = _whereEl;
-
-                if (_ident_sh1 != null) {
-                    ocb.activate(_ident_sh1, 1);
-                }
-
-                //visitIdentifierExpression - end sh
-                edu.pjwstk.kor.model.Shipment _dotEl2 = _ident_sh1;
-
-                if (_ident_sh1 != null) {
-                    ocb.activate(_ident_sh1, 2);
-                }
-
-                //visitMethodExpression - start getEmplyDelivering()
-                edu.pjwstk.kor.model.Employee _mth_getEmplyDeliveringResult = _dotEl2.getEmplyDelivering();
-
-                if (_mth_getEmplyDeliveringResult != null) {
-                    ocb.activate(_mth_getEmplyDeliveringResult, 1);
-                }
-
-                //visitMethodExpression - end getEmplyDelivering()
-                //visitDotExpression - end sh.getEmplyDelivering()
-                edu.pjwstk.kor.model.Employee _dotEl3 = _mth_getEmplyDeliveringResult;
-
-                if (_mth_getEmplyDeliveringResult != null) {
-                    ocb.activate(_mth_getEmplyDeliveringResult, 2);
-                }
-
-                //visitMethodExpression - start getIsTemporary()
-                java.lang.Boolean _mth_getIsTemporaryResult1 = _dotEl3.getIsTemporary();
-
-                if (_mth_getIsTemporaryResult1 != null) {
-                    ocb.activate(_mth_getIsTemporaryResult1, 1);
-                }
-
-                //visitMethodExpression - end getIsTemporary()
-                //visitDotExpression - end sh.getEmplyDelivering().getIsTemporary()
-                //visitLiteralExpression - start false
-                //visitLiteralExpression - end false
-                //OperatorEquals - start sh.getEmplyDelivering().getIsTemporary() == false
-                java.lang.Boolean _equalsResult1 = OperatorUtils.equalsSafe(_mth_getIsTemporaryResult1,
-                        false);
-                //OperatorEquals - end sh.getEmplyDelivering().getIsTemporary() == false
-                //visitBinaryAExpression - end sh.getEmplyDelivering().getIsTemporary() == false
-                _orResult = _equalsResult1;
-            }
-
-            //OperatorOr - end sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
-            //visitBinaryAExpression - end sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
-            if (_orResult) {
-                _whereResult.add(_whereEl);
-            }
-
-            _whereLoopIndex++;
+            _dotResult.addAll(_ident_Payment);
+            _dotIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false
-        //OperatorCount - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
-        java.lang.Integer _countResult = _whereResult.size();
+        //visitDotExpression - end Shipment.Payment
+        java.util.Collection<edu.pjwstk.kor.model.PaymentType> _dotResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
+        int _dotIndex1 = 0;
 
-        //OperatorCount - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
-        //visitUnaryExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false))
-        java.lang.Integer _asResult_iloscObsluzonychPrzezStalych = _countResult;
-        //visitAsExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_iloscObsluzonychPrzezStalych,
+        for (edu.pjwstk.kor.model.Payment _dotEl1 : _dotResult) {
+            if (_dotEl1 == null) {
+                continue;
+            }
+
+            if (_dotEl1 != null) {
+                ocb.activate(_dotEl1, 1);
+            }
+
+            //visitMethodExpression - start getPaymentType()
+            edu.pjwstk.kor.model.PaymentType _mth_getPaymentTypeResult = _dotEl1.getPaymentType();
+
+            if (_mth_getPaymentTypeResult != null) {
+                ocb.activate(_mth_getPaymentTypeResult, 1);
+            }
+
+            //visitMethodExpression - end getPaymentType()
+            if (_mth_getPaymentTypeResult != null) {
+                ocb.activate(_mth_getPaymentTypeResult, 1);
+            }
+
+            _dotResult1.add(_mth_getPaymentTypeResult);
+            _dotIndex1++;
+        }
+
+        //visitDotExpression - end Shipment.Payment.getPaymentType()
+        java.util.Collection<java.lang.Double> _dotResult2 = new java.util.ArrayList<java.lang.Double>();
+        int _dotIndex2 = 0;
+
+        for (edu.pjwstk.kor.model.PaymentType _dotEl2 : _dotResult1) {
+            if (_dotEl2 == null) {
+                continue;
+            }
+
+            if (_dotEl2 != null) {
+                ocb.activate(_dotEl2, 1);
+            }
+
+            //visitMethodExpression - start getPaymentPrice()
+            java.lang.Double _mth_getPaymentPriceResult = _dotEl2.getPaymentPrice();
+
+            if (_mth_getPaymentPriceResult != null) {
+                ocb.activate(_mth_getPaymentPriceResult, 1);
+            }
+
+            //visitMethodExpression - end getPaymentPrice()
+            if (_mth_getPaymentPriceResult != null) {
+                ocb.activate(_mth_getPaymentPriceResult, 1);
+            }
+
+            _dotResult2.add(_mth_getPaymentPriceResult);
+            _dotIndex2++;
+        }
+
+        //visitDotExpression - end Shipment.Payment.getPaymentType().getPaymentPrice()
+        //OperatorAvg - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
+        java.lang.Double _avgResult = 0d;
+
+        if ((_dotResult2 != null) && !_dotResult2.isEmpty()) {
+            Number _avgSum1 = null;
+
+            for (Number _avgEl1 : _dotResult2) {
+                _avgSum1 = MathUtils.sum(_avgSum1, _avgEl1);
+            }
+
+            _avgResult = _avgSum1.doubleValue() / _dotResult2.size();
+        }
+
+        //OperatorAvg - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
+        //visitUnaryExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
+        java.lang.Double _asResult_sredniaCenaPrzesylki = _avgResult;
+        //visitAsExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_sredniaCenaPrzesylki,
             ocb);
 
-        return _asResult_iloscObsluzonychPrzezStalych;
+        return _asResult_sredniaCenaPrzesylki;
 
-        //evaluateExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == false || sh.getEmplyDelivering().getIsTemporary() == false)) as iloscObsluzonychPrzezStalych
+        //evaluateExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
     }
 }

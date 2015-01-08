@@ -47,41 +47,43 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery28Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Employee>> {
+public class MyQuery_SbqlQuery28Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery28Db4o0() {
     }
 
     /**
-     * query='dataBase.(Employee as ee where ee.getPosition() != "Kierownik")'
+     * query='dataBase.( count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych)'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Employee> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Employee as ee where ee.getPosition() != "Kierownik"
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitWhereExpression - start Employee as ee where ee.getPosition() != "Kierownik"
-        //visitAsExpression - start Employee as ee
-        //visitIdentifierExpression - start Employee
-        final java.util.Collection<edu.pjwstk.kor.model.Employee> _ident_Employee =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
-        ClassMetadata _classMeta39 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Employee");
-        long[] _ids39 = _classMeta39.getIDs(transLocal);
+        //visitAsExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych
+        //visitUnaryExpression - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true))
+        //visitWhereExpression - start Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true
+        //visitAsExpression - start Shipment as sh
+        //visitIdentifierExpression - start Shipment
+        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        ClassMetadata _classMeta40 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+        long[] _ids40 = _classMeta40.getIDs(transLocal);
 
-        for (long _id39 : _ids39) {
-            LazyObjectReference _ref39 = transLocal.lazyReferenceFor((int) _id39);
-            _ident_Employee.add((edu.pjwstk.kor.model.Employee) _ref39.getObject());
+        for (long _id40 : _ids40) {
+            LazyObjectReference _ref40 = transLocal.lazyReferenceFor((int) _id40);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref40.getObject());
         }
 
-        //visitIdentifierExpression - end Employee
-        java.util.Collection<edu.pjwstk.kor.model.Employee> _asResult_ee = _ident_Employee;
+        //visitIdentifierExpression - end Shipment
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
 
-        //visitAsExpression - end Employee as ee
-        java.util.Collection<edu.pjwstk.kor.model.Employee> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
+        //visitAsExpression - end Shipment as sh
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Employee _whereEl : _asResult_ee) {
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
             if (_whereEl == null) {
                 continue;
             }
@@ -90,51 +92,135 @@ public class MyQuery_SbqlQuery28Db4o0 implements Db4oSBQLQuery<java.util.Collect
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start ee.getPosition() != "Kierownik"
-            //visitDotExpression - start ee.getPosition()
-            //visitIdentifierExpression - start ee
-            edu.pjwstk.kor.model.Employee _ident_ee = _whereEl;
+            //visitBinaryAExpression - start sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true
+            //OperatorOr - start sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true
+            //visitBinaryAExpression - start sh.getEmplyReceiving().getIsTemporary() == true
+            //visitDotExpression - start sh.getEmplyReceiving().getIsTemporary()
+            //visitDotExpression - start sh.getEmplyReceiving()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
 
-            if (_ident_ee != null) {
-                ocb.activate(_ident_ee, 1);
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 1);
             }
 
-            //visitIdentifierExpression - end ee
-            edu.pjwstk.kor.model.Employee _dotEl = _ident_ee;
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
 
-            if (_ident_ee != null) {
-                ocb.activate(_ident_ee, 2);
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 2);
             }
 
-            //visitMethodExpression - start getPosition()
-            java.lang.String _mth_getPositionResult = _dotEl.getPosition();
+            //visitMethodExpression - start getEmplyReceiving()
+            edu.pjwstk.kor.model.Employee _mth_getEmplyReceivingResult = _dotEl.getEmplyReceiving();
 
-            if (_mth_getPositionResult != null) {
-                ocb.activate(_mth_getPositionResult, 1);
+            if (_mth_getEmplyReceivingResult != null) {
+                ocb.activate(_mth_getEmplyReceivingResult, 1);
             }
 
-            //visitMethodExpression - end getPosition()
-            //visitDotExpression - end ee.getPosition()
-            //visitLiteralExpression - start "Kierownik"
-            //visitLiteralExpression - end "Kierownik"
-            //OperatorEquals - start ee.getPosition() != "Kierownik"
-            java.lang.Boolean _not_equalsResult = !OperatorUtils.equalsSafe(_mth_getPositionResult,
-                    "Kierownik");
+            //visitMethodExpression - end getEmplyReceiving()
+            //visitDotExpression - end sh.getEmplyReceiving()
+            edu.pjwstk.kor.model.Employee _dotEl1 = _mth_getEmplyReceivingResult;
 
-            //OperatorEquals - end ee.getPosition() != "Kierownik"
-            //visitBinaryAExpression - end ee.getPosition() != "Kierownik"
-            if (_not_equalsResult) {
+            if (_mth_getEmplyReceivingResult != null) {
+                ocb.activate(_mth_getEmplyReceivingResult, 2);
+            }
+
+            //visitMethodExpression - start getIsTemporary()
+            java.lang.Boolean _mth_getIsTemporaryResult = _dotEl1.getIsTemporary();
+
+            if (_mth_getIsTemporaryResult != null) {
+                ocb.activate(_mth_getIsTemporaryResult, 1);
+            }
+
+            //visitMethodExpression - end getIsTemporary()
+            //visitDotExpression - end sh.getEmplyReceiving().getIsTemporary()
+            //visitLiteralExpression - start true
+            //visitLiteralExpression - end true
+            //OperatorEquals - start sh.getEmplyReceiving().getIsTemporary() == true
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsTemporaryResult,
+                    true);
+
+            //OperatorEquals - end sh.getEmplyReceiving().getIsTemporary() == true
+            //visitBinaryAExpression - end sh.getEmplyReceiving().getIsTemporary() == true
+            java.lang.Boolean _orResult;
+
+            if (!_equalsResult) {
+                _orResult = true;
+            } else {
+                //visitBinaryAExpression - start sh.getEmplyDelivering().getIsTemporary() == true
+                //visitDotExpression - start sh.getEmplyDelivering().getIsTemporary()
+                //visitDotExpression - start sh.getEmplyDelivering()
+                //visitIdentifierExpression - start sh
+                edu.pjwstk.kor.model.Shipment _ident_sh1 = _whereEl;
+
+                if (_ident_sh1 != null) {
+                    ocb.activate(_ident_sh1, 1);
+                }
+
+                //visitIdentifierExpression - end sh
+                edu.pjwstk.kor.model.Shipment _dotEl2 = _ident_sh1;
+
+                if (_ident_sh1 != null) {
+                    ocb.activate(_ident_sh1, 2);
+                }
+
+                //visitMethodExpression - start getEmplyDelivering()
+                edu.pjwstk.kor.model.Employee _mth_getEmplyDeliveringResult = _dotEl2.getEmplyDelivering();
+
+                if (_mth_getEmplyDeliveringResult != null) {
+                    ocb.activate(_mth_getEmplyDeliveringResult, 1);
+                }
+
+                //visitMethodExpression - end getEmplyDelivering()
+                //visitDotExpression - end sh.getEmplyDelivering()
+                edu.pjwstk.kor.model.Employee _dotEl3 = _mth_getEmplyDeliveringResult;
+
+                if (_mth_getEmplyDeliveringResult != null) {
+                    ocb.activate(_mth_getEmplyDeliveringResult, 2);
+                }
+
+                //visitMethodExpression - start getIsTemporary()
+                java.lang.Boolean _mth_getIsTemporaryResult1 = _dotEl3.getIsTemporary();
+
+                if (_mth_getIsTemporaryResult1 != null) {
+                    ocb.activate(_mth_getIsTemporaryResult1, 1);
+                }
+
+                //visitMethodExpression - end getIsTemporary()
+                //visitDotExpression - end sh.getEmplyDelivering().getIsTemporary()
+                //visitLiteralExpression - start true
+                //visitLiteralExpression - end true
+                //OperatorEquals - start sh.getEmplyDelivering().getIsTemporary() == true
+                java.lang.Boolean _equalsResult1 = OperatorUtils.equalsSafe(_mth_getIsTemporaryResult1,
+                        true);
+                //OperatorEquals - end sh.getEmplyDelivering().getIsTemporary() == true
+                //visitBinaryAExpression - end sh.getEmplyDelivering().getIsTemporary() == true
+                _orResult = _equalsResult1;
+            }
+
+            //OperatorOr - end sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true
+            //visitBinaryAExpression - end sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true
+            if (_orResult) {
                 _whereResult.add(_whereEl);
             }
 
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Employee as ee where ee.getPosition() != "Kierownik"
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
+        //visitWhereExpression - end Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true
+        //OperatorCount - start  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true))
+        java.lang.Integer _countResult = _whereResult.size();
 
-        return _whereResult;
+        //OperatorCount - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true))
+        //visitUnaryExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true))
+        java.lang.Integer _asResult_iloscObsluzonychPrzezTymczasowych = _countResult;
+        //visitAsExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_iloscObsluzonychPrzezTymczasowych,
+            ocb);
 
-        //evaluateExpression - end Employee as ee where ee.getPosition() != "Kierownik"
+        return _asResult_iloscObsluzonychPrzezTymczasowych;
+
+        //evaluateExpression - end  count((Shipment as sh where sh.getEmplyReceiving().getIsTemporary() == true || sh.getEmplyDelivering().getIsTemporary() == true)) as iloscObsluzonychPrzezTymczasowych
     }
 }

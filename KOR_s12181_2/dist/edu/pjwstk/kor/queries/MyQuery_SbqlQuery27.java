@@ -50,165 +50,22 @@ public class MyQuery_SbqlQuery27 {
     }
 
     /**
-     * original query='dataBase.( Shipment as sh where sh.isLost == true).(sh.sendDate as dataNadania,sh.deliveredDate as dataZgubienia,sh.sndr.name as imieNadawcy, sh.sndr.surname as nazwiskoNadawcy,  sh.sndr.city as miasto)'
+     * original query='dataBase.( (Shipment as sh where sh.isComplaint == true join sh.sndr as sn join sh.rcvr as rc ).(sh.sendDate as DataWyslania, sh.sndr.surname as Od, sh.deliveredDate as DataDostarczenia, sh.rcvr.surname as Do) )'
      *
-     * query after optimization='dataBase.(Shipment as sh where sh.getIsLost() == true).(sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto)'
+     * query after optimization='dataBase.(Shipment as sh where sh.getIsComplaint() == true join sh.getSndr() as sn join sh.getRcvr() as rc).(sh.getSendDate() as DataWyslania, sh.getSndr().getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, sh.getRcvr().getSurname() as Do)'
     */
     public java.util.Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> executeQuery() {
-        //evaluateExpression - start dataBase.(Shipment as sh where sh.getIsLost() == true).(sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto)
-        //visitDotExpression - start dataBase.(Shipment as sh where sh.getIsLost() == true).(sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto)
-        //visitDotExpression - start dataBase.(Shipment as sh where sh.getIsLost() == true)
+        //evaluateExpression - start dataBase.(Shipment as sh where sh.getIsComplaint() == true join sh.getSndr() as sn join sh.getRcvr() as rc).(sh.getSendDate() as DataWyslania, sh.getSndr().getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, sh.getRcvr().getSurname() as Do)
+        //visitDotExpression - start dataBase.(Shipment as sh where sh.getIsComplaint() == true join sh.getSndr() as sn join sh.getRcvr() as rc).(sh.getSendDate() as DataWyslania, sh.getSndr().getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, sh.getRcvr().getSurname() as Do)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _dotResult1 = _ident_dataBase.query(new MyQuery_SbqlQuery27Db4o0());
         java.util.Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _queryResult =
-            new java.util.ArrayList<pl.wcislo.sbql4j.java.model.runtime.Struct>();
-        int _dotIndex10 = 0;
+            _ident_dataBase.query(new MyQuery_SbqlQuery27Db4o0());
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl10 : _dotResult1) {
-            if (_dotEl10 == null) {
-                continue;
-            } //visitCommaExpression - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto
-              //visitCommaExpression - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy
-              //visitCommaExpression - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy
-              //visitCommaExpression - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia
-              //visitAsExpression - start sh.getSendDate() as dataNadania
-              //visitDotExpression - start sh.getSendDate()
-              //visitIdentifierExpression - start sh
-
-            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl10;
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl2 = _ident_sh1;
-
-            //visitMethodExpression - start getSendDate()
-            java.util.Date _mth_getSendDateResult = _dotEl2.getSendDate();
-
-            //visitMethodExpression - end getSendDate()
-            //visitDotExpression - end sh.getSendDate()
-            java.util.Date _asResult_dataNadania = _mth_getSendDateResult;
-
-            //visitAsExpression - end sh.getSendDate() as dataNadania
-            //visitAsExpression - start sh.getDeliveredDate() as dataZgubienia
-            //visitDotExpression - start sh.getDeliveredDate()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh2 = _dotEl10;
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl3 = _ident_sh2;
-
-            //visitMethodExpression - start getDeliveredDate()
-            java.util.Date _mth_getDeliveredDateResult = _dotEl3.getDeliveredDate();
-
-            //visitMethodExpression - end getDeliveredDate()
-            //visitDotExpression - end sh.getDeliveredDate()
-            java.util.Date _asResult_dataZgubienia = _mth_getDeliveredDateResult;
-
-            //visitAsExpression - end sh.getDeliveredDate() as dataZgubienia
-            //OperatorComma - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia
-            pl.wcislo.sbql4j.java.model.runtime.Struct _commaResult = OperatorUtils.cartesianProductSS(_asResult_dataNadania,
-                    _asResult_dataZgubienia, "dataNadania", "dataZgubienia");
-
-            //OperatorComma - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia
-            //visitCommaExpression - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia
-            //visitAsExpression - start sh.getSndr().getName() as imieNadawcy
-            //visitDotExpression - start sh.getSndr().getName()
-            //visitDotExpression - start sh.getSndr()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh3 = _dotEl10;
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl4 = _ident_sh3;
-
-            //visitMethodExpression - start getSndr()
-            edu.pjwstk.kor.model.Sender _mth_getSndrResult = _dotEl4.getSndr();
-
-            //visitMethodExpression - end getSndr()
-            //visitDotExpression - end sh.getSndr()
-            edu.pjwstk.kor.model.Sender _dotEl5 = _mth_getSndrResult;
-
-            //visitMethodExpression - start getName()
-            java.lang.String _mth_getNameResult = _dotEl5.getName();
-
-            //visitMethodExpression - end getName()
-            //visitDotExpression - end sh.getSndr().getName()
-            java.lang.String _asResult_imieNadawcy = _mth_getNameResult;
-
-            //visitAsExpression - end sh.getSndr().getName() as imieNadawcy
-            //OperatorComma - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy
-            pl.wcislo.sbql4j.java.model.runtime.Struct _commaResult1 = OperatorUtils.cartesianProductSS(_commaResult,
-                    _asResult_imieNadawcy, "", "imieNadawcy");
-
-            //OperatorComma - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy
-            //visitCommaExpression - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy
-            //visitAsExpression - start sh.getSndr().getSurname() as nazwiskoNadawcy
-            //visitDotExpression - start sh.getSndr().getSurname()
-            //visitDotExpression - start sh.getSndr()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh4 = _dotEl10;
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl6 = _ident_sh4;
-
-            //visitMethodExpression - start getSndr()
-            edu.pjwstk.kor.model.Sender _mth_getSndrResult1 = _dotEl6.getSndr();
-
-            //visitMethodExpression - end getSndr()
-            //visitDotExpression - end sh.getSndr()
-            edu.pjwstk.kor.model.Sender _dotEl7 = _mth_getSndrResult1;
-
-            //visitMethodExpression - start getSurname()
-            java.lang.String _mth_getSurnameResult = _dotEl7.getSurname();
-
-            //visitMethodExpression - end getSurname()
-            //visitDotExpression - end sh.getSndr().getSurname()
-            java.lang.String _asResult_nazwiskoNadawcy = _mth_getSurnameResult;
-
-            //visitAsExpression - end sh.getSndr().getSurname() as nazwiskoNadawcy
-            //OperatorComma - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy
-            pl.wcislo.sbql4j.java.model.runtime.Struct _commaResult2 = OperatorUtils.cartesianProductSS(_commaResult1,
-                    _asResult_nazwiskoNadawcy, "", "nazwiskoNadawcy");
-
-            //OperatorComma - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy
-            //visitCommaExpression - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy
-            //visitAsExpression - start sh.getSndr().getCity() as miasto
-            //visitDotExpression - start sh.getSndr().getCity()
-            //visitDotExpression - start sh.getSndr()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh5 = _dotEl10;
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl8 = _ident_sh5;
-
-            //visitMethodExpression - start getSndr()
-            edu.pjwstk.kor.model.Sender _mth_getSndrResult2 = _dotEl8.getSndr();
-
-            //visitMethodExpression - end getSndr()
-            //visitDotExpression - end sh.getSndr()
-            edu.pjwstk.kor.model.Sender _dotEl9 = _mth_getSndrResult2;
-
-            //visitMethodExpression - start getCity()
-            java.lang.String _mth_getCityResult = _dotEl9.getCity();
-
-            //visitMethodExpression - end getCity()
-            //visitDotExpression - end sh.getSndr().getCity()
-            java.lang.String _asResult_miasto = _mth_getCityResult;
-
-            //visitAsExpression - end sh.getSndr().getCity() as miasto
-            //OperatorComma - start sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto
-            pl.wcislo.sbql4j.java.model.runtime.Struct _commaResult3 = OperatorUtils.cartesianProductSS(_commaResult2,
-                    _asResult_miasto, "", "miasto");
-            //OperatorComma - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto
-            //visitCommaExpression - end sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto
-            _queryResult.add(_commaResult3);
-            _dotIndex10++;
-        }
-
-        //visitDotExpression - end dataBase.(Shipment as sh where sh.getIsLost() == true).(sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto)
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(Shipment as sh where sh.getIsLost() == true).(sh.getSendDate() as dataNadania, sh.getDeliveredDate() as dataZgubienia, sh.getSndr().getName() as imieNadawcy, sh.getSndr().getSurname() as nazwiskoNadawcy, sh.getSndr().getCity() as miasto)
+        //evaluateExpression - end dataBase.(Shipment as sh where sh.getIsComplaint() == true join sh.getSndr() as sn join sh.getRcvr() as rc).(sh.getSendDate() as DataWyslania, sh.getSndr().getSurname() as Od, sh.getDeliveredDate() as DataDostarczenia, sh.getRcvr().getSurname() as Do)
     }
 }

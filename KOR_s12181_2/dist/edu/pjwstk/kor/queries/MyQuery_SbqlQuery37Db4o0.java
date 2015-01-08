@@ -47,41 +47,40 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery37Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery37Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery37Db4o0() {
     }
 
     /**
-     * query='dataBase.( avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki)'
+     * query='dataBase.( count((Receiver.getCity() as rc where rc == "Poznan")))'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
+        //evaluateExpression - start  count((Receiver.getCity() as rc where rc == "Poznan"))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitAsExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
-        //visitUnaryExpression - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        //visitDotExpression - start Shipment.Payment.getPaymentType().getPaymentPrice()
-        //visitDotExpression - start Shipment.Payment.getPaymentType()
-        //visitDotExpression - start Shipment.Payment
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta53 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids53 = _classMeta53.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Receiver.getCity() as rc where rc == "Poznan"))
+        //visitWhereExpression - start Receiver.getCity() as rc where rc == "Poznan"
+        //visitAsExpression - start Receiver.getCity() as rc
+        //visitDotExpression - start Receiver.getCity()
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
+        ClassMetadata _classMeta54 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
+        long[] _ids54 = _classMeta54.getIDs(transLocal);
 
-        for (long _id53 : _ids53) {
-            LazyObjectReference _ref53 = transLocal.lazyReferenceFor((int) _id53);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref53.getObject());
+        for (long _id54 : _ids54) {
+            LazyObjectReference _ref54 = transLocal.lazyReferenceFor((int) _id54);
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref54.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Payment> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
         int _dotIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
             if (_dotEl == null) {
                 continue;
             }
@@ -90,108 +89,71 @@ public class MyQuery_SbqlQuery37Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl, 1);
             }
 
-            //visitIdentifierExpression - start Payment
-            final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
-            ClassMetadata _classMeta54 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Payment");
-            long[] _ids54 = _classMeta54.getIDs(transLocal);
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl.getCity();
 
-            for (long _id54 : _ids54) {
-                LazyObjectReference _ref54 = transLocal.lazyReferenceFor((int) _id54);
-                _ident_Payment.add((edu.pjwstk.kor.model.Payment) _ref54.getObject());
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
             }
 
-            //visitIdentifierExpression - end Payment
-            if (_ident_Payment != null) {
-                ocb.activate(_ident_Payment, 2);
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
             }
 
-            _dotResult.addAll(_ident_Payment);
+            _dotResult.add(_mth_getCityResult);
             _dotIndex++;
         }
 
-        //visitDotExpression - end Shipment.Payment
-        java.util.Collection<edu.pjwstk.kor.model.PaymentType> _dotResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
-        int _dotIndex1 = 0;
+        //visitDotExpression - end Receiver.getCity()
+        java.util.Collection<java.lang.String> _asResult_rc = _dotResult;
 
-        for (edu.pjwstk.kor.model.Payment _dotEl1 : _dotResult) {
-            if (_dotEl1 == null) {
+        //visitAsExpression - end Receiver.getCity() as rc
+        java.util.Collection<java.lang.String> _whereResult = new java.util.ArrayList<java.lang.String>();
+        int _whereLoopIndex = 0;
+
+        for (java.lang.String _whereEl : _asResult_rc) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl1 != null) {
-                ocb.activate(_dotEl1, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitMethodExpression - start getPaymentType()
-            edu.pjwstk.kor.model.PaymentType _mth_getPaymentTypeResult = _dotEl1.getPaymentType();
+            //visitBinaryAExpression - start rc == "Poznan"
+            //visitIdentifierExpression - start rc
+            java.lang.String _ident_rc = _whereEl;
 
-            if (_mth_getPaymentTypeResult != null) {
-                ocb.activate(_mth_getPaymentTypeResult, 1);
+            if (_ident_rc != null) {
+                ocb.activate(_ident_rc, 1);
             }
 
-            //visitMethodExpression - end getPaymentType()
-            if (_mth_getPaymentTypeResult != null) {
-                ocb.activate(_mth_getPaymentTypeResult, 1);
+            //visitIdentifierExpression - end rc
+            //visitLiteralExpression - start "Poznan"
+            //visitLiteralExpression - end "Poznan"
+            //OperatorEquals - start rc == "Poznan"
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_ident_rc,
+                    "Poznan");
+
+            //OperatorEquals - end rc == "Poznan"
+            //visitBinaryAExpression - end rc == "Poznan"
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
             }
 
-            _dotResult1.add(_mth_getPaymentTypeResult);
-            _dotIndex1++;
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.Payment.getPaymentType()
-        java.util.Collection<java.lang.Double> _dotResult2 = new java.util.ArrayList<java.lang.Double>();
-        int _dotIndex2 = 0;
+        //visitWhereExpression - end Receiver.getCity() as rc where rc == "Poznan"
+        //OperatorCount - start  count((Receiver.getCity() as rc where rc == "Poznan"))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Receiver.getCity() as rc where rc == "Poznan"))
+        //visitUnaryExpression - end  count((Receiver.getCity() as rc where rc == "Poznan"))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
-        for (edu.pjwstk.kor.model.PaymentType _dotEl2 : _dotResult1) {
-            if (_dotEl2 == null) {
-                continue;
-            }
+        return _countResult;
 
-            if (_dotEl2 != null) {
-                ocb.activate(_dotEl2, 1);
-            }
-
-            //visitMethodExpression - start getPaymentPrice()
-            java.lang.Double _mth_getPaymentPriceResult = _dotEl2.getPaymentPrice();
-
-            if (_mth_getPaymentPriceResult != null) {
-                ocb.activate(_mth_getPaymentPriceResult, 1);
-            }
-
-            //visitMethodExpression - end getPaymentPrice()
-            if (_mth_getPaymentPriceResult != null) {
-                ocb.activate(_mth_getPaymentPriceResult, 1);
-            }
-
-            _dotResult2.add(_mth_getPaymentPriceResult);
-            _dotIndex2++;
-        }
-
-        //visitDotExpression - end Shipment.Payment.getPaymentType().getPaymentPrice()
-        //OperatorAvg - start  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        java.lang.Double _avgResult = 0d;
-
-        if ((_dotResult2 != null) && !_dotResult2.isEmpty()) {
-            Number _avgSum6 = null;
-
-            for (Number _avgEl6 : _dotResult2) {
-                _avgSum6 = MathUtils.sum(_avgSum6, _avgEl6);
-            }
-
-            _avgResult = _avgSum6.doubleValue() / _dotResult2.size();
-        }
-
-        //OperatorAvg - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        //visitUnaryExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice())
-        java.lang.Double _asResult_sredniaCenaPrzesylki = _avgResult;
-        //visitAsExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_sredniaCenaPrzesylki,
-            ocb);
-
-        return _asResult_sredniaCenaPrzesylki;
-
-        //evaluateExpression - end  avg(Shipment.Payment.getPaymentType().getPaymentPrice()) as sredniaCenaPrzesylki
+        //evaluateExpression - end  count((Receiver.getCity() as rc where rc == "Poznan"))
     }
 }

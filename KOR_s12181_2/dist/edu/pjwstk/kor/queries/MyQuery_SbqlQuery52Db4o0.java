@@ -47,31 +47,33 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery52Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Shipment>> {
+public class MyQuery_SbqlQuery52Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery52Db4o0() {
     }
 
     /**
-     * query='dataBase.(Shipment as sh where sh.getIsLost() == true)'
+     * query='dataBase.( count((Shipment as sh where sh.size() == 6).sh.size()))'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Shipment> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Shipment as sh where sh.getIsLost() == true
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  count((Shipment as sh where sh.size() == 6).sh.size())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitWhereExpression - start Shipment as sh where sh.getIsLost() == true
+        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 6).sh.size())
+        //visitDotExpression - start (Shipment as sh where sh.size() == 6).sh.size()
+        //visitWhereExpression - start Shipment as sh where sh.size() == 6
         //visitAsExpression - start Shipment as sh
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta74 = ocb.classCollection()
+        ClassMetadata _classMeta71 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids74 = _classMeta74.getIDs(transLocal);
+        long[] _ids71 = _classMeta71.getIDs(transLocal);
 
-        for (long _id74 : _ids74) {
-            LazyObjectReference _ref74 = transLocal.lazyReferenceFor((int) _id74);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref74.getObject());
+        for (long _id71 : _ids71) {
+            LazyObjectReference _ref71 = transLocal.lazyReferenceFor((int) _id71);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref71.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
@@ -90,8 +92,8 @@ public class MyQuery_SbqlQuery52Db4o0 implements Db4oSBQLQuery<java.util.Collect
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.getIsLost() == true
-            //visitDotExpression - start sh.getIsLost()
+            //visitBinaryAExpression - start sh.size() == 6
+            //visitDotExpression - start sh.size()
             //visitIdentifierExpression - start sh
             edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
 
@@ -106,23 +108,23 @@ public class MyQuery_SbqlQuery52Db4o0 implements Db4oSBQLQuery<java.util.Collect
                 ocb.activate(_ident_sh, 2);
             }
 
-            //visitMethodExpression - start getIsLost()
-            java.lang.Boolean _mth_getIsLostResult = _dotEl.getIsLost();
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult = _dotEl.size();
 
-            if (_mth_getIsLostResult != null) {
-                ocb.activate(_mth_getIsLostResult, 1);
+            if (_mth_sizeResult != null) {
+                ocb.activate(_mth_sizeResult, 1);
             }
 
-            //visitMethodExpression - end getIsLost()
-            //visitDotExpression - end sh.getIsLost()
-            //visitLiteralExpression - start true
-            //visitLiteralExpression - end true
-            //OperatorEquals - start sh.getIsLost() == true
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsLostResult,
-                    true);
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            //visitLiteralExpression - start 6
+            //visitLiteralExpression - end 6
+            //OperatorEquals - start sh.size() == 6
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
+                    6);
 
-            //OperatorEquals - end sh.getIsLost() == true
-            //visitBinaryAExpression - end sh.getIsLost() == true
+            //OperatorEquals - end sh.size() == 6
+            //visitBinaryAExpression - end sh.size() == 6
             if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
@@ -130,11 +132,60 @@ public class MyQuery_SbqlQuery52Db4o0 implements Db4oSBQLQuery<java.util.Collect
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.getIsLost() == true
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
+        //visitWhereExpression - end Shipment as sh where sh.size() == 6
+        java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
+        int _dotIndex2 = 0;
 
-        return _whereResult;
+        for (edu.pjwstk.kor.model.Shipment _dotEl2 : _whereResult) {
+            if (_dotEl2 == null) {
+                continue;
+            }
 
-        //evaluateExpression - end Shipment as sh where sh.getIsLost() == true
+            if (_dotEl2 != null) {
+                ocb.activate(_dotEl2, 1);
+            }
+
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl2;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 1);
+            }
+
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl1 = _ident_sh1;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 2);
+            }
+
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult1 = _dotEl1.size();
+
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            _dotResult2.add(_mth_sizeResult1);
+            _dotIndex2++;
+        }
+
+        //visitDotExpression - end (Shipment as sh where sh.size() == 6).sh.size()
+        //OperatorCount - start  count((Shipment as sh where sh.size() == 6).sh.size())
+        java.lang.Integer _countResult = _dotResult2.size();
+        //OperatorCount - end  count((Shipment as sh where sh.size() == 6).sh.size())
+        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 6).sh.size())
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+
+        return _countResult;
+
+        //evaluateExpression - end  count((Shipment as sh where sh.size() == 6).sh.size())
     }
 }

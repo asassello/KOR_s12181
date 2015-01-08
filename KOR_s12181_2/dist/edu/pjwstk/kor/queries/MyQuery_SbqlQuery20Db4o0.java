@@ -47,23 +47,24 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery20Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
+public class MyQuery_SbqlQuery20Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
     public MyQuery_SbqlQuery20Db4o0() {
     }
 
     /**
-     * query='dataBase.( count((Shipment as sh where sh.size() == 3).sh.size()))'
+     * query='dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))'
     '
      **/
-    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  count((Shipment as sh where sh.size() == 3).sh.size())
+        //evaluateExpression - start 0.0 +  avg(Shipment.getFullDaysOfDelivery())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 3).sh.size())
-        //visitDotExpression - start (Shipment as sh where sh.size() == 3).sh.size()
-        //visitWhereExpression - start Shipment as sh where sh.size() == 3
-        //visitAsExpression - start Shipment as sh
+        //visitBinaryAExpression - start 0.0 +  avg(Shipment.getFullDaysOfDelivery())
+        //visitLiteralExpression - start 0.0
+        //visitLiteralExpression - end 0.0
+        //visitUnaryExpression - start  avg(Shipment.getFullDaysOfDelivery())
+        //visitDotExpression - start Shipment.getFullDaysOfDelivery()
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
@@ -77,115 +78,58 @@ public class MyQuery_SbqlQuery20Db4o0 implements Db4oSBQLQuery<java.lang.Integer
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
+        java.util.Collection<java.lang.Integer> _dotResult = new java.util.ArrayList<java.lang.Integer>();
+        int _dotIndex = 0;
 
-        //visitAsExpression - end Shipment as sh
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        int _whereLoopIndex = 0;
-
-        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
-            if (_whereEl == null) {
+        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
+            if (_dotEl == null) {
                 continue;
             }
 
-            if (_whereEl != null) {
-                ocb.activate(_whereEl, 1);
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.size() == 3
-            //visitDotExpression - start sh.size()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
+            //visitMethodExpression - start getFullDaysOfDelivery()
+            java.lang.Integer _mth_getFullDaysOfDeliveryResult = _dotEl.getFullDaysOfDelivery();
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 1);
+            if (_mth_getFullDaysOfDeliveryResult != null) {
+                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
             }
 
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
-
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 2);
+            //visitMethodExpression - end getFullDaysOfDelivery()
+            if (_mth_getFullDaysOfDeliveryResult != null) {
+                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
             }
 
-            //visitMethodExpression - start size()
-            java.lang.Integer _mth_sizeResult = _dotEl.size();
-
-            if (_mth_sizeResult != null) {
-                ocb.activate(_mth_sizeResult, 1);
-            }
-
-            //visitMethodExpression - end size()
-            //visitDotExpression - end sh.size()
-            //visitLiteralExpression - start 3
-            //visitLiteralExpression - end 3
-            //OperatorEquals - start sh.size() == 3
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
-                    3);
-
-            //OperatorEquals - end sh.size() == 3
-            //visitBinaryAExpression - end sh.size() == 3
-            if (_equalsResult) {
-                _whereResult.add(_whereEl);
-            }
-
-            _whereLoopIndex++;
+            _dotResult.add(_mth_getFullDaysOfDeliveryResult);
+            _dotIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.size() == 3
-        java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
-        int _dotIndex2 = 0;
+        //visitDotExpression - end Shipment.getFullDaysOfDelivery()
+        //OperatorAvg - start  avg(Shipment.getFullDaysOfDelivery())
+        java.lang.Double _avgResult = 0d;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl2 : _whereResult) {
-            if (_dotEl2 == null) {
-                continue;
+        if ((_dotResult != null) && !_dotResult.isEmpty()) {
+            Number _avgSum3 = null;
+
+            for (Number _avgEl3 : _dotResult) {
+                _avgSum3 = MathUtils.sum(_avgSum3, _avgEl3);
             }
 
-            if (_dotEl2 != null) {
-                ocb.activate(_dotEl2, 1);
-            }
-
-            //visitDotExpression - start sh.size()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl2;
-
-            if (_ident_sh1 != null) {
-                ocb.activate(_ident_sh1, 1);
-            }
-
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl1 = _ident_sh1;
-
-            if (_ident_sh1 != null) {
-                ocb.activate(_ident_sh1, 2);
-            }
-
-            //visitMethodExpression - start size()
-            java.lang.Integer _mth_sizeResult1 = _dotEl1.size();
-
-            if (_mth_sizeResult1 != null) {
-                ocb.activate(_mth_sizeResult1, 1);
-            }
-
-            //visitMethodExpression - end size()
-            //visitDotExpression - end sh.size()
-            if (_mth_sizeResult1 != null) {
-                ocb.activate(_mth_sizeResult1, 1);
-            }
-
-            _dotResult2.add(_mth_sizeResult1);
-            _dotIndex2++;
+            _avgResult = _avgSum3.doubleValue() / _dotResult.size();
         }
 
-        //visitDotExpression - end (Shipment as sh where sh.size() == 3).sh.size()
-        //OperatorCount - start  count((Shipment as sh where sh.size() == 3).sh.size())
-        java.lang.Integer _countResult = _dotResult2.size();
-        //OperatorCount - end  count((Shipment as sh where sh.size() == 3).sh.size())
-        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 3).sh.size())
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+        //OperatorAvg - end  avg(Shipment.getFullDaysOfDelivery())
+        //visitUnaryExpression - end  avg(Shipment.getFullDaysOfDelivery())
+        //OperatorPlus - start 0.0 +  avg(Shipment.getFullDaysOfDelivery())
+        java.lang.Double _plusResult = 0.0 + _avgResult;
+        //OperatorPlus - end 0.0 +  avg(Shipment.getFullDaysOfDelivery())
+        //visitBinaryAExpression - end 0.0 +  avg(Shipment.getFullDaysOfDelivery())
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_plusResult, ocb);
 
-        return _countResult;
+        return _plusResult;
 
-        //evaluateExpression - end  count((Shipment as sh where sh.size() == 3).sh.size())
+        //evaluateExpression - end 0.0 +  avg(Shipment.getFullDaysOfDelivery())
     }
 }

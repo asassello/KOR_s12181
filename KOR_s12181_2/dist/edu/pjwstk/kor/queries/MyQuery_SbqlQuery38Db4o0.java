@@ -47,41 +47,40 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery38Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery38Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery38Db4o0() {
     }
 
     /**
-     * query='dataBase.( avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki)'
+     * query='dataBase.( count((Receiver.getCity() as rc where rc == "Wroclaw")))'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
+        //evaluateExpression - start  count((Receiver.getCity() as rc where rc == "Wroclaw"))
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitAsExpression - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
-        //visitUnaryExpression - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        //visitDotExpression - start Shipment.Packagement.PaymentType.getPaymentPrice()
-        //visitDotExpression - start Shipment.Packagement.PaymentType
-        //visitDotExpression - start Shipment.Packagement
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        //visitUnaryExpression - start  count((Receiver.getCity() as rc where rc == "Wroclaw"))
+        //visitWhereExpression - start Receiver.getCity() as rc where rc == "Wroclaw"
+        //visitAsExpression - start Receiver.getCity() as rc
+        //visitDotExpression - start Receiver.getCity()
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
         ClassMetadata _classMeta55 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
         long[] _ids55 = _classMeta55.getIDs(transLocal);
 
         for (long _id55 : _ids55) {
             LazyObjectReference _ref55 = transLocal.lazyReferenceFor((int) _id55);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref55.getObject());
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref55.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Packagement> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<java.lang.String> _dotResult = new java.util.ArrayList<java.lang.String>();
         int _dotIndex = 0;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
             if (_dotEl == null) {
                 continue;
             }
@@ -90,113 +89,71 @@ public class MyQuery_SbqlQuery38Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl, 1);
             }
 
-            //visitIdentifierExpression - start Packagement
-            final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
-            ClassMetadata _classMeta56 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Packagement");
-            long[] _ids56 = _classMeta56.getIDs(transLocal);
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl.getCity();
 
-            for (long _id56 : _ids56) {
-                LazyObjectReference _ref56 = transLocal.lazyReferenceFor((int) _id56);
-                _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref56.getObject());
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
             }
 
-            //visitIdentifierExpression - end Packagement
-            if (_ident_Packagement != null) {
-                ocb.activate(_ident_Packagement, 2);
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
             }
 
-            _dotResult.addAll(_ident_Packagement);
+            _dotResult.add(_mth_getCityResult);
             _dotIndex++;
         }
 
-        //visitDotExpression - end Shipment.Packagement
-        java.util.Collection<edu.pjwstk.kor.model.PaymentType> _dotResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
-        int _dotIndex1 = 0;
+        //visitDotExpression - end Receiver.getCity()
+        java.util.Collection<java.lang.String> _asResult_rc = _dotResult;
 
-        for (edu.pjwstk.kor.model.Packagement _dotEl1 : _dotResult) {
-            if (_dotEl1 == null) {
+        //visitAsExpression - end Receiver.getCity() as rc
+        java.util.Collection<java.lang.String> _whereResult = new java.util.ArrayList<java.lang.String>();
+        int _whereLoopIndex = 0;
+
+        for (java.lang.String _whereEl : _asResult_rc) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl1 != null) {
-                ocb.activate(_dotEl1, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitIdentifierExpression - start PaymentType
-            final java.util.Collection<edu.pjwstk.kor.model.PaymentType> _ident_PaymentType =
-                new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
-            ClassMetadata _classMeta57 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.PaymentType");
-            long[] _ids57 = _classMeta57.getIDs(transLocal);
+            //visitBinaryAExpression - start rc == "Wroclaw"
+            //visitIdentifierExpression - start rc
+            java.lang.String _ident_rc = _whereEl;
 
-            for (long _id57 : _ids57) {
-                LazyObjectReference _ref57 = transLocal.lazyReferenceFor((int) _id57);
-                _ident_PaymentType.add((edu.pjwstk.kor.model.PaymentType) _ref57.getObject());
+            if (_ident_rc != null) {
+                ocb.activate(_ident_rc, 1);
             }
 
-            //visitIdentifierExpression - end PaymentType
-            if (_ident_PaymentType != null) {
-                ocb.activate(_ident_PaymentType, 2);
+            //visitIdentifierExpression - end rc
+            //visitLiteralExpression - start "Wroclaw"
+            //visitLiteralExpression - end "Wroclaw"
+            //OperatorEquals - start rc == "Wroclaw"
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_ident_rc,
+                    "Wroclaw");
+
+            //OperatorEquals - end rc == "Wroclaw"
+            //visitBinaryAExpression - end rc == "Wroclaw"
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
             }
 
-            _dotResult1.addAll(_ident_PaymentType);
-            _dotIndex1++;
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.Packagement.PaymentType
-        java.util.Collection<java.lang.Double> _dotResult2 = new java.util.ArrayList<java.lang.Double>();
-        int _dotIndex2 = 0;
+        //visitWhereExpression - end Receiver.getCity() as rc where rc == "Wroclaw"
+        //OperatorCount - start  count((Receiver.getCity() as rc where rc == "Wroclaw"))
+        java.lang.Integer _countResult = _whereResult.size();
+        //OperatorCount - end  count((Receiver.getCity() as rc where rc == "Wroclaw"))
+        //visitUnaryExpression - end  count((Receiver.getCity() as rc where rc == "Wroclaw"))
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
-        for (edu.pjwstk.kor.model.PaymentType _dotEl2 : _dotResult1) {
-            if (_dotEl2 == null) {
-                continue;
-            }
+        return _countResult;
 
-            if (_dotEl2 != null) {
-                ocb.activate(_dotEl2, 1);
-            }
-
-            //visitMethodExpression - start getPaymentPrice()
-            java.lang.Double _mth_getPaymentPriceResult = _dotEl2.getPaymentPrice();
-
-            if (_mth_getPaymentPriceResult != null) {
-                ocb.activate(_mth_getPaymentPriceResult, 1);
-            }
-
-            //visitMethodExpression - end getPaymentPrice()
-            if (_mth_getPaymentPriceResult != null) {
-                ocb.activate(_mth_getPaymentPriceResult, 1);
-            }
-
-            _dotResult2.add(_mth_getPaymentPriceResult);
-            _dotIndex2++;
-        }
-
-        //visitDotExpression - end Shipment.Packagement.PaymentType.getPaymentPrice()
-        //OperatorAvg - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        java.lang.Double _avgResult = 0d;
-
-        if ((_dotResult2 != null) && !_dotResult2.isEmpty()) {
-            Number _avgSum7 = null;
-
-            for (Number _avgEl7 : _dotResult2) {
-                _avgSum7 = MathUtils.sum(_avgSum7, _avgEl7);
-            }
-
-            _avgResult = _avgSum7.doubleValue() / _dotResult2.size();
-        }
-
-        //OperatorAvg - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        //visitUnaryExpression - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        java.lang.Double _asResult_sredniaCenaPaczki = _avgResult;
-        //visitAsExpression - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_sredniaCenaPaczki,
-            ocb);
-
-        return _asResult_sredniaCenaPaczki;
-
-        //evaluateExpression - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
+        //evaluateExpression - end  count((Receiver.getCity() as rc where rc == "Wroclaw"))
     }
 }

@@ -47,44 +47,43 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery15Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Employee>> {
-    private java.lang.Integer param;
-
-    public MyQuery_SbqlQuery15Db4o0(java.lang.Integer param) {
-        this.param = param;
+public class MyQuery_SbqlQuery15Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
+    public MyQuery_SbqlQuery15Db4o0() {
     }
 
     /**
-     * query='dataBase.(Employee as em where em.getSalary() < param)'
+     * query='dataBase.( count((Shipment as sh where sh.size() == 2).sh.size()))'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Employee> executeQuery(
-        final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Employee as em where em.getSalary() < param
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
+        final Transaction t) {
+        //evaluateExpression - start  count((Shipment as sh where sh.size() == 2).sh.size())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitWhereExpression - start Employee as em where em.getSalary() < param
-        //visitAsExpression - start Employee as em
-        //visitIdentifierExpression - start Employee
-        final java.util.Collection<edu.pjwstk.kor.model.Employee> _ident_Employee =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
-        ClassMetadata _classMeta24 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Employee");
-        long[] _ids24 = _classMeta24.getIDs(transLocal);
+        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 2).sh.size())
+        //visitDotExpression - start (Shipment as sh where sh.size() == 2).sh.size()
+        //visitWhereExpression - start Shipment as sh where sh.size() == 2
+        //visitAsExpression - start Shipment as sh
+        //visitIdentifierExpression - start Shipment
+        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        ClassMetadata _classMeta26 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
+        long[] _ids26 = _classMeta26.getIDs(transLocal);
 
-        for (long _id24 : _ids24) {
-            LazyObjectReference _ref24 = transLocal.lazyReferenceFor((int) _id24);
-            _ident_Employee.add((edu.pjwstk.kor.model.Employee) _ref24.getObject());
+        for (long _id26 : _ids26) {
+            LazyObjectReference _ref26 = transLocal.lazyReferenceFor((int) _id26);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref26.getObject());
         }
 
-        //visitIdentifierExpression - end Employee
-        java.util.Collection<edu.pjwstk.kor.model.Employee> _asResult_em = _ident_Employee;
+        //visitIdentifierExpression - end Shipment
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
 
-        //visitAsExpression - end Employee as em
-        java.util.Collection<edu.pjwstk.kor.model.Employee> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Employee>();
+        //visitAsExpression - end Shipment as sh
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
         int _whereLoopIndex = 0;
 
-        for (edu.pjwstk.kor.model.Employee _whereEl : _asResult_em) {
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
             if (_whereEl == null) {
                 continue;
             }
@@ -93,52 +92,100 @@ public class MyQuery_SbqlQuery15Db4o0 implements Db4oSBQLQuery<java.util.Collect
                 ocb.activate(_whereEl, 1);
             }
 
-            //visitBinaryAExpression - start em.getSalary() < param
-            //visitDotExpression - start em.getSalary()
-            //visitIdentifierExpression - start em
-            edu.pjwstk.kor.model.Employee _ident_em = _whereEl;
+            //visitBinaryAExpression - start sh.size() == 2
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
 
-            if (_ident_em != null) {
-                ocb.activate(_ident_em, 1);
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 1);
             }
 
-            //visitIdentifierExpression - end em
-            edu.pjwstk.kor.model.Employee _dotEl = _ident_em;
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
 
-            if (_ident_em != null) {
-                ocb.activate(_ident_em, 2);
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 2);
             }
 
-            //visitMethodExpression - start getSalary()
-            java.lang.Integer _mth_getSalaryResult = _dotEl.getSalary();
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult = _dotEl.size();
 
-            if (_mth_getSalaryResult != null) {
-                ocb.activate(_mth_getSalaryResult, 1);
+            if (_mth_sizeResult != null) {
+                ocb.activate(_mth_sizeResult, 1);
             }
 
-            //visitMethodExpression - end getSalary()
-            //visitDotExpression - end em.getSalary()
-            //visitIdentifierExpression - start param
-            java.lang.Integer _ident_param = param;
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            //visitLiteralExpression - start 2
+            //visitLiteralExpression - end 2
+            //OperatorEquals - start sh.size() == 2
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
+                    2);
 
-            //visitIdentifierExpression - end param
-            //OperatorLess - start em.getSalary() < param
-            Boolean _lessResult = _mth_getSalaryResult < _ident_param;
-
-            //OperatorLess - end em.getSalary() < param
-            //visitBinaryAExpression - end em.getSalary() < param
-            if (_lessResult) {
+            //OperatorEquals - end sh.size() == 2
+            //visitBinaryAExpression - end sh.size() == 2
+            if (_equalsResult) {
                 _whereResult.add(_whereEl);
             }
 
             _whereLoopIndex++;
         }
 
-        //visitWhereExpression - end Employee as em where em.getSalary() < param
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
+        //visitWhereExpression - end Shipment as sh where sh.size() == 2
+        java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
+        int _dotIndex2 = 0;
 
-        return _whereResult;
+        for (edu.pjwstk.kor.model.Shipment _dotEl2 : _whereResult) {
+            if (_dotEl2 == null) {
+                continue;
+            }
 
-        //evaluateExpression - end Employee as em where em.getSalary() < param
+            if (_dotEl2 != null) {
+                ocb.activate(_dotEl2, 1);
+            }
+
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl2;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 1);
+            }
+
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl1 = _ident_sh1;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 2);
+            }
+
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult1 = _dotEl1.size();
+
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            _dotResult2.add(_mth_sizeResult1);
+            _dotIndex2++;
+        }
+
+        //visitDotExpression - end (Shipment as sh where sh.size() == 2).sh.size()
+        //OperatorCount - start  count((Shipment as sh where sh.size() == 2).sh.size())
+        java.lang.Integer _countResult = _dotResult2.size();
+        //OperatorCount - end  count((Shipment as sh where sh.size() == 2).sh.size())
+        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 2).sh.size())
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+
+        return _countResult;
+
+        //evaluateExpression - end  count((Shipment as sh where sh.size() == 2).sh.size())
     }
 }

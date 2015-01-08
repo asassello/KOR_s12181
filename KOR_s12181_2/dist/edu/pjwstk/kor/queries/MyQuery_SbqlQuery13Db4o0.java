@@ -48,74 +48,106 @@ import java.util.Date;
 
 
 public class MyQuery_SbqlQuery13Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
-    public MyQuery_SbqlQuery13Db4o0() {
+    private java.util.Date param;
+
+    public MyQuery_SbqlQuery13Db4o0(java.util.Date param) {
+        this.param = param;
     }
 
     /**
-     * query='dataBase.( avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki)'
+     * query='dataBase.(0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice())'
     '
      **/
     public java.lang.Double executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
+        //evaluateExpression - start 0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitAsExpression - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
-        //visitUnaryExpression - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        //visitDotExpression - start Shipment.Packagement.PaymentType.getPaymentPrice()
-        //visitDotExpression - start Shipment.Packagement.PaymentType
-        //visitDotExpression - start Shipment.Packagement
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta19 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids19 = _classMeta19.getIDs(transLocal);
+        //visitBinaryAExpression - start 0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //visitLiteralExpression - start 0.0
+        //visitLiteralExpression - end 0.0
+        //visitUnaryExpression - start  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //visitDotExpression - start (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //visitDotExpression - start (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType()
+        //visitDotExpression - start (Payment as pm where pm.getPaymentDate() > param).pm
+        //visitWhereExpression - start Payment as pm where pm.getPaymentDate() > param
+        //visitAsExpression - start Payment as pm
+        //visitIdentifierExpression - start Payment
+        final java.util.Collection<edu.pjwstk.kor.model.Payment> _ident_Payment = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+        ClassMetadata _classMeta24 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Payment");
+        long[] _ids24 = _classMeta24.getIDs(transLocal);
 
-        for (long _id19 : _ids19) {
-            LazyObjectReference _ref19 = transLocal.lazyReferenceFor((int) _id19);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref19.getObject());
+        for (long _id24 : _ids24) {
+            LazyObjectReference _ref24 = transLocal.lazyReferenceFor((int) _id24);
+            _ident_Payment.add((edu.pjwstk.kor.model.Payment) _ref24.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Packagement> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
-        int _dotIndex = 0;
+        //visitIdentifierExpression - end Payment
+        java.util.Collection<edu.pjwstk.kor.model.Payment> _asResult_pm = _ident_Payment;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
-            if (_dotEl == null) {
+        //visitAsExpression - end Payment as pm
+        java.util.Collection<edu.pjwstk.kor.model.Payment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
+        int _whereLoopIndex = 0;
+
+        for (edu.pjwstk.kor.model.Payment _whereEl : _asResult_pm) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl != null) {
-                ocb.activate(_dotEl, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitIdentifierExpression - start Packagement
-            final java.util.Collection<edu.pjwstk.kor.model.Packagement> _ident_Packagement =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Packagement>();
-            ClassMetadata _classMeta20 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Packagement");
-            long[] _ids20 = _classMeta20.getIDs(transLocal);
+            //visitBinaryAExpression - start pm.getPaymentDate() > param
+            //visitDotExpression - start pm.getPaymentDate()
+            //visitIdentifierExpression - start pm
+            edu.pjwstk.kor.model.Payment _ident_pm = _whereEl;
 
-            for (long _id20 : _ids20) {
-                LazyObjectReference _ref20 = transLocal.lazyReferenceFor((int) _id20);
-                _ident_Packagement.add((edu.pjwstk.kor.model.Packagement) _ref20.getObject());
+            if (_ident_pm != null) {
+                ocb.activate(_ident_pm, 1);
             }
 
-            //visitIdentifierExpression - end Packagement
-            if (_ident_Packagement != null) {
-                ocb.activate(_ident_Packagement, 2);
+            //visitIdentifierExpression - end pm
+            edu.pjwstk.kor.model.Payment _dotEl = _ident_pm;
+
+            if (_ident_pm != null) {
+                ocb.activate(_ident_pm, 2);
             }
 
-            _dotResult.addAll(_ident_Packagement);
-            _dotIndex++;
+            //visitMethodExpression - start getPaymentDate()
+            java.util.Date _mth_getPaymentDateResult = _dotEl.getPaymentDate();
+
+            if (_mth_getPaymentDateResult != null) {
+                ocb.activate(_mth_getPaymentDateResult, 1);
+            }
+
+            //visitMethodExpression - end getPaymentDate()
+            //visitDotExpression - end pm.getPaymentDate()
+            //visitIdentifierExpression - start param
+            java.util.Date _ident_param = param;
+
+            //visitIdentifierExpression - end param
+            //OperatorMore - start pm.getPaymentDate() > param
+            Boolean _moreResult = (_mth_getPaymentDateResult == null)
+                ? ((_mth_getPaymentDateResult == null) ? false : false)
+                : ((_mth_getPaymentDateResult == null) ? true
+                                                       : (_mth_getPaymentDateResult.compareTo(_ident_param) > 0));
+
+            //OperatorMore - end pm.getPaymentDate() > param
+            //visitBinaryAExpression - end pm.getPaymentDate() > param
+            if (_moreResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.Packagement
-        java.util.Collection<edu.pjwstk.kor.model.PaymentType> _dotResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
+        //visitWhereExpression - end Payment as pm where pm.getPaymentDate() > param
+        java.util.Collection<edu.pjwstk.kor.model.Payment> _dotResult1 = new java.util.ArrayList<edu.pjwstk.kor.model.Payment>();
         int _dotIndex1 = 0;
 
-        for (edu.pjwstk.kor.model.Packagement _dotEl1 : _dotResult) {
+        for (edu.pjwstk.kor.model.Payment _dotEl1 : _whereResult) {
             if (_dotEl1 == null) {
                 continue;
             }
@@ -124,32 +156,27 @@ public class MyQuery_SbqlQuery13Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl1, 1);
             }
 
-            //visitIdentifierExpression - start PaymentType
-            final java.util.Collection<edu.pjwstk.kor.model.PaymentType> _ident_PaymentType =
-                new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
-            ClassMetadata _classMeta21 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.PaymentType");
-            long[] _ids21 = _classMeta21.getIDs(transLocal);
+            //visitIdentifierExpression - start pm
+            edu.pjwstk.kor.model.Payment _ident_pm1 = _dotEl1;
 
-            for (long _id21 : _ids21) {
-                LazyObjectReference _ref21 = transLocal.lazyReferenceFor((int) _id21);
-                _ident_PaymentType.add((edu.pjwstk.kor.model.PaymentType) _ref21.getObject());
+            if (_ident_pm1 != null) {
+                ocb.activate(_ident_pm1, 1);
             }
 
-            //visitIdentifierExpression - end PaymentType
-            if (_ident_PaymentType != null) {
-                ocb.activate(_ident_PaymentType, 2);
+            //visitIdentifierExpression - end pm
+            if (_ident_pm1 != null) {
+                ocb.activate(_ident_pm1, 1);
             }
 
-            _dotResult1.addAll(_ident_PaymentType);
+            _dotResult1.add(_ident_pm1);
             _dotIndex1++;
         }
 
-        //visitDotExpression - end Shipment.Packagement.PaymentType
-        java.util.Collection<java.lang.Double> _dotResult2 = new java.util.ArrayList<java.lang.Double>();
+        //visitDotExpression - end (Payment as pm where pm.getPaymentDate() > param).pm
+        java.util.Collection<edu.pjwstk.kor.model.PaymentType> _dotResult2 = new java.util.ArrayList<edu.pjwstk.kor.model.PaymentType>();
         int _dotIndex2 = 0;
 
-        for (edu.pjwstk.kor.model.PaymentType _dotEl2 : _dotResult1) {
+        for (edu.pjwstk.kor.model.Payment _dotEl2 : _dotResult1) {
             if (_dotEl2 == null) {
                 continue;
             }
@@ -158,8 +185,37 @@ public class MyQuery_SbqlQuery13Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_dotEl2, 1);
             }
 
+            //visitMethodExpression - start getPaymentType()
+            edu.pjwstk.kor.model.PaymentType _mth_getPaymentTypeResult = _dotEl2.getPaymentType();
+
+            if (_mth_getPaymentTypeResult != null) {
+                ocb.activate(_mth_getPaymentTypeResult, 1);
+            }
+
+            //visitMethodExpression - end getPaymentType()
+            if (_mth_getPaymentTypeResult != null) {
+                ocb.activate(_mth_getPaymentTypeResult, 1);
+            }
+
+            _dotResult2.add(_mth_getPaymentTypeResult);
+            _dotIndex2++;
+        }
+
+        //visitDotExpression - end (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType()
+        java.util.Collection<java.lang.Double> _dotResult3 = new java.util.ArrayList<java.lang.Double>();
+        int _dotIndex3 = 0;
+
+        for (edu.pjwstk.kor.model.PaymentType _dotEl3 : _dotResult2) {
+            if (_dotEl3 == null) {
+                continue;
+            }
+
+            if (_dotEl3 != null) {
+                ocb.activate(_dotEl3, 1);
+            }
+
             //visitMethodExpression - start getPaymentPrice()
-            java.lang.Double _mth_getPaymentPriceResult = _dotEl2.getPaymentPrice();
+            java.lang.Double _mth_getPaymentPriceResult = _dotEl3.getPaymentPrice();
 
             if (_mth_getPaymentPriceResult != null) {
                 ocb.activate(_mth_getPaymentPriceResult, 1);
@@ -170,33 +226,30 @@ public class MyQuery_SbqlQuery13Db4o0 implements Db4oSBQLQuery<java.lang.Double>
                 ocb.activate(_mth_getPaymentPriceResult, 1);
             }
 
-            _dotResult2.add(_mth_getPaymentPriceResult);
-            _dotIndex2++;
+            _dotResult3.add(_mth_getPaymentPriceResult);
+            _dotIndex3++;
         }
 
-        //visitDotExpression - end Shipment.Packagement.PaymentType.getPaymentPrice()
-        //OperatorAvg - start  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        java.lang.Double _avgResult = 0d;
+        //visitDotExpression - end (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //OperatorSum - start  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        Number _sum0 = null;
 
-        if ((_dotResult2 != null) && !_dotResult2.isEmpty()) {
-            Number _avgSum3 = null;
-
-            for (Number _avgEl3 : _dotResult2) {
-                _avgSum3 = MathUtils.sum(_avgSum3, _avgEl3);
-            }
-
-            _avgResult = _avgSum3.doubleValue() / _dotResult2.size();
+        for (Number _sumEl0 : _dotResult3) {
+            _sum0 = MathUtils.sum(_sum0, _sumEl0);
         }
 
-        //OperatorAvg - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        //visitUnaryExpression - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice())
-        java.lang.Double _asResult_sredniaCenaPaczki = _avgResult;
-        //visitAsExpression - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_sredniaCenaPaczki,
-            ocb);
+        java.lang.Double _sumResult = (java.lang.Double) _sum0;
 
-        return _asResult_sredniaCenaPaczki;
+        //OperatorSum - end  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //visitUnaryExpression - end  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //OperatorPlus - start 0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        java.lang.Double _plusResult = 0.0 + _sumResult;
+        //OperatorPlus - end 0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        //visitBinaryAExpression - end 0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_plusResult, ocb);
 
-        //evaluateExpression - end  avg(Shipment.Packagement.PaymentType.getPaymentPrice()) as sredniaCenaPaczki
+        return _plusResult;
+
+        //evaluateExpression - end 0.0 +  sum (Payment as pm where pm.getPaymentDate() > param).pm.getPaymentType().getPaymentPrice()
     }
 }

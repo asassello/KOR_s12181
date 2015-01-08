@@ -3,8 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
-import edu.pjwstk.kor.model.Adress;
-import edu.pjwstk.kor.model.Receiver;
+import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -51,21 +50,21 @@ public class MyQuery_SbqlQuery14 {
     }
 
     /**
-     * original query='dataBase.(unique(Receiver.Adress.city) as miasto)'
+     * original query='dataBase.( count((Shipment as sh where sh.size() == 1).(sh.size())))'
      *
-     * query after optimization='dataBase.( unique Receiver.Adress.getCity() as miasto)'
+     * query after optimization='dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))'
     */
-    public java.util.Collection<java.lang.String> executeQuery() {
-        //evaluateExpression - start dataBase.( unique Receiver.Adress.getCity() as miasto)
-        //visitDotExpression - start dataBase.( unique Receiver.Adress.getCity() as miasto)
+    public java.lang.Integer executeQuery() {
+        //evaluateExpression - start dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))
+        //visitDotExpression - start dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.util.Collection<java.lang.String> _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery14Db4o0());
+        java.lang.Integer _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery14Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.( unique Receiver.Adress.getCity() as miasto)
+        //evaluateExpression - end dataBase.( count((Shipment as sh where sh.size() == 1).sh.size()))
     }
 }

@@ -47,118 +47,145 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery16Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery16Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery16Db4o0() {
     }
 
     /**
-     * query='dataBase.((0.0 +  count(Shipment))/  count( unique Shipment.Sender))'
+     * query='dataBase.( count((Shipment as sh where sh.size() == 3).sh.size()))'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+        //evaluateExpression - start  count((Shipment as sh where sh.size() == 3).sh.size())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        //visitBinaryAExpression - start 0.0 +  count(Shipment)
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  count(Shipment)
+        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 3).sh.size())
+        //visitDotExpression - start (Shipment as sh where sh.size() == 3).sh.size()
+        //visitWhereExpression - start Shipment as sh where sh.size() == 3
+        //visitAsExpression - start Shipment as sh
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta25 = ocb.classCollection()
+        ClassMetadata _classMeta27 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids25 = _classMeta25.getIDs(transLocal);
+        long[] _ids27 = _classMeta27.getIDs(transLocal);
 
-        for (long _id25 : _ids25) {
-            LazyObjectReference _ref25 = transLocal.lazyReferenceFor((int) _id25);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref25.getObject());
+        for (long _id27 : _ids27) {
+            LazyObjectReference _ref27 = transLocal.lazyReferenceFor((int) _id27);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref27.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
-        //OperatorCount - start  count(Shipment)
-        java.lang.Integer _countResult = _ident_Shipment.size();
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
 
-        //OperatorCount - end  count(Shipment)
-        //visitUnaryExpression - end  count(Shipment)
-        //OperatorPlus - start 0.0 +  count(Shipment)
-        java.lang.Double _plusResult = 0.0 + _countResult;
+        //visitAsExpression - end Shipment as sh
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        int _whereLoopIndex = 0;
 
-        //OperatorPlus - end 0.0 +  count(Shipment)
-        //visitBinaryAExpression - end 0.0 +  count(Shipment)
-        //visitUnaryExpression - start  count( unique Shipment.Sender)
-        //visitUnaryExpression - start  unique Shipment.Sender
-        //visitDotExpression - start Shipment.Sender
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment1 =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta26 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids26 = _classMeta26.getIDs(transLocal);
-
-        for (long _id26 : _ids26) {
-            LazyObjectReference _ref26 = transLocal.lazyReferenceFor((int) _id26);
-            _ident_Shipment1.add((edu.pjwstk.kor.model.Shipment) _ref26.getObject());
-        }
-
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Sender> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
-        int _dotIndex = 0;
-
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment1) {
-            if (_dotEl == null) {
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl != null) {
-                ocb.activate(_dotEl, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitIdentifierExpression - start Sender
-            final java.util.Collection<edu.pjwstk.kor.model.Sender> _ident_Sender =
-                new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
-            ClassMetadata _classMeta27 = ocb.classCollection()
-                                            .getClassMetadata("edu.pjwstk.kor.model.Sender");
-            long[] _ids27 = _classMeta27.getIDs(transLocal);
+            //visitBinaryAExpression - start sh.size() == 3
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
 
-            for (long _id27 : _ids27) {
-                LazyObjectReference _ref27 = transLocal.lazyReferenceFor((int) _id27);
-                _ident_Sender.add((edu.pjwstk.kor.model.Sender) _ref27.getObject());
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 1);
             }
 
-            //visitIdentifierExpression - end Sender
-            if (_ident_Sender != null) {
-                ocb.activate(_ident_Sender, 2);
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
+
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 2);
             }
 
-            _dotResult.addAll(_ident_Sender);
-            _dotIndex++;
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult = _dotEl.size();
+
+            if (_mth_sizeResult != null) {
+                ocb.activate(_mth_sizeResult, 1);
+            }
+
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            //visitLiteralExpression - start 3
+            //visitLiteralExpression - end 3
+            //OperatorEquals - start sh.size() == 3
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
+                    3);
+
+            //OperatorEquals - end sh.size() == 3
+            //visitBinaryAExpression - end sh.size() == 3
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.Sender
-        //OperatorUnique - start  unique Shipment.Sender
-        java.util.Collection<edu.pjwstk.kor.model.Sender> _uniqueResult = new java.util.ArrayList<edu.pjwstk.kor.model.Sender>();
-        Set<edu.pjwstk.kor.model.Sender> _tmp1 = new LinkedHashSet<edu.pjwstk.kor.model.Sender>();
-        _tmp1.addAll(_dotResult);
-        _uniqueResult.addAll(_tmp1);
+        //visitWhereExpression - end Shipment as sh where sh.size() == 3
+        java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
+        int _dotIndex2 = 0;
 
-        //OperatorUnique - end  unique Shipment.Sender
-        //visitUnaryExpression - end  unique Shipment.Sender
-        //OperatorCount - start  count( unique Shipment.Sender)
-        java.lang.Integer _countResult1 = _uniqueResult.size();
+        for (edu.pjwstk.kor.model.Shipment _dotEl2 : _whereResult) {
+            if (_dotEl2 == null) {
+                continue;
+            }
 
-        //OperatorCount - end  count( unique Shipment.Sender)
-        //visitUnaryExpression - end  count( unique Shipment.Sender)
-        //OperatorDivide - start (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        java.lang.Double _divideResult = _plusResult / _countResult1;
-        //OperatorDivide - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        //visitBinaryAExpression - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_divideResult, ocb);
+            if (_dotEl2 != null) {
+                ocb.activate(_dotEl2, 1);
+            }
 
-        return _divideResult;
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl2;
 
-        //evaluateExpression - end (0.0 +  count(Shipment))/  count( unique Shipment.Sender)
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 1);
+            }
+
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl1 = _ident_sh1;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 2);
+            }
+
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult1 = _dotEl1.size();
+
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            _dotResult2.add(_mth_sizeResult1);
+            _dotIndex2++;
+        }
+
+        //visitDotExpression - end (Shipment as sh where sh.size() == 3).sh.size()
+        //OperatorCount - start  count((Shipment as sh where sh.size() == 3).sh.size())
+        java.lang.Integer _countResult = _dotResult2.size();
+        //OperatorCount - end  count((Shipment as sh where sh.size() == 3).sh.size())
+        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 3).sh.size())
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
+
+        return _countResult;
+
+        //evaluateExpression - end  count((Shipment as sh where sh.size() == 3).sh.size())
     }
 }

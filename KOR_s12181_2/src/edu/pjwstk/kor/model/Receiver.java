@@ -26,6 +26,18 @@ public class Receiver extends Person {
 	public String getCity() {
 		return super.getCity();
 	}
+	
+	public String getName() {
+		return super.getName();
+	}
+	
+	public String getSurname() {
+		return super.getSurname();
+	}
+	
+	public String getEmailAdress() {
+		return super.getEmailAdress();
+	}
 
 	@Override
 	public String toString() {

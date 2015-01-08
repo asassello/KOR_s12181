@@ -3,6 +3,7 @@ package edu.pjwstk.kor.queries;
 import com.db4o.ObjectContainer;
 
 import edu.pjwstk.kor.model.*;
+import edu.pjwstk.kor.model.Packagement;
 import edu.pjwstk.kor.model.Shipment;
 import edu.pjwstk.kor.model.data.*;
 
@@ -50,13 +51,13 @@ public class MyQuery_SbqlQuery25 {
     }
 
     /**
-     * original query='dataBase.(0.0+ min(Shipment.fullDaysOfDelivery))'
+     * original query='dataBase.(avg(Shipment.Packagement.weight) as SredniaWagaPaczki)'
      *
-     * query after optimization='dataBase.(0.0 +  min(Shipment.getFullDaysOfDelivery()))'
+     * query after optimization='dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)'
     */
     public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.(0.0 +  min(Shipment.getFullDaysOfDelivery()))
-        //visitDotExpression - start dataBase.(0.0 +  min(Shipment.getFullDaysOfDelivery()))
+        //evaluateExpression - start dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)
+        //visitDotExpression - start dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
@@ -65,6 +66,6 @@ public class MyQuery_SbqlQuery25 {
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(0.0 +  min(Shipment.getFullDaysOfDelivery()))
+        //evaluateExpression - end dataBase.( avg(Shipment.Packagement.getWeight()) as SredniaWagaPaczki)
     }
 }

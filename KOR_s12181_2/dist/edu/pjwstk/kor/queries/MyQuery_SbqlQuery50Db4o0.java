@@ -47,85 +47,145 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery50Db4o0 implements Db4oSBQLQuery<java.lang.Double> {
+public class MyQuery_SbqlQuery50Db4o0 implements Db4oSBQLQuery<java.lang.Integer> {
     public MyQuery_SbqlQuery50Db4o0() {
     }
 
     /**
-     * query='dataBase.(0.0 +  min(Shipment.getFullDaysOfDelivery()))'
+     * query='dataBase.( count((Shipment as sh where sh.size() == 4).sh.size()))'
     '
      **/
-    public java.lang.Double executeQuery(final ObjectContainerBase ocb,
+    public java.lang.Integer executeQuery(final ObjectContainerBase ocb,
         final Transaction t) {
-        //evaluateExpression - start 0.0 +  min(Shipment.getFullDaysOfDelivery())
+        //evaluateExpression - start  count((Shipment as sh where sh.size() == 4).sh.size())
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitBinaryAExpression - start 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        //visitLiteralExpression - start 0.0
-        //visitLiteralExpression - end 0.0
-        //visitUnaryExpression - start  min(Shipment.getFullDaysOfDelivery())
-        //visitDotExpression - start Shipment.getFullDaysOfDelivery()
+        //visitUnaryExpression - start  count((Shipment as sh where sh.size() == 4).sh.size())
+        //visitDotExpression - start (Shipment as sh where sh.size() == 4).sh.size()
+        //visitWhereExpression - start Shipment as sh where sh.size() == 4
+        //visitAsExpression - start Shipment as sh
         //visitIdentifierExpression - start Shipment
         final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
             new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta72 = ocb.classCollection()
+        ClassMetadata _classMeta69 = ocb.classCollection()
                                         .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids72 = _classMeta72.getIDs(transLocal);
+        long[] _ids69 = _classMeta69.getIDs(transLocal);
 
-        for (long _id72 : _ids72) {
-            LazyObjectReference _ref72 = transLocal.lazyReferenceFor((int) _id72);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref72.getObject());
+        for (long _id69 : _ids69) {
+            LazyObjectReference _ref69 = transLocal.lazyReferenceFor((int) _id69);
+            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref69.getObject());
         }
 
         //visitIdentifierExpression - end Shipment
-        java.util.Collection<java.lang.Integer> _dotResult = new java.util.ArrayList<java.lang.Integer>();
-        int _dotIndex = 0;
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
 
-        for (edu.pjwstk.kor.model.Shipment _dotEl : _ident_Shipment) {
-            if (_dotEl == null) {
+        //visitAsExpression - end Shipment as sh
+        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
+        int _whereLoopIndex = 0;
+
+        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
+            if (_whereEl == null) {
                 continue;
             }
 
-            if (_dotEl != null) {
-                ocb.activate(_dotEl, 1);
+            if (_whereEl != null) {
+                ocb.activate(_whereEl, 1);
             }
 
-            //visitMethodExpression - start getFullDaysOfDelivery()
-            java.lang.Integer _mth_getFullDaysOfDeliveryResult = _dotEl.getFullDaysOfDelivery();
+            //visitBinaryAExpression - start sh.size() == 4
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
 
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 1);
             }
 
-            //visitMethodExpression - end getFullDaysOfDelivery()
-            if (_mth_getFullDaysOfDeliveryResult != null) {
-                ocb.activate(_mth_getFullDaysOfDeliveryResult, 1);
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
+
+            if (_ident_sh != null) {
+                ocb.activate(_ident_sh, 2);
             }
 
-            _dotResult.add(_mth_getFullDaysOfDeliveryResult);
-            _dotIndex++;
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult = _dotEl.size();
+
+            if (_mth_sizeResult != null) {
+                ocb.activate(_mth_sizeResult, 1);
+            }
+
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            //visitLiteralExpression - start 4
+            //visitLiteralExpression - end 4
+            //OperatorEquals - start sh.size() == 4
+            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_sizeResult,
+                    4);
+
+            //OperatorEquals - end sh.size() == 4
+            //visitBinaryAExpression - end sh.size() == 4
+            if (_equalsResult) {
+                _whereResult.add(_whereEl);
+            }
+
+            _whereLoopIndex++;
         }
 
-        //visitDotExpression - end Shipment.getFullDaysOfDelivery()
-        //OperatorMin - start  min(Shipment.getFullDaysOfDelivery())
-        Number _min1 = null;
+        //visitWhereExpression - end Shipment as sh where sh.size() == 4
+        java.util.Collection<java.lang.Integer> _dotResult2 = new java.util.ArrayList<java.lang.Integer>();
+        int _dotIndex2 = 0;
 
-        for (Number _minEl1 : _dotResult) {
-            _min1 = MathUtils.min(_min1, _minEl1);
+        for (edu.pjwstk.kor.model.Shipment _dotEl2 : _whereResult) {
+            if (_dotEl2 == null) {
+                continue;
+            }
+
+            if (_dotEl2 != null) {
+                ocb.activate(_dotEl2, 1);
+            }
+
+            //visitDotExpression - start sh.size()
+            //visitIdentifierExpression - start sh
+            edu.pjwstk.kor.model.Shipment _ident_sh1 = _dotEl2;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 1);
+            }
+
+            //visitIdentifierExpression - end sh
+            edu.pjwstk.kor.model.Shipment _dotEl1 = _ident_sh1;
+
+            if (_ident_sh1 != null) {
+                ocb.activate(_ident_sh1, 2);
+            }
+
+            //visitMethodExpression - start size()
+            java.lang.Integer _mth_sizeResult1 = _dotEl1.size();
+
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            //visitMethodExpression - end size()
+            //visitDotExpression - end sh.size()
+            if (_mth_sizeResult1 != null) {
+                ocb.activate(_mth_sizeResult1, 1);
+            }
+
+            _dotResult2.add(_mth_sizeResult1);
+            _dotIndex2++;
         }
 
-        java.lang.Integer _minResult = (java.lang.Integer) _min1;
+        //visitDotExpression - end (Shipment as sh where sh.size() == 4).sh.size()
+        //OperatorCount - start  count((Shipment as sh where sh.size() == 4).sh.size())
+        java.lang.Integer _countResult = _dotResult2.size();
+        //OperatorCount - end  count((Shipment as sh where sh.size() == 4).sh.size())
+        //visitUnaryExpression - end  count((Shipment as sh where sh.size() == 4).sh.size())
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_countResult, ocb);
 
-        //OperatorMin - end  min(Shipment.getFullDaysOfDelivery())
-        //visitUnaryExpression - end  min(Shipment.getFullDaysOfDelivery())
-        //OperatorPlus - start 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        java.lang.Double _plusResult = 0.0 + _minResult;
-        //OperatorPlus - end 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        //visitBinaryAExpression - end 0.0 +  min(Shipment.getFullDaysOfDelivery())
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_plusResult, ocb);
+        return _countResult;
 
-        return _plusResult;
-
-        //evaluateExpression - end 0.0 +  min(Shipment.getFullDaysOfDelivery())
+        //evaluateExpression - end  count((Shipment as sh where sh.size() == 4).sh.size())
     }
 }

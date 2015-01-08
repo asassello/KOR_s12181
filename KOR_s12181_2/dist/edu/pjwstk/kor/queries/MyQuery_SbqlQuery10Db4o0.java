@@ -47,94 +47,114 @@ import java.util.*;
 import java.util.Date;
 
 
-public class MyQuery_SbqlQuery10Db4o0 implements Db4oSBQLQuery<java.util.Collection<edu.pjwstk.kor.model.Shipment>> {
+public class MyQuery_SbqlQuery10Db4o0 implements Db4oSBQLQuery<java.util.Collection<java.lang.String>> {
     public MyQuery_SbqlQuery10Db4o0() {
     }
 
     /**
-     * query='dataBase.(Shipment as sh where sh.getIsComplaint() == true)'
+     * query='dataBase.( unique Receiver.Adress.getCity() as miasto)'
     '
      **/
-    public java.util.Collection<edu.pjwstk.kor.model.Shipment> executeQuery(
+    public java.util.Collection<java.lang.String> executeQuery(
         final ObjectContainerBase ocb, final Transaction t) {
-        //evaluateExpression - start Shipment as sh where sh.getIsComplaint() == true
+        //evaluateExpression - start  unique Receiver.Adress.getCity() as miasto
         final LocalTransaction transLocal = (LocalTransaction) t;
 
-        //visitWhereExpression - start Shipment as sh where sh.getIsComplaint() == true
-        //visitAsExpression - start Shipment as sh
-        //visitIdentifierExpression - start Shipment
-        final java.util.Collection<edu.pjwstk.kor.model.Shipment> _ident_Shipment =
-            new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        ClassMetadata _classMeta13 = ocb.classCollection()
-                                        .getClassMetadata("edu.pjwstk.kor.model.Shipment");
-        long[] _ids13 = _classMeta13.getIDs(transLocal);
+        //visitAsExpression - start  unique Receiver.Adress.getCity() as miasto
+        //visitUnaryExpression - start  unique Receiver.Adress.getCity()
+        //visitDotExpression - start Receiver.Adress.getCity()
+        //visitDotExpression - start Receiver.Adress
+        //visitIdentifierExpression - start Receiver
+        final java.util.Collection<edu.pjwstk.kor.model.Receiver> _ident_Receiver =
+            new java.util.ArrayList<edu.pjwstk.kor.model.Receiver>();
+        ClassMetadata _classMeta18 = ocb.classCollection()
+                                        .getClassMetadata("edu.pjwstk.kor.model.Receiver");
+        long[] _ids18 = _classMeta18.getIDs(transLocal);
 
-        for (long _id13 : _ids13) {
-            LazyObjectReference _ref13 = transLocal.lazyReferenceFor((int) _id13);
-            _ident_Shipment.add((edu.pjwstk.kor.model.Shipment) _ref13.getObject());
+        for (long _id18 : _ids18) {
+            LazyObjectReference _ref18 = transLocal.lazyReferenceFor((int) _id18);
+            _ident_Receiver.add((edu.pjwstk.kor.model.Receiver) _ref18.getObject());
         }
 
-        //visitIdentifierExpression - end Shipment
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _asResult_sh = _ident_Shipment;
+        //visitIdentifierExpression - end Receiver
+        java.util.Collection<edu.pjwstk.kor.model.Adress> _dotResult = new java.util.ArrayList<edu.pjwstk.kor.model.Adress>();
+        int _dotIndex = 0;
 
-        //visitAsExpression - end Shipment as sh
-        java.util.Collection<edu.pjwstk.kor.model.Shipment> _whereResult = new java.util.ArrayList<edu.pjwstk.kor.model.Shipment>();
-        int _whereLoopIndex = 0;
-
-        for (edu.pjwstk.kor.model.Shipment _whereEl : _asResult_sh) {
-            if (_whereEl == null) {
+        for (edu.pjwstk.kor.model.Receiver _dotEl : _ident_Receiver) {
+            if (_dotEl == null) {
                 continue;
             }
 
-            if (_whereEl != null) {
-                ocb.activate(_whereEl, 1);
+            if (_dotEl != null) {
+                ocb.activate(_dotEl, 1);
             }
 
-            //visitBinaryAExpression - start sh.getIsComplaint() == true
-            //visitDotExpression - start sh.getIsComplaint()
-            //visitIdentifierExpression - start sh
-            edu.pjwstk.kor.model.Shipment _ident_sh = _whereEl;
+            //visitIdentifierExpression - start Adress
+            final java.util.Collection<edu.pjwstk.kor.model.Adress> _ident_Adress =
+                new java.util.ArrayList<edu.pjwstk.kor.model.Adress>();
+            ClassMetadata _classMeta19 = ocb.classCollection()
+                                            .getClassMetadata("edu.pjwstk.kor.model.Adress");
+            long[] _ids19 = _classMeta19.getIDs(transLocal);
 
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 1);
+            for (long _id19 : _ids19) {
+                LazyObjectReference _ref19 = transLocal.lazyReferenceFor((int) _id19);
+                _ident_Adress.add((edu.pjwstk.kor.model.Adress) _ref19.getObject());
             }
 
-            //visitIdentifierExpression - end sh
-            edu.pjwstk.kor.model.Shipment _dotEl = _ident_sh;
-
-            if (_ident_sh != null) {
-                ocb.activate(_ident_sh, 2);
+            //visitIdentifierExpression - end Adress
+            if (_ident_Adress != null) {
+                ocb.activate(_ident_Adress, 2);
             }
 
-            //visitMethodExpression - start getIsComplaint()
-            java.lang.Boolean _mth_getIsComplaintResult = _dotEl.getIsComplaint();
-
-            if (_mth_getIsComplaintResult != null) {
-                ocb.activate(_mth_getIsComplaintResult, 1);
-            }
-
-            //visitMethodExpression - end getIsComplaint()
-            //visitDotExpression - end sh.getIsComplaint()
-            //visitLiteralExpression - start true
-            //visitLiteralExpression - end true
-            //OperatorEquals - start sh.getIsComplaint() == true
-            java.lang.Boolean _equalsResult = OperatorUtils.equalsSafe(_mth_getIsComplaintResult,
-                    true);
-
-            //OperatorEquals - end sh.getIsComplaint() == true
-            //visitBinaryAExpression - end sh.getIsComplaint() == true
-            if (_equalsResult) {
-                _whereResult.add(_whereEl);
-            }
-
-            _whereLoopIndex++;
+            _dotResult.addAll(_ident_Adress);
+            _dotIndex++;
         }
 
-        //visitWhereExpression - end Shipment as sh where sh.getIsComplaint() == true
-        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_whereResult, ocb);
+        //visitDotExpression - end Receiver.Adress
+        java.util.Collection<java.lang.String> _dotResult1 = new java.util.ArrayList<java.lang.String>();
+        int _dotIndex1 = 0;
 
-        return _whereResult;
+        for (edu.pjwstk.kor.model.Adress _dotEl1 : _dotResult) {
+            if (_dotEl1 == null) {
+                continue;
+            }
 
-        //evaluateExpression - end Shipment as sh where sh.getIsComplaint() == true
+            if (_dotEl1 != null) {
+                ocb.activate(_dotEl1, 1);
+            }
+
+            //visitMethodExpression - start getCity()
+            java.lang.String _mth_getCityResult = _dotEl1.getCity();
+
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            //visitMethodExpression - end getCity()
+            if (_mth_getCityResult != null) {
+                ocb.activate(_mth_getCityResult, 1);
+            }
+
+            _dotResult1.add(_mth_getCityResult);
+            _dotIndex1++;
+        }
+
+        //visitDotExpression - end Receiver.Adress.getCity()
+        //OperatorUnique - start  unique Receiver.Adress.getCity()
+        java.util.Collection<java.lang.String> _uniqueResult = new java.util.ArrayList<java.lang.String>();
+        Set<java.lang.String> _tmp0 = new LinkedHashSet<java.lang.String>();
+        _tmp0.addAll(_dotResult1);
+        _uniqueResult.addAll(_tmp0);
+
+        //OperatorUnique - end  unique Receiver.Adress.getCity()
+        //visitUnaryExpression - end  unique Receiver.Adress.getCity()
+        java.util.Collection<java.lang.String> _asResult_miasto = _uniqueResult;
+        //visitAsExpression - end  unique Receiver.Adress.getCity() as miasto
+        pl.wcislo.sbql4j.db4o.utils.DerefUtils.activateResult(_asResult_miasto,
+            ocb);
+
+        return _asResult_miasto;
+
+        //evaluateExpression - end  unique Receiver.Adress.getCity() as miasto
     }
 }
