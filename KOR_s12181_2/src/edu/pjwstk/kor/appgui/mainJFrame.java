@@ -33,6 +33,7 @@ import javax.swing.JScrollPane;
 
 
 
+
 import org.apache.commons.lang3.StringUtils;
 
 import java.awt.event.ActionListener;
@@ -51,6 +52,7 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.pjwstk.kor.model.Employee;
 import edu.pjwstk.kor.queries.*;
 
 
@@ -58,11 +60,17 @@ public class mainJFrame {
 	
 	public MyQuery mainOb = new MyQuery();
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public mainJFrame(){
 		mainJFrameDraw frame = new mainJFrameDraw();
 		frame.setVisible(true);
 	}
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public static void main(String[] args){
 		mainJFrame app = new mainJFrame();
 	}
@@ -86,6 +94,7 @@ public class mainJFrameDraw extends JFrame {
 	private JButton btnZapytanie_11;
 	private JButton btnZapytanie_12;
 	private JButton btnZapytanie_13;
+	private JButton btnZapytanie_14;
 	private JTable table = new JTable();
 	private JScrollPane scrollPane;
 	
@@ -142,8 +151,8 @@ public class mainJFrameDraw extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 							
-				ArrayList res_query01 = (ArrayList<?>) mainOb._query01();
-				table = arrayListToJTable.convert(res_query01);
+				List<Employee> res_query01 = (List<Employee>) mainOb._query01();
+				table = employeeToJTable.convert(res_query01);
 				scrollPane.setViewportView(table);
 				//table.setForeground(Color.WHITE);
 			}
@@ -306,6 +315,18 @@ public class mainJFrameDraw extends JFrame {
 			}
 		});
 		toolBar.add(btnZapytanie_13);
+		
+		btnZapytanie_14 = new JButton("Zapytanie 16");
+		btnZapytanie_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<String> res_query00 = (List<String>) mainOb._query00();
+				table = listToJTable.convert(res_query00,"Statusy");
+				scrollPane.setViewportView(table);
+				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+			}
+		});
+		toolBar.add(btnZapytanie_14);
+		
 		
 	}
 	

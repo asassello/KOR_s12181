@@ -264,9 +264,13 @@ public class MyQuery {
         return lostPckgsWithSendrAndAdress;
     }
     
-    public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query01() {
-        this.polacz();
-        Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor = new MyQuery_SbqlQuery57(dataBase).executeQuery();
+    public List<Employee> _query01() {
+        List<Employee> employeesBySupervisor = (List<Employee>)new MyQuery_SbqlQuery57(dataBase).executeQuery();
         return employeesBySupervisor;
+    }
+    
+    public List<String> _query00() {
+        List<String> allStatuses = new MyQuery_SbqlQuery58(dataBase).executeQuery();
+        return allStatuses;
     }
 }

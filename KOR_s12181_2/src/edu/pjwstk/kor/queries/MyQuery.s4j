@@ -76,6 +76,7 @@ public class  MyQuery{
 //		_query03();
 //		_query02();
 //		_query01();
+//		_query00();
 		
 //		System.out. println("Koniec");
 //
@@ -484,12 +485,14 @@ public class  MyQuery{
 				return lostPckgsWithSendrAndAdress;
 	}
 	
-	public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct>
+	public List<Employee>
 	//public ArrayList
 	_query01(){
-		this.polacz();
-		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor =
-				#{ dataBase.( Employee as ee where ee.position != "Kierownik"  ).(ee.superior.name as ImiePrzelozonego, ee.superior.surname as NazwiskoPrzelozonego, ee.name as Imie, ee.surname as Nazwisko, ee.position as Stanowisko) };
+		
+		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor =
+		List<Employee> employeesBySupervisor = (List<Employee>)
+				//#{ dataBase.( Employee as ee where ee.position != "Kierownik" ).(ee.superior.name as ImiePrzelozonego, ee.superior.surname as NazwiskoPrzelozonego, ee.name as Imie, ee.surname as Nazwisko, ee.position as Stanowisko) };
+				#{ dataBase.( Employee as ee [0] close by superior)};
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> employeesBySupervisor2 =
 				//#{ dataBase.( Employee as ee where ee.position != "Kierownik"  ).(ee.superior.name, ee.superior.surname, ee.name, ee.surname, ee.position) };
 				//System.out.println(employeesBySupervisor);
@@ -502,5 +505,14 @@ public class  MyQuery{
 				return employeesBySupervisor;
 				//return res_query01;
 				
+	}
+	
+	public  List<String>  _query00(){
+		List<String>  allStatuses = 
+		//Collection<Shipment> lostPckgsWithSendrAndAdress =
+				#{ dataBase.( Status as ss order by ss.statusName).(ss.statusName) };
+//		System.out. println(allStatuses);
+				
+				return allStatuses;
 	}
 }
