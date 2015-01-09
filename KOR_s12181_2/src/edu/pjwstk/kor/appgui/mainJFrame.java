@@ -38,8 +38,6 @@ public class mainJFrame extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args){
-//		mainJFrame appl = new mainJFrame();
-//		appl.setVisible(true);
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -98,6 +96,8 @@ public class mainJFrame extends JFrame {
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane);
 		
+		this.setTitle("Pawel Celebucki - s12181");
+		
 		textField = new JTextField("KOR 2014-2015 PJATK");
 		scrollPane.setColumnHeaderView(textField);
 		textField.setHorizontalAlignment(JTextField.CENTER);
@@ -109,11 +109,7 @@ public class mainJFrame extends JFrame {
 				List<Employee> res_query01 = (List<Employee>) mainOb._query01();
 				table = employeeToJTable.convert(res_query01);
 				scrollPane.setViewportView(table);
-				//table.setForeground(Color.WHITE);
-				textField.setText("PRACOWNIK UZUPE£NIONY O PRZE£OØONEGO (CLOSE BY)");
-				contentPane.add(textField);
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("PRACOWNIK UZUPE£NIONY O PRZE£OØONEGO (CLOSE BY)");
 			}
 		});
 		toolBar.add(btnNewButton);
@@ -125,9 +121,8 @@ public class mainJFrame extends JFrame {
 				ArrayList res_query02 = (ArrayList<?>) mainOb._query02();
 				table = arrayListToJTable.convert(res_query02);
 				scrollPane.setViewportView(table);
-				textField.setText("ZAGUBIONE PACZKI WRAZ Z NADAWCAMI");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("ZAGUBIONE PACZKI WRAZ Z NADAWCAMI");
+
 			}
 		});
 		toolBar.add(btnZapytanie);
@@ -138,9 +133,11 @@ public class mainJFrame extends JFrame {
 				Map<String,Double> res_query03 = (Map<String,Double>) mainOb._query03();
 				table = mapDoubleToJTable.convert(res_query03);
 				scrollPane.setViewportView(table);
-				textField.setText("CZASY DOSTARCZENIA PRZESY£EK");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("CZASY DOSTARCZENIA PRZESY£EK");
+				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+				table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
+
 			}
 		});
 		toolBar.add(btnZapytanie_1);
@@ -151,9 +148,8 @@ public class mainJFrame extends JFrame {
 				Map<String,Integer> res_query04 = (Map<String,Integer>) mainOb._query04();
 				table = mapIntToJTable.convert(res_query04);
 				scrollPane.setViewportView(table);
-				textField.setText("ILOå∆ PACZEK W POSZCZEG”LNYCH STATUSACH");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("ILOå∆ PACZEK W POSZCZEG”LNYCH STATUSACH");
+
 			}
 		});
 		toolBar.add(btnZapytanie_2);
@@ -173,9 +169,8 @@ public class mainJFrame extends JFrame {
 				table = mapDoubleToJTable.convert(res_query05);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("SUMA P£ATNOåCI OD DATY");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("SUMA P£ATNOåCI OD DATY");
+
 			}
 		});
 		toolBar.add(btnZapytanie_3);
@@ -187,9 +182,8 @@ public class mainJFrame extends JFrame {
 				table = mapDoubleToJTable.convert(res_query06);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("åREDNIA ILOå∆ PACZEK NA JEDNEGO SPRZEDAJACEGO");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("åREDNIA ILOå∆ PACZEK NA JEDNEGO SPRZEDAJACEGO");
+
 			}
 		});
 		toolBar.add(btnZapytanie_4);
@@ -200,9 +194,8 @@ public class mainJFrame extends JFrame {
 				ArrayList res_query07 = (ArrayList<?>) mainOb._query07(5000);
 				table = arrayListToJTable.convert(res_query07);
 				scrollPane.setViewportView(table);
-				textField.setText("PRACOWNICY Z PENSJA POWYØEJ PODANEJ");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("PRACOWNICY Z PENSJA POWYØEJ PODANEJ");
+
 			}
 		});
 		toolBar.add(btnZapytanie_5);
@@ -213,9 +206,8 @@ public class mainJFrame extends JFrame {
 				Map<String,Integer> res_query08 = (Map<String,Integer>) mainOb._query08();
 				table = mapIntToJTable.convert(res_query08);
 				scrollPane.setViewportView(table);
-				textField.setText("ILOå∆ ODBIORC”W W POSZCZEG”LNYCH MIASTACH");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("ILOå∆ ODBIORC”W W POSZCZEG”LNYCH MIASTACH");
+
 			}
 		});
 		toolBar.add(btnZapytanie_6);
@@ -227,9 +219,9 @@ public class mainJFrame extends JFrame {
 				table = mapDoubleToJTable.convert(res_query09);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("åREDNIA CENA WYSY£KI I OPAKOWANIA");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+				setTitle("åREDNIA CENA WYSY£KI I OPAKOWANIA");
+
 			}
 		});
 		toolBar.add(btnZapytanie_7);
@@ -241,9 +233,8 @@ public class mainJFrame extends JFrame {
 				table = mapDoubleToJTable.convert(res_query10);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("PROCENT OP”èNIONYCH P£ATNOåCI");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("PROCENT OP”èNIONYCH P£ATNOåCI");
+
 			}
 		});
 		toolBar.add(btnZapytanie_8);
@@ -254,9 +245,8 @@ public class mainJFrame extends JFrame {
 				ArrayList res_query11 = (ArrayList<?>) mainOb._query11();
 				table = arrayListToJTable.convert(res_query11);
 				scrollPane.setViewportView(table);
-				textField.setText("OP”èNIONE PACZKI WRAZ Z PRACOWNIKAMI DOSTARCZAJACYMI");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("OP”èNIONE PACZKI WRAZ Z PRACOWNIKAMI DOSTARCZAJACYMI");
+
 			}
 		});
 		toolBar.add(btnZapytanie_9);
@@ -267,9 +257,8 @@ public class mainJFrame extends JFrame {
 				ArrayList res_query12 = (ArrayList<?>) mainOb._query12();
 				table = arrayListToJTable.convert(res_query12);
 				scrollPane.setViewportView(table);
-				textField.setText("ODBIORCY Z USTAWIONYM DRUGIM ADRESEM");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("ODBIORCY Z USTAWIONYM DRUGIM ADRESEM");
+
 			}
 		});
 		toolBar.add(btnZapytanie_10);
@@ -281,9 +270,9 @@ public class mainJFrame extends JFrame {
 				table = mapIntToJTable.convert(res_query13);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("ILOå∆ PACZEK OBSLUZONYCH PRZEZ TYMCZAS./NIETYMCZAS. PRACOWNIK”W");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
+				setTitle("ILOå∆ PACZEK OBSLUZONYCH PRZEZ TYMCZAS./NIETYMCZAS. PRACOWNIK”W");
+
 			}
 		});
 		toolBar.add(btnZapytanie_11);
@@ -294,9 +283,8 @@ public class mainJFrame extends JFrame {
 				ArrayList res_query14 = (ArrayList<?>) mainOb._query14();
 				table = arrayListToJTable.convert(res_query14);
 				scrollPane.setViewportView(table);
-				textField.setText("REKLAMOWANE PACZKI WRAZ Z NADAWCA I ODBIORCA");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("REKLAMOWANE PACZKI WRAZ Z NADAWCA I ODBIORCA");
+
 			}
 		});
 		toolBar.add(btnZapytanie_12);
@@ -308,9 +296,8 @@ public class mainJFrame extends JFrame {
 				table = mapDoubleToJTable.convert(res_query15);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("åREDNIA WAGA PACZKI");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("åREDNIA WAGA PACZKI");
+
 			}
 		});
 		toolBar.add(btnZapytanie_13);
@@ -322,9 +309,8 @@ public class mainJFrame extends JFrame {
 				table = listToJTable.convert(res_query00,"Statusy");
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-				textField.setText("STATUSY POSORTOWANE");
-				scrollPane.setColumnHeaderView(textField);
-				textField.setHorizontalAlignment(JTextField.CENTER);
+				setTitle("STATUSY POSORTOWANE");
+
 			}
 		});
 		toolBar.add(btnZapytanie_14);
