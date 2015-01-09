@@ -230,7 +230,7 @@ public class mainJFrame extends JFrame {
 		btnZapytanie_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Map<String,Double> res_query10 = (Map<String,Double>) mainOb._query10();
-				table = mapDoubleToJTable.convert(res_query10);
+				table = mapLongDoubleToJTable.convert(res_query10);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 				setTitle("PROCENT OP”èNIONYCH P£ATNOåCI");

@@ -509,10 +509,18 @@ public class  MyQuery{
 	
 	public  List<String>  _query00(){
 		List<String>  allStatuses = 
-		//Collection<Shipment> lostPckgsWithSendrAndAdress =
+
 				#{ dataBase.( Status as ss order by ss.statusName).(ss.statusName) };
 //		System.out. println(allStatuses);
 				
 				return allStatuses;
+	}
+	
+	public Collection<Employee>  _query0(){
+		Collection<Employee> empWithMaxSalary = 
+				#{ dataBase.( Employee as ee where ee.salary == (max(Employee.salary))  ) };
+//		System.out. println(empWithMaxSalary);
+				
+				return empWithMaxSalary;
 	}
 }

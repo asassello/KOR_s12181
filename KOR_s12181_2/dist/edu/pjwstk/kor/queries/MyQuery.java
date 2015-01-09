@@ -273,4 +273,9 @@ public class MyQuery {
         List<String> allStatuses = new MyQuery_SbqlQuery58(dataBase).executeQuery();
         return allStatuses;
     }
+    
+    public Collection<Employee> _query0() {
+        Collection<Employee> empWithMaxSalary = new MyQuery_SbqlQuery59(dataBase).executeQuery();
+        return empWithMaxSalary;
+    }
 }
