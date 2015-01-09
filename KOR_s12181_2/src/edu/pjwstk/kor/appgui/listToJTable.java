@@ -11,7 +11,7 @@ public class listToJTable {
 public static JTable convert (List<String> aL, String name){
 		
 
-		System.out.println(aL);
+//		System.out.println(aL);
 		Integer liczbaPol = aL.size();
 //		System.out.println(liczbaPol);
 

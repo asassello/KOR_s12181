@@ -1,3 +1,3 @@
-2015-01-08 23:28:46,140 INFO  [pl.wcislo.sbql4j.java.preprocessor.PreprocessorRun] Sucessfully preprocessed task
-2015-01-08 23:28:46,310 INFO  [pl.wcislo.sbql4j.java.preprocessor.PreprocessorRun] Creating java file: C:\Users\user\git\KOR_s12181_2\dist\edu\pjwstk\kor\queries\MyQuery.java
-2015-01-08 23:28:48,238 INFO  [pl.wcislo.sbql4j.java.preprocessor.PreprocessorRun] Sucessfully writed 1 files
+2015-01-09 01:07:13,576 INFO  [pl.wcislo.sbql4j.java.preprocessor.PreprocessorRun] Sucessfully preprocessed task
+2015-01-09 01:07:13,747 INFO  [pl.wcislo.sbql4j.java.preprocessor.PreprocessorRun] Creating java file: C:\Users\user\git\KOR_s12181_2\dist\edu\pjwstk\kor\queries\MyQuery.java
+2015-01-09 01:07:15,666 INFO  [pl.wcislo.sbql4j.java.preprocessor.PreprocessorRun] Sucessfully writed 1 files

@@ -1,82 +1,57 @@
 package edu.pjwstk.kor.appgui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.JToolBar;
-import javax.swing.JButton;
-
-import java.awt.FlowLayout;
-
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-
-import java.awt.Color;
-
-import javax.swing.JScrollPane;
-
-//import antlr.collections.impl.Vector;
-
-
-
-
-
-
-
-
-
-
-
-import org.apache.commons.lang3.StringUtils;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.print.PrinterException;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import edu.pjwstk.kor.model.Employee;
-import edu.pjwstk.kor.queries.*;
+import edu.pjwstk.kor.queries.MyQuery;
+import javax.swing.JTextField;
 
 
-public class mainJFrame {
+public class mainJFrame extends JFrame {
 	
 	public MyQuery mainOb = new MyQuery();
 	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	public mainJFrame(){
-		mainJFrameDraw frame = new mainJFrameDraw();
-		frame.setVisible(true);
-	}
 	
 	/**
-	 * @wbp.parser.entryPoint
+	 * Launch the application.
 	 */
 	public static void main(String[] args){
-		mainJFrame app = new mainJFrame();
+//		mainJFrame appl = new mainJFrame();
+//		appl.setVisible(true);
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					mainJFrame frame = new mainJFrame();
+					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-	
-
-public class mainJFrameDraw extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnNewButton;
@@ -97,45 +72,24 @@ public class mainJFrameDraw extends JFrame {
 	private JButton btnZapytanie_14;
 	private JTable table = new JTable();
 	private JScrollPane scrollPane;
-	
-//	public MyQuery mainOb;
+	private JTextField textField;
 
-	/**
-	 * Launch the application.
-	 */
-//	public void start() {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					mainJFrameDraw frame = new mainJFrameDraw();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the frame.
 	 * @throws Exception 
 	 */
-	public mainJFrameDraw() {
-		
-//		mainOb = new MyQuery();
-//		mainOb.polacz();
+	public mainJFrame() {
+
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 750, 625);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
-//		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//		centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-//		table.setDefaultRenderer(String.class, centerRenderer);
 		final DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 		centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-		
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 		
 		JToolBar toolBar = new JToolBar();
 		toolBar.setOrientation(SwingConstants.VERTICAL);
@@ -144,8 +98,9 @@ public class mainJFrameDraw extends JFrame {
 		scrollPane = new JScrollPane();
 		contentPane.add(scrollPane);
 		
-		
-
+		textField = new JTextField("KOR 2014-2015 PJATK");
+		scrollPane.setColumnHeaderView(textField);
+		textField.setHorizontalAlignment(JTextField.CENTER);
 		
 		btnNewButton = new JButton("Zapytanie 1");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -155,6 +110,10 @@ public class mainJFrameDraw extends JFrame {
 				table = employeeToJTable.convert(res_query01);
 				scrollPane.setViewportView(table);
 				//table.setForeground(Color.WHITE);
+				textField.setText("PRACOWNIK UZUPE£NIONY O PRZE£OØONEGO (CLOSE BY)");
+				contentPane.add(textField);
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnNewButton);
@@ -166,7 +125,9 @@ public class mainJFrameDraw extends JFrame {
 				ArrayList res_query02 = (ArrayList<?>) mainOb._query02();
 				table = arrayListToJTable.convert(res_query02);
 				scrollPane.setViewportView(table);
-				//table.setForeground(Color.WHITE);
+				textField.setText("ZAGUBIONE PACZKI WRAZ Z NADAWCAMI");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie);
@@ -177,6 +138,9 @@ public class mainJFrameDraw extends JFrame {
 				Map<String,Double> res_query03 = (Map<String,Double>) mainOb._query03();
 				table = mapDoubleToJTable.convert(res_query03);
 				scrollPane.setViewportView(table);
+				textField.setText("CZASY DOSTARCZENIA PRZESY£EK");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_1);
@@ -187,6 +151,9 @@ public class mainJFrameDraw extends JFrame {
 				Map<String,Integer> res_query04 = (Map<String,Integer>) mainOb._query04();
 				table = mapIntToJTable.convert(res_query04);
 				scrollPane.setViewportView(table);
+				textField.setText("ILOå∆ PACZEK W POSZCZEG”LNYCH STATUSACH");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_2);
@@ -206,6 +173,9 @@ public class mainJFrameDraw extends JFrame {
 				table = mapDoubleToJTable.convert(res_query05);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("SUMA P£ATNOåCI OD DATY");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_3);
@@ -217,6 +187,9 @@ public class mainJFrameDraw extends JFrame {
 				table = mapDoubleToJTable.convert(res_query06);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("åREDNIA ILOå∆ PACZEK NA JEDNEGO SPRZEDAJACEGO");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_4);
@@ -227,6 +200,9 @@ public class mainJFrameDraw extends JFrame {
 				ArrayList res_query07 = (ArrayList<?>) mainOb._query07(5000);
 				table = arrayListToJTable.convert(res_query07);
 				scrollPane.setViewportView(table);
+				textField.setText("PRACOWNICY Z PENSJA POWYØEJ PODANEJ");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_5);
@@ -237,7 +213,9 @@ public class mainJFrameDraw extends JFrame {
 				Map<String,Integer> res_query08 = (Map<String,Integer>) mainOb._query08();
 				table = mapIntToJTable.convert(res_query08);
 				scrollPane.setViewportView(table);
-				//table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("ILOå∆ ODBIORC”W W POSZCZEG”LNYCH MIASTACH");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_6);
@@ -249,6 +227,9 @@ public class mainJFrameDraw extends JFrame {
 				table = mapDoubleToJTable.convert(res_query09);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("åREDNIA CENA WYSY£KI I OPAKOWANIA");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_7);
@@ -260,6 +241,9 @@ public class mainJFrameDraw extends JFrame {
 				table = mapDoubleToJTable.convert(res_query10);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("PROCENT OP”èNIONYCH P£ATNOåCI");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_8);
@@ -270,6 +254,9 @@ public class mainJFrameDraw extends JFrame {
 				ArrayList res_query11 = (ArrayList<?>) mainOb._query11();
 				table = arrayListToJTable.convert(res_query11);
 				scrollPane.setViewportView(table);
+				textField.setText("OP”èNIONE PACZKI WRAZ Z PRACOWNIKAMI DOSTARCZAJACYMI");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_9);
@@ -280,6 +267,9 @@ public class mainJFrameDraw extends JFrame {
 				ArrayList res_query12 = (ArrayList<?>) mainOb._query12();
 				table = arrayListToJTable.convert(res_query12);
 				scrollPane.setViewportView(table);
+				textField.setText("ODBIORCY Z USTAWIONYM DRUGIM ADRESEM");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_10);
@@ -291,6 +281,9 @@ public class mainJFrameDraw extends JFrame {
 				table = mapIntToJTable.convert(res_query13);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("ILOå∆ PACZEK OBSLUZONYCH PRZEZ TYMCZAS./NIETYMCZAS. PRACOWNIK”W");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_11);
@@ -301,6 +294,9 @@ public class mainJFrameDraw extends JFrame {
 				ArrayList res_query14 = (ArrayList<?>) mainOb._query14();
 				table = arrayListToJTable.convert(res_query14);
 				scrollPane.setViewportView(table);
+				textField.setText("REKLAMOWANE PACZKI WRAZ Z NADAWCA I ODBIORCA");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_12);
@@ -312,6 +308,9 @@ public class mainJFrameDraw extends JFrame {
 				table = mapDoubleToJTable.convert(res_query15);
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("åREDNIA WAGA PACZKI");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_13);
@@ -323,13 +322,12 @@ public class mainJFrameDraw extends JFrame {
 				table = listToJTable.convert(res_query00,"Statusy");
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				textField.setText("STATUSY POSORTOWANE");
+				scrollPane.setColumnHeaderView(textField);
+				textField.setHorizontalAlignment(JTextField.CENTER);
 			}
 		});
 		toolBar.add(btnZapytanie_14);
-		
-		
-	}
 	
-}
-
+	}
 }
