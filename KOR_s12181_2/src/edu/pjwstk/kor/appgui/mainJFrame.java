@@ -75,6 +75,7 @@ public class mainJFrame extends JFrame {
 	private JButton btnZapytanie_14;
 	private JButton btnZapytanie_15;
 	private JButton btnZapytanie_16;
+	private JButton btnZapytanie_17;
 	private JTable table = new JTable();
 	private JScrollPane scrollPane;
 	private JTextField textField;
@@ -328,24 +329,13 @@ public class mainJFrame extends JFrame {
 				List<Receiver> res_query2 = (List<Receiver>) mainOb._query2();
 				table = rcvToJTable.convert(res_query2);
 				scrollPane.setViewportView(table);
-				setTitle("WSZYSCY ODBIORCY (OPTYMALIZACJA z JOIN)");
+				setTitle("WSZYSCY ODBIORCY");
 
 			}
 		});
 		toolBar.add(btnZapytanie_15);
 		
-//		btnZapytanie_15 = new JButton("Zapytanie 17");
-//		btnZapytanie_15.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				List<Employee> res_query2 = (List<Employee>) mainOb._query2();
-//				table = employeeToJTable.convert(res_query2);
-//				scrollPane.setViewportView(table);
-//				setTitle("WSZYSCY PRACOWNICY (OPTYMALIZACJA z JOIN)");
-//
-//			}
-//		});
-//		toolBar.add(btnZapytanie_15);
-		
+	
 		btnZapytanie_16 = new JButton("Zapytanie 18");
 		btnZapytanie_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -358,6 +348,19 @@ public class mainJFrame extends JFrame {
 			}
 		});
 		toolBar.add(btnZapytanie_16);
+		
+		btnZapytanie_17 = new JButton("Zapytanie 19");
+		btnZapytanie_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Boolean res_query3 = (Boolean) mainOb._query3();
+				table = boolToJTable.convert(res_query3, "CZY SA PRACOWNICY Z WYZSZA PENSJA NIZ PRZELOZENI");
+				scrollPane.setViewportView(table);
+				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				setTitle("CZY SA PRACOWNICY Z WYZSZA PENSJA NIZ PRZELOZENI");
+
+			}
+		});
+		toolBar.add(btnZapytanie_17);
 	
 	}
 }

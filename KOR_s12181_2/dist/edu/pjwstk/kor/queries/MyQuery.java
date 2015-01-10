@@ -32,8 +32,7 @@ public class MyQuery {
         super();
         data = new DataGenerator();
         dataBase = data.getConnection();
-        _query1();
-        _query2();
+        _query3();
     }
     
     public void query15() {
@@ -193,14 +192,6 @@ public class MyQuery {
         Integer szczecin = new MyQuery_SbqlQuery41(dataBase).executeQuery();
         Integer rzeszow = new MyQuery_SbqlQuery42(dataBase).executeQuery();
         Integer katowice = new MyQuery_SbqlQuery43(dataBase).executeQuery();
-        System.out.println(katowice);
-        System.out.println(krakow);
-        System.out.println(lodz);
-        System.out.println(poznan);
-        System.out.println(rzeszow);
-        System.out.println(szczecin);
-        System.out.println(warszawa);
-        System.out.println(wroclaw);
         Map<String, Integer> query08yMap = new HashMap<String, Integer>();
         query08yMap.put("Gdansk", gdansk);
         query08yMap.put("Katowice", katowice);
@@ -283,5 +274,10 @@ public class MyQuery {
     public Collection<Receiver> _query2() {
         Collection<Receiver> allRcv = new MyQuery_SbqlQuery59(dataBase).executeQuery();
         return allRcv;
+    }
+    
+    public Boolean _query3() {
+        Boolean isItTrueSalary = new MyQuery_SbqlQuery60(dataBase).executeQuery();
+        return isItTrueSalary;
     }
 }

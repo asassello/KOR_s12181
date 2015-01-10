@@ -77,8 +77,9 @@ public class  MyQuery{
 //		_query02();
 //		_query01();
 //		_query00();
-		  _query1();
-		  _query2();
+//		  _query1();
+//		  _query2();
+		  _query3();
 		
 //		System.out. println("Koniec");
 //
@@ -360,14 +361,14 @@ public class  MyQuery{
 		Integer katowice  = #{ dataBase.(count(Receiver.city as rc where rc == "Katowice")) };
 			//#{ dataBase.(unique(Receiver.Adress.city) as miasto).(miasto as UnikalneMiasto, "TAK" as Ocena) };
 		
-		System.out. println(katowice);
-		System.out. println(krakow);
-		System.out. println(lodz);
-		System.out. println(poznan);
-		System.out. println(rzeszow);
-		System.out. println(szczecin);
-		System.out. println(warszawa);
-		System.out. println(wroclaw);
+//		System.out. println(katowice);
+//		System.out. println(krakow);
+//		System.out. println(lodz);
+//		System.out. println(poznan);
+//		System.out. println(rzeszow);
+//		System.out. println(szczecin);
+//		System.out. println(warszawa);
+//		System.out. println(wroclaw);
 		
 	//System.out. println(citiesByNumberOfReceivers);
 			Map<String, Integer> query08yMap = new HashMap<String, Integer>();
@@ -567,9 +568,24 @@ public class  MyQuery{
 	public Collection<Receiver>  _query2(){
 		Collection<Receiver> allRcv = 
 				#{ dataBase.(unique( Receiver as rc join Adress).(rc))  };
-				//optymalizacja na join
+				//optymalizacja na join nie dzia³a
 		//System.out. println(allEmp);
 				
 				return allRcv;
 	}
+	
+	public 
+	Boolean  
+	//Collection<Employee>
+	_query3(){
+		Boolean isItTrueSalary =
+		//Collection<Employee> isItTrueSalary= 
+				//#{ dataBase.( ((Employee where position == "Kierownik") as kk) any((Employee as ee minus kk) as e)(e.salary == kk.salary))  };
+				#{ dataBase.( any(Employee minus (Employee where position == "Kierownik") as ee)( ee.salary >= ee.superior.salary) )};
+		//System.out. println(isItTrueSalary);
+				
+				return isItTrueSalary;
+	}
+	
+	
 }
