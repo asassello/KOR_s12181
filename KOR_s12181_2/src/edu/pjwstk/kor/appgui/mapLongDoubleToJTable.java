@@ -24,7 +24,7 @@ public static JTable convert (Map<String,Double> aL){
 		
 		int j = 0;
 		for(String x: o){
-			stringTable[0][j++] = String.valueOf(aL.get(x)); 
+			stringTable[0][j++] = String.valueOf(aL.get(x)) +" %"; 
 		}
 		
 //

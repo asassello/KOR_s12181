@@ -77,6 +77,8 @@ public class  MyQuery{
 //		_query02();
 //		_query01();
 //		_query00();
+		  _query1();
+		  _query2();
 		
 //		System.out. println("Koniec");
 //
@@ -522,5 +524,31 @@ public class  MyQuery{
 //		System.out. println(empWithMaxSalary);
 				
 				return empWithMaxSalary;
+	}
+	
+	public Collection<Packagement>  _query1(){
+		Collection<Packagement> pckgWithWieghtGraterThanPayment = 
+				#{ dataBase.( Packagement where weight > (avg(PaymentType.paymentPrice))  ) };
+		//System.out. println(pckgWithWieghtGraterThanPayment);
+				
+				return pckgWithWieghtGraterThanPayment;
+	}
+	
+//	public Collection<Employee>  _query2(){
+//		Collection<Employee> allEmp = 
+//				#{ dataBase.( Employee as ee join Shipment).(ee)  };
+//				//optymalizacja na join
+//		//System.out. println(allEmp);
+//				
+//				return allEmp;
+//	}
+	
+	public Collection<Receiver>  _query2(){
+		Collection<Receiver> allRcv = 
+				#{ dataBase.(unique( Receiver as rc join Adress).(rc))  };
+				//optymalizacja na join
+		//System.out. println(allEmp);
+				
+				return allRcv;
 	}
 }

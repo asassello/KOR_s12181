@@ -32,6 +32,8 @@ public class MyQuery {
         super();
         data = new DataGenerator();
         dataBase = data.getConnection();
+        _query1();
+        _query2();
     }
     
     public void query15() {
@@ -277,5 +279,15 @@ public class MyQuery {
     public Collection<Employee> _query0() {
         Collection<Employee> empWithMaxSalary = new MyQuery_SbqlQuery59(dataBase).executeQuery();
         return empWithMaxSalary;
+    }
+    
+    public Collection<Packagement> _query1() {
+        Collection<Packagement> pckgWithWieghtGraterThanPayment = new MyQuery_SbqlQuery60(dataBase).executeQuery();
+        return pckgWithWieghtGraterThanPayment;
+    }
+    
+    public Collection<Receiver> _query2() {
+        Collection<Receiver> allRcv = new MyQuery_SbqlQuery61(dataBase).executeQuery();
+        return allRcv;
     }
 }

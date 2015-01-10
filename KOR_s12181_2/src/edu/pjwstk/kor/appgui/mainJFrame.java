@@ -22,7 +22,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import edu.pjwstk.kor.model.Employee;
+import edu.pjwstk.kor.model.Packagement;
+import edu.pjwstk.kor.model.Receiver;
 import edu.pjwstk.kor.queries.MyQuery;
+
 import javax.swing.JTextField;
 
 
@@ -68,6 +71,8 @@ public class mainJFrame extends JFrame {
 	private JButton btnZapytanie_12;
 	private JButton btnZapytanie_13;
 	private JButton btnZapytanie_14;
+	private JButton btnZapytanie_15;
+	private JButton btnZapytanie_16;
 	private JTable table = new JTable();
 	private JScrollPane scrollPane;
 	private JTextField textField;
@@ -314,6 +319,43 @@ public class mainJFrame extends JFrame {
 			}
 		});
 		toolBar.add(btnZapytanie_14);
+		
+		btnZapytanie_15 = new JButton("Zapytanie 17");
+		btnZapytanie_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<Receiver> res_query2 = (List<Receiver>) mainOb._query2();
+				table = rcvToJTable.convert(res_query2);
+				scrollPane.setViewportView(table);
+				setTitle("WSZYSCY ODBIORCY (OPTYMALIZACJA z JOIN)");
+
+			}
+		});
+		toolBar.add(btnZapytanie_15);
+		
+//		btnZapytanie_15 = new JButton("Zapytanie 17");
+//		btnZapytanie_15.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				List<Employee> res_query2 = (List<Employee>) mainOb._query2();
+//				table = employeeToJTable.convert(res_query2);
+//				scrollPane.setViewportView(table);
+//				setTitle("WSZYSCY PRACOWNICY (OPTYMALIZACJA z JOIN)");
+//
+//			}
+//		});
+//		toolBar.add(btnZapytanie_15);
+		
+		btnZapytanie_16 = new JButton("Zapytanie 18");
+		btnZapytanie_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				List<Packagement> res_query1 = (List<Packagement>) mainOb._query1();
+				table = packagementToJTable.convert(res_query1);
+				scrollPane.setViewportView(table);
+				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+				setTitle("NAZWA PACZKI Z WAGA WIEKSZA NIZ SREDNIA CENA (OPTYMALIZACJA z MARTWYM POD.ZAP.)");
+
+			}
+		});
+		toolBar.add(btnZapytanie_16);
 	
 	}
 }
