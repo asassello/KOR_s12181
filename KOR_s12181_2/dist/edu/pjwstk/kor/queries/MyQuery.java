@@ -250,44 +250,38 @@ public class MyQuery {
         return query04yMap;
     }
     
-    public Map<String, Double> _query03() {
-        Double avgDaysOfDelivery = new MyQuery_SbqlQuery53(dataBase).executeQuery();
-        Double minDaysOfDelivery = new MyQuery_SbqlQuery54(dataBase).executeQuery();
-        Double maxDaysOfDelivery = new MyQuery_SbqlQuery55(dataBase).executeQuery();
-        Map<String, Double> query03yMap = new HashMap<String, Double>();
-        query03yMap.put("avgDaysOfDelivery", avgDaysOfDelivery);
-        query03yMap.put("minDaysOfDelivery", minDaysOfDelivery);
-        query03yMap.put("maxDaysOfDelivery", maxDaysOfDelivery);
+    public pl.wcislo.sbql4j.java.model.runtime.Struct _query03() {
+        pl.wcislo.sbql4j.java.model.runtime.Struct query03yMap = new MyQuery_SbqlQuery53(dataBase).executeQuery();
         return query03yMap;
     }
     
     public Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query02() {
-        Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> lostPckgsWithSendrAndAdress = new MyQuery_SbqlQuery56(dataBase).executeQuery();
+        Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> lostPckgsWithSendrAndAdress = new MyQuery_SbqlQuery54(dataBase).executeQuery();
         return lostPckgsWithSendrAndAdress;
     }
     
     public List<Employee> _query01() {
-        List<Employee> employeesBySupervisor = (List<Employee>)new MyQuery_SbqlQuery57(dataBase).executeQuery();
+        List<Employee> employeesBySupervisor = (List<Employee>)new MyQuery_SbqlQuery55(dataBase).executeQuery();
         return employeesBySupervisor;
     }
     
     public List<String> _query00() {
-        List<String> allStatuses = new MyQuery_SbqlQuery58(dataBase).executeQuery();
+        List<String> allStatuses = new MyQuery_SbqlQuery56(dataBase).executeQuery();
         return allStatuses;
     }
     
     public Collection<Employee> _query0() {
-        Collection<Employee> empWithMaxSalary = new MyQuery_SbqlQuery59(dataBase).executeQuery();
+        Collection<Employee> empWithMaxSalary = new MyQuery_SbqlQuery57(dataBase).executeQuery();
         return empWithMaxSalary;
     }
     
     public Collection<Packagement> _query1() {
-        Collection<Packagement> pckgWithWieghtGraterThanPayment = new MyQuery_SbqlQuery60(dataBase).executeQuery();
+        Collection<Packagement> pckgWithWieghtGraterThanPayment = new MyQuery_SbqlQuery58(dataBase).executeQuery();
         return pckgWithWieghtGraterThanPayment;
     }
     
     public Collection<Receiver> _query2() {
-        Collection<Receiver> allRcv = new MyQuery_SbqlQuery61(dataBase).executeQuery();
+        Collection<Receiver> allRcv = new MyQuery_SbqlQuery59(dataBase).executeQuery();
         return allRcv;
     }
 }

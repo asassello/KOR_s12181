@@ -50,21 +50,21 @@ public class MyQuery_SbqlQuery53 {
     }
 
     /**
-     * original query='dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery))'
+     * original query='dataBase.((0.0+ avg(Shipment.fullDaysOfDelivery)) as wartoscSrednia, (0.0+ min(Shipment.fullDaysOfDelivery)) as wartoscMinimalna, (0.0+ max(Shipment.fullDaysOfDelivery)) as wartoscMaksymalna)'
      *
-     * query after optimization='dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))'
+     * query after optimization='dataBase.((0.0 +  avg(Shipment.getFullDaysOfDelivery())) as wartoscSrednia, (0.0 +  min(Shipment.getFullDaysOfDelivery())) as wartoscMinimalna, (0.0 +  max(Shipment.getFullDaysOfDelivery())) as wartoscMaksymalna)'
     */
-    public java.lang.Double executeQuery() {
-        //evaluateExpression - start dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))
-        //visitDotExpression - start dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))
+    public pl.wcislo.sbql4j.java.model.runtime.Struct executeQuery() {
+        //evaluateExpression - start dataBase.((0.0 +  avg(Shipment.getFullDaysOfDelivery())) as wartoscSrednia, (0.0 +  min(Shipment.getFullDaysOfDelivery())) as wartoscMinimalna, (0.0 +  max(Shipment.getFullDaysOfDelivery())) as wartoscMaksymalna)
+        //visitDotExpression - start dataBase.((0.0 +  avg(Shipment.getFullDaysOfDelivery())) as wartoscSrednia, (0.0 +  min(Shipment.getFullDaysOfDelivery())) as wartoscMinimalna, (0.0 +  max(Shipment.getFullDaysOfDelivery())) as wartoscMaksymalna)
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
         //visitIdentifierExpression - end dataBase
-        java.lang.Double _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery53Db4o0());
+        pl.wcislo.sbql4j.java.model.runtime.Struct _queryResult = _ident_dataBase.query(new MyQuery_SbqlQuery53Db4o0());
 
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(0.0 +  avg(Shipment.getFullDaysOfDelivery()))
+        //evaluateExpression - end dataBase.((0.0 +  avg(Shipment.getFullDaysOfDelivery())) as wartoscSrednia, (0.0 +  min(Shipment.getFullDaysOfDelivery())) as wartoscMinimalna, (0.0 +  max(Shipment.getFullDaysOfDelivery())) as wartoscMaksymalna)
     }
 }

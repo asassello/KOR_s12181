@@ -50,14 +50,14 @@ public class MyQuery_SbqlQuery30 {
     }
 
     /**
-     * original query='dataBase.(Receiver where secondaryAdress != 0 ).(name as Imie, surname as Nazwisko, city as Miasto, emailAdress as email)'
+     * original query='dataBase.(Receiver where exists(secondaryAdress) ).(name as Imie, surname as Nazwisko, city as Miasto, emailAdress as email)'
      *
-     * query after optimization='dataBase.(Receiver where getSecondaryAdress() != 0).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)'
+     * query after optimization='dataBase.(Receiver where  exists getSecondaryAdress()).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)'
     */
     public java.util.Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> executeQuery() {
-        //evaluateExpression - start dataBase.(Receiver where getSecondaryAdress() != 0).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
-        //visitDotExpression - start dataBase.(Receiver where getSecondaryAdress() != 0).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
-        //visitDotExpression - start dataBase.(Receiver where getSecondaryAdress() != 0)
+        //evaluateExpression - start dataBase.(Receiver where  exists getSecondaryAdress()).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
+        //visitDotExpression - start dataBase.(Receiver where  exists getSecondaryAdress()).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
+        //visitDotExpression - start dataBase.(Receiver where  exists getSecondaryAdress())
         //visitIdentifierExpression - start dataBase
         com.db4o.ObjectContainer _ident_dataBase = dataBase;
 
@@ -127,9 +127,9 @@ public class MyQuery_SbqlQuery30 {
             _dotIndex1++;
         }
 
-        //visitDotExpression - end dataBase.(Receiver where getSecondaryAdress() != 0).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
+        //visitDotExpression - end dataBase.(Receiver where  exists getSecondaryAdress()).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
         return _queryResult;
 
-        //evaluateExpression - end dataBase.(Receiver where getSecondaryAdress() != 0).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
+        //evaluateExpression - end dataBase.(Receiver where  exists getSecondaryAdress()).(getName() as Imie, getSurname() as Nazwisko, getCity() as Miasto, getEmailAdress() as email)
     }
 }

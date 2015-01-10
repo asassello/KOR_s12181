@@ -1,21 +1,19 @@
 package edu.pjwstk.kor.appgui;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import javax.swing.JTable;
 
-public class listToJTable {
-
-public static JTable convert (List<String> aL, String name){
+public class listDoubleToJTable {
+	
+public static JTable convert (List<Double> aL){
 		
 
 //		System.out.println(aL);
 		Integer liczbaPol = aL.size();
 //		System.out.println(liczbaPol);
 
-		String[] headTable = new String[] {"Lp.",name};
+		String[] headTable = new String[] {"Wartosc srednia","Wartosc minimalna","Wartosc maksymalna"};
 		String[][] stringTable = new String[liczbaPol][2];
 
 
@@ -27,5 +25,4 @@ public static JTable convert (List<String> aL, String name){
 		JTable table = new JTable(stringTable,headTable);
 		return table;
 	}
-	
 }

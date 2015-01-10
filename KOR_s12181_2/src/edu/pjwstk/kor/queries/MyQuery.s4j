@@ -293,7 +293,7 @@ public class  MyQuery{
 	
 	
 	public  Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> _query12(){
-		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> rcvrsWithSecAdress = #{ dataBase.(Receiver where secondaryAdress != 0 ).(name as Imie, surname as Nazwisko, city as Miasto, emailAdress as email) };
+		Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> rcvrsWithSecAdress = #{ dataBase.(Receiver where exists(secondaryAdress) ).(name as Imie, surname as Nazwisko, city as Miasto, emailAdress as email) };
 		//System.out. println(rcvrsWithSecAdress);
 		return rcvrsWithSecAdress;
 	}
@@ -458,22 +458,43 @@ public class  MyQuery{
 		return query04yMap;
 	}
 	
-	public  Map<String, Double> _query03(){
+//	public  Map<String, Double> _query03(){
+//		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
+//		Double avgDaysOfDelivery =
+//				#{ dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery)) };
+//
+//		Double minDaysOfDelivery =
+//				#{ dataBase.(0.0+ min(Shipment.fullDaysOfDelivery)) };
+//				
+//		Double maxDaysOfDelivery =
+//				#{ dataBase.(0.0+ max(Shipment.fullDaysOfDelivery)) };
+//				
+//		Map<String, Double> query03yMap = new HashMap<String, Double>();
+//		query03yMap.put("avgDaysOfDelivery", avgDaysOfDelivery);
+//		query03yMap.put("minDaysOfDelivery", minDaysOfDelivery);
+//		query03yMap.put("maxDaysOfDelivery", maxDaysOfDelivery);
+//		//System.out. println(query03yMap);
+//		
+//		return query03yMap;
+//	}
+	
+	public  pl.wcislo.sbql4j.java.model.runtime.Struct _query03(){
 		//Collection<pl.wcislo.sbql4j.java.model.runtime.Struct> avgNumberOfPackagesPerSender = 
-		Double avgDaysOfDelivery =
-				#{ dataBase.(0.0+ avg(Shipment.fullDaysOfDelivery)) };
+		pl.wcislo.sbql4j.java.model.runtime.Struct query03yMap =
+				#{ dataBase.((0.0+ avg(Shipment.fullDaysOfDelivery)) as wartoscSrednia, (0.0+ min(Shipment.fullDaysOfDelivery)) as wartoscMinimalna, (0.0+ max(Shipment.fullDaysOfDelivery)) as wartoscMaksymalna) };
 
-		Double minDaysOfDelivery =
-				#{ dataBase.(0.0+ min(Shipment.fullDaysOfDelivery)) };
+//		Double minDaysOfDelivery =
+//				#{ dataBase.(0.0+ min(Shipment.fullDaysOfDelivery)) };
+//				
+//		Double maxDaysOfDelivery =
+//				#{ dataBase.(0.0+ max(Shipment.fullDaysOfDelivery)) };
 				
-		Double maxDaysOfDelivery =
-				#{ dataBase.(0.0+ max(Shipment.fullDaysOfDelivery)) };
+//		Map<String, Double> query03yMap = new HashMap<String, Double>();
+//		query03yMap.put("avgDaysOfDelivery", avgDaysOfDelivery);
+//		query03yMap.put("minDaysOfDelivery", minDaysOfDelivery);
+//		query03yMap.put("maxDaysOfDelivery", maxDaysOfDelivery);
+//		System.out. println(query03yMap);
 				
-		Map<String, Double> query03yMap = new HashMap<String, Double>();
-		query03yMap.put("avgDaysOfDelivery", avgDaysOfDelivery);
-		query03yMap.put("minDaysOfDelivery", minDaysOfDelivery);
-		query03yMap.put("maxDaysOfDelivery", maxDaysOfDelivery);
-		//System.out. println(query03yMap);
 		
 		return query03yMap;
 	}

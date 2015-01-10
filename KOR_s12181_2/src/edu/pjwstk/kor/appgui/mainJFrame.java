@@ -28,6 +28,8 @@ import edu.pjwstk.kor.queries.MyQuery;
 
 import javax.swing.JTextField;
 
+import pl.wcislo.sbql4j.java.model.runtime.Struct;
+
 
 public class mainJFrame extends JFrame {
 	
@@ -135,8 +137,8 @@ public class mainJFrame extends JFrame {
 		btnZapytanie_1 = new JButton("Zapytanie 3");
 		btnZapytanie_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Map<String,Double> res_query03 = (Map<String,Double>) mainOb._query03();
-				table = mapDoubleToJTable.convert(res_query03);
+				Struct res_query03 = (Struct) mainOb._query03();
+				table = structToJTable.convert(res_query03);
 				scrollPane.setViewportView(table);
 				setTitle("CZASY DOSTARCZENIA PRZESY£EK");
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
@@ -311,7 +313,7 @@ public class mainJFrame extends JFrame {
 		btnZapytanie_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				List<String> res_query00 = (List<String>) mainOb._query00();
-				table = listToJTable.convert(res_query00,"Statusy");
+				table = listStringToJTable.convert(res_query00,"Statusy");
 				scrollPane.setViewportView(table);
 				table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
 				setTitle("STATUSY POSORTOWANE");
